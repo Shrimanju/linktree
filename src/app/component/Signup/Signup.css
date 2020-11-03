@@ -1,0 +1,45 @@
+body {
+  background-color: #f5f6f8;
+}
+
+.logo {
+  margin-top: 80px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.text {
+  margin-top: 40px;
+}
+
+.loginPart {
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  width: 500px;
+  height: 450px;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+.formPart {
+  margin-top: 50px;
+  padding-top: 40px;
+}
+
+.creatAccountPart {
+  margin-top: 20px;
+}
+/*# sourceMappingURL=Signup.css.map */

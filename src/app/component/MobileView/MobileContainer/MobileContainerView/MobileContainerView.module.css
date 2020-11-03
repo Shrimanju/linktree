@@ -1,0 +1,16 @@
+.ContainerView {
+  font-size: 20px;
+  background-color: red;
+  color: white;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 20px;
+  margin-top: 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid gray;
+}
+/*# sourceMappingURL=MobileContainerView.module.css.map */

@@ -1,0 +1,23 @@
+.container{
+    background-color: yellowgreen;
+    width: 50%;
+    height: 80%;
+    border-radius: 30px;
+    border: 8px solid black;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    .container_heading{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width:800px){
+    .container{
+        display: none;
+    }
+}

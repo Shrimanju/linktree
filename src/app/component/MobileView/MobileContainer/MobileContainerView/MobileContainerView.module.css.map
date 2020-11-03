@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAA;EACV,SAAS,EAAE,IAAI;EACf,gBAAgB,EAAC,GAAG;EACpB,KAAK,EAAE,KAAK;EACZ,OAAO,EAAE,IAAI;EACb,OAAO,EAAE,IAAI;EACb,aAAa,EAAE,IAAI;EACnB,UAAU,EAAE,IAAI;EAChB,eAAe,EAAE,MAAM;EACvB,MAAM,EAAE,cAAc;CACzB",
+    "sources": [
+        "MobileContainerView.module.scss"
+    ],
+    "names": [],
+    "file": "MobileContainerView.module.css"
+}

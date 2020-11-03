@@ -1,0 +1,15 @@
+.app{
+  height: 100vh;
+  display: flex;
+}
+
+@media (max-width: 800px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .app :nth-child(1) { order: 1; }
+  .app :nth-child(2) { order: 3; }
+  .app :nth-child(3) { order: 2; }
+}
+

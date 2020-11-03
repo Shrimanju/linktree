@@ -1,0 +1,46 @@
+.mylink_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1vw;
+}
+
+.mylink_container .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+}
+
+.mylink_container .header .avatar {
+  width: 85px;
+  height: 85px;
+  background-color: yellowgreen;
+  margin-bottom: 10px;
+}
+
+.mylink_container .header span {
+  font-weight: bold;
+}
+
+.mylink_container .body {
+  padding: 5px;
+  padding-left: 20vw;
+  padding-right: 20vw;
+}
+
+.mylink_container .footer {
+  background-color: skyblue;
+}
+/*# sourceMappingURL=Mylink.module.css.map */

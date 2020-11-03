@@ -1,0 +1,37 @@
+.container{
+ flex: 0.4;
+ flex-direction: column;
+ background-color: green;
+
+ .mobileheader{
+    display: flex;
+    justify-content: space-between;
+    background-color:white;
+    padding: 1vh;
+    border-bottom: 1px solid gray;
+    
+    span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+ }
+
+ .mobilebody{
+     background-color: #F5F6F8;
+     height: 91.7vh; 
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+}
+
+@media (max-width: 800px){
+    .container{
+        flex: 0.05;
+
+        .mobilebody{
+            display: none;
+        }
+    }
+}
