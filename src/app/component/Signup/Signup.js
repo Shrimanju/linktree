@@ -103,7 +103,7 @@ const Signup = () => {
             </div>
             <div className="creatAccountPart text-center">
                 <p>By using this service you are agreeing to the terms of service and privacy policy</p>
-                <h6>Already have an account?</h6>
+                <a href='/'><h6>Already have an account?</h6></a>
             </div>
         </div>
     );
