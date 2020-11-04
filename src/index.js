@@ -4,19 +4,20 @@ import './index.css';
 import App from './App';
 import Mylink from './app/pages/mylink';
 import Login from './app/component/Login/Login';
+import Signup from './app/component/Signup/Signup';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 
 ReactDOM.render(
-    <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Login} />;
-        <Route exact path='/admin' component={App}/>;
-      </Switch>
-    </BrowserRouter> 
-  ,
-  document.getElementById('root')
-);
+  <BrowserRouter>
+    <Switch>
+      <Route exact path='/' component={App}/>;
+      <Route exact path='/signup' component={Signup}/>;
+    </Switch>
+  </BrowserRouter> 
+,
+document.getElementById('root')
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

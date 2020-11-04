@@ -1,29 +1,36 @@
 import React, { Component, useState } from 'react';
 import './Signup.css'
-import fire from '../../Config/firebase';
+import db,{firebaseApp,auth} from '../../../Firebase_config/firebase';
 import { useForm } from 'react-hook-form';
-import Logo from '../../Assests/img/logo.png';
+import Logo from '../../../Assets/logo.png';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { useHistory } from 'react-router-dom';
 
 
 
 const Signup = () => {
-
+    let history = useHistory();
     const { handleSubmit, register, errors } = useForm();
     const [ErrorMessage, setErrorMessage] = useState();
     const [ErrorMessageFirebase, setErrorMessageFirebase] = useState()
     const onSubmit = (data) => {
         if (data.password === data.confpassword) {
             setErrorMessage("")
-            fire.auth().createUserWithEmailAndPassword(data.email, data.password)
+            auth.createUserWithEmailAndPassword(data.email, data.password)
                 .then((u) => {
-                    console.log(u);
+                    db.collection('users').doc(firebaseApp.auth().currentUser.uid)
+                    .set({
+                        email : data.email,
+                        password : data.password,
+                    })
+                    
                 })
                 .catch(err => {
                     setErrorMessageFirebase(err.message)
                     console.log(err);
                 })
+                history.push('/');
             console.log(data);
         } else {
             setErrorMessage("Password is not match")
