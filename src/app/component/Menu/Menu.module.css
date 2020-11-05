@@ -11,6 +11,11 @@
   border-right: 1px solid gray;
 }
 
+.menucontainer .link {
+  text-decoration: none;
+  color: yellowgreen;
+}
+
 .menucontainer a.activeclass {
   border-bottom: 2px solid green;
   color: red;

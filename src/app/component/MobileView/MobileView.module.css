@@ -33,6 +33,11 @@
           align-items: center;
 }
 
+.container .mobileheader span .link {
+  text-decoration: none;
+  color: yellowgreen;
+}
+
 .container .mobilebody {
   background-color: #F5F6F8;
   height: 91.7vh;

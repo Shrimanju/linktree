@@ -8,7 +8,7 @@ const MobileView = () =>{
     return(
         <div className={classes.container}>
             <div className={classes.mobileheader}>
-                <span>My Link : <Link to='/mylink' target='_blank'> mylink</Link></span>
+                <span>My Link : <Link to='/mylink' target='_blank' className={classes.link}> mylink</Link></span>
                 <button className='btn btn-light'>Share</button>
             </div>
             <div className={classes.mobilebody}>
