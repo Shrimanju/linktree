@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5vw;
+    padding: 0.1vw;
     border-right: 1px solid gray;
 
     .sidenavbar_buttom{
@@ -13,20 +13,24 @@
         justify-content: space-between;
         align-items: center;
         min-height: 20vh;
+        
+        .avatar{
+          background-color: yellowgreen;
+        }
     }
 }
 
 @media (max-width: 800px) {
     .sidenavbar {        
       flex-direction: row;
-      padding: 0.8vh;
+      padding: 0.1vh;
       border-bottom: 1px solid gray;
       border-right: 0;
 
       .sidenavbar_buttom{
         flex-direction: row;
         min-width: 30vw;
-        min-height: 3vh;
+        min-height: 2vh;
     }
 
     .sidenavbar_buttom :nth-child(1) { order: 1; }

@@ -12,11 +12,11 @@ const SideNavBar = () =>{
 
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleClick = (event) => {
+    const popoverOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
   
-    const handleClose = () => {
+    const popoverClose = () => {
       setAnchorEl(null);
     };
 
@@ -29,10 +29,10 @@ const SideNavBar = () =>{
             <div className={classes.sidenavbar_buttom}>
                 <MessageOutlinedIcon/>
                 <NotificationsActiveOutlinedIcon/>
-                <IconButton aria-describedby={id} onClick={handleClick }>
-                    <Avatar />
+                <IconButton aria-describedby={id} onClick={popoverOpen }>
+                    <Avatar className={classes.avatar} />
                 </IconButton>
-                <AccountPopover id = {id} open= {open} anchorEl={anchorEl} handleClose={handleClose} />
+                <AccountPopover id = {id} open= {open} anchorEl={anchorEl} handleClose={popoverClose} />
             </div>
         </div>
     );

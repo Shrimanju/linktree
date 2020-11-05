@@ -35,7 +35,10 @@ export default function AccountPopover(props) {
                     horizontal: 'left',
                 }}
             >
-                <Typography className={classes.typography}><Button onClick={logout}>Logout</Button></Typography>
+                <Typography className={classes.typography}>
+                    <span>My Account</span><br/>
+                    <Button onClick={logout}>Logout</Button>
+                </Typography>
             </Popover>
         </div>
     );

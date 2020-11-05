@@ -13,7 +13,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0.5vw;
+  padding: 0.1vw;
   border-right: 1px solid gray;
 }
 
@@ -34,13 +34,17 @@
   min-height: 20vh;
 }
 
+.sidenavbar .sidenavbar_buttom .avatar {
+  background-color: yellowgreen;
+}
+
 @media (max-width: 800px) {
   .sidenavbar {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    padding: 0.8vh;
+    padding: 0.1vh;
     border-bottom: 1px solid gray;
     border-right: 0;
   }
@@ -50,7 +54,7 @@
         -ms-flex-direction: row;
             flex-direction: row;
     min-width: 30vw;
-    min-height: 3vh;
+    min-height: 2vh;
   }
   .sidenavbar .sidenavbar_buttom :nth-child(1) {
     -webkit-box-ordinal-group: 2;
