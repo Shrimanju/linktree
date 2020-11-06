@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import LinkContainer from '../component/LinkContainer/LinkContainer';
 import classes from '../../styles/Links/Links.module.css';
-import db from '../../Firebase_config/firebase';
+import db,{auth} from '../../Firebase_config/firebase';
 
 const Link = () =>{
 
@@ -11,25 +11,25 @@ const Link = () =>{
     const [linkIndex,setLinkIndex] = useState([]);
 
     useEffect(() => {
-        db.collection('links').onSnapshot((snapshot) =>
+        db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot) =>
             setlinks(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data(),
             })))
         )
-        
-        db.collection('links').onSnapshot((snapshot)=>{
-            if(snapshot.docs.length > 0){
-                setLinkIndex(snapshot.docs.map((doc) =>  ({
-                    id : doc.data().id,
-                    title : doc.data().title,
-                    url : doc.data().url,
-                })))
-            }
-            else{
-                setLinkIndex([{id : 45.67}])
-            }
-        })
+
+        db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot)=>{
+                if(snapshot.docs.length > 0){
+                    setLinkIndex(snapshot.docs.map((doc) =>  ({
+                        id : doc.data().id,
+                        title : doc.data().title,
+                        url : doc.data().url,
+                    })))
+                }
+                else{
+                    setLinkIndex([{id : 45.67}])
+                }
+            })
     }, [])
 
 
@@ -43,10 +43,10 @@ const Link = () =>{
     }
 
     const setLinkData = (title,url,index) =>{
-        db.collection('links').add({
-            id : index,
-            title : title,
-            url : url,
+        db.collection('users').doc(auth.currentUser.uid).collection('links').add({
+            id: index,
+            title: title,
+            url: url,
         })
     }
 
@@ -60,7 +60,7 @@ const Link = () =>{
 
         links.map((link)=>{
             if(link.data.id === id){
-                db.collection('links').doc(link.id).delete();
+                db.collection('users').doc(auth.currentUser.uid).collection('links').doc(link.id).delete();
             }
         })
     }

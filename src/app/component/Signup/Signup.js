@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from 'react-router-dom';
 
-
-
 const Signup = () => {
     let history = useHistory();
     const { handleSubmit, register, errors } = useForm();
@@ -19,12 +17,11 @@ const Signup = () => {
             setErrorMessage("")
             auth.createUserWithEmailAndPassword(data.email, data.password)
                 .then((u) => {
-                    db.collection('users').doc(firebaseApp.auth().currentUser.uid)
+                    db.collection('users').doc(auth.currentUser.uid)
                     .set({
                         email : data.email,
-                        password : data.password,
-                    })
-                    
+                        username : data.username,
+                    })  
                 })
                 .catch(err => {
                     setErrorMessageFirebase(err.message)

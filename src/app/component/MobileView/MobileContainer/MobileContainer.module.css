@@ -1,5 +1,5 @@
 .container {
-  background-color: yellowgreen;
+  background-color: #F5F6F8;
   width: 50%;
   height: 80%;
   border-radius: 30px;
@@ -26,6 +26,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.container .avatar {
+  background-color: lightgreen;
 }
 
 @media (max-width: 800px) {

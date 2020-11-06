@@ -1,5 +1,5 @@
 .container{
-    background-color: yellowgreen;
+    background-color:#F5F6F8;
     width: 50%;
     height: 80%;
     border-radius: 30px;
@@ -13,6 +13,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .avatar{
+        background-color: lightgreen;
     }
 }
 

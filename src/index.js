@@ -13,7 +13,9 @@ ReactDOM.render(
     <Switch>
       <Route exact path='/' component={App}/>;
       <Route exact path='/signup' component={Signup}/>;
-      <Route exact path ='/mylink' component={Mylink}/>;
+      <Route exact path='/:mylinkid'>
+        <Mylink/>
+      </Route>
     </Switch>
   </BrowserRouter> 
 ,
