@@ -3,6 +3,7 @@
     display: flex;
     margin-top: 6vh;
     border-radius: 30px;
+    height: 150px;
 
     .drag_drop{
         padding : 1vw;
@@ -22,6 +23,7 @@
             flex-direction: row;
             justify-content: space-between;
             padding: 1vw;
+            padding-top: 1.2vw;
         }
 
         .url{
@@ -29,10 +31,11 @@
         }
 
         .icons{
-            padding: 1vw;
+            margin-top: -3%;
+            padding-right: 15px;
             display: flex;
             justify-content: flex-end;
-
+            
             .iconbtn{
                 &:hover{
                     color: white;
@@ -42,6 +45,11 @@
         }
     }
 }
+
+input {
+   border: none;
+   outline:0;
+  }
 
 @media (max-width:800px){
     .link_body :nth-child(1){order: 1;}
