@@ -5,6 +5,7 @@
   display: flex;
   margin-top: 6vh;
   border-radius: 30px;
+  height: 150px;
 }
 
 .linkcontainer .drag_drop {
@@ -45,6 +46,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 1vw;
+  padding-top: 1.2vw;
 }
 
 .linkcontainer .link_body .url {
@@ -52,7 +54,8 @@
 }
 
 .linkcontainer .link_body .icons {
-  padding: 1vw;
+  margin-top: -3%;
+  padding-right: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,6 +67,11 @@
 .linkcontainer .link_body .icons .iconbtn:hover {
   color: white;
   background-color: red;
+}
+
+input {
+  border: none;
+  outline: 0;
 }
 
 @media (max-width: 800px) {

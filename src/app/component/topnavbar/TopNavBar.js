@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '../../pages/links';
-import Appearance from '../../pages/appearance';
+import Appearance from '../Apperance/appearance';
 import Settings from '../../pages/settings';
 import Menu from '../Menu/Menu';
 import classes from '../topnavbar/TopNavBar.module.css';
