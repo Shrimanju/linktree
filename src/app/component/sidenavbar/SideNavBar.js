@@ -5,7 +5,7 @@ import {Avatar, IconButton} from '@material-ui/core';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import AnnouncementOutlinedIcon from '@material-ui/icons/AnnouncementOutlined';
 import NotificationsActiveOutlinedIcon from '@material-ui/icons/NotificationsActiveOutlined';
-import { auth } from '../../../Firebase_config/firebase';
+
 import AccountPopover from '../Account_PopOver/AccountPopover';
 
 const SideNavBar = () =>{

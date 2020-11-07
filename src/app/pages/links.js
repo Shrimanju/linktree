@@ -67,7 +67,7 @@ const Link = () =>{
 
     return(
         <div className={classes.link_body}>
-            <btn className='btn btn-primary w-100 rounded-pill p-3' onClick={LinkAddHandler}>Add Link</btn>
+            <button className='btn btn-primary w-100 rounded-pill p-3' onClick={LinkAddHandler}>Add Link</button>
             {linkIndex.map((index)=> {
                 return (
                     <LinkContainer

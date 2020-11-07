@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Mylink from './app/pages/mylink';
-import Login from './app/component/Login/Login';
 import Signup from './app/component/Signup/Signup';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';

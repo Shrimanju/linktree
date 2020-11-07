@@ -47,13 +47,13 @@ const LinkContainer = (props) =>{
             </div>
             <div className={classes.link_body}>
                 <div className={classes.title}>
-                    <input type='text' value={props.title} placeholder="Enter title &#xf044;" style={{'font-family': 'FontAwesome','font-weight': 'bold'}} onChange={titlehandler}/>
+                    <input type='text' value={props.title} placeholder="Enter title &#xf044;" style={{'fontFamily': 'FontAwesome','fontWeight': 'bold'}} onChange={titlehandler}/>
                     
                     <Switch onChange={handleChange} checked={checked} />
                 </div>
                 
                 <div className={classes.url}>
-                    <input type='text' value={props.url} placeholder="Enter Url &#xf044;" style={{'font-family': 'FontAwesome'}} onChange={urlhandler}/>
+                    <input type='text' value={props.url} placeholder="Enter Url &#xf044;" style={{'fontFamily': 'FontAwesome'}} onChange={urlhandler}/>
                 </div>
                 
                 <div className={classes.icons}>
