@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import classes from '../LinkContainer/LinkContainer.module.css';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
@@ -6,10 +6,23 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import Switch from "react-switch";
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
+import db, { auth } from '../../../Firebase_config/firebase';
 
 const LinkContainer = (props) =>{
+    const [links, setlinks] = useState([]);
+
+    useEffect(() => {
+        db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot) =>
+            setlinks(snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+            })))
+        )
+    }, [])
 
     const [checked,setChecked] = useState(false);
+
+    const [linkMatch,setLinkMatch] = useState('notmatched');
 
     const [title,setTitle] = useState();
     const [url,setUrl] = useState();
@@ -23,10 +36,18 @@ const LinkContainer = (props) =>{
     }
 
     const handleChange = (checked) =>{
+        let match = false;
         if(title && url){
             setChecked(checked);
             if(checked){
-                props.data(title,url,props.id);
+                links.map((link)=>{
+                    if(link.data.id === props.id ){
+                        match = true;
+                    }
+                })
+                if(match === false){
+                    props.linkData(title,url,props.id);
+                }
             }
         }
         else{

@@ -73,7 +73,7 @@ const Link = () =>{
                     <LinkContainer
                         key={index.id}
                         id={index.id}
-                        data={setLinkData}
+                        linkData={setLinkData}
                         onDelete = {onLinkDelete}
                         title = {index.title}
                         url = {index.url}
