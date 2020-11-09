@@ -25,7 +25,7 @@ function Mylink() {
             console.log(error);
         })
 
-        const unsubscribe = db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot)=>
+        const unsubscribe = db.collection('users').doc(auth.currentUser.uid).collection('links').orderBy('timestamp','desc').onSnapshot((snapshot)=>
             setlinks(snapshot.docs.map((doc)=>({
                 id : doc.id,
                 data : doc.data(),
@@ -46,7 +46,9 @@ function Mylink() {
             <div className={classes.body}>
                 {
                     links.map((link) => {
-                        return <MyLinkContainer title={link.data.title} url={link.data.url} />;
+                        if(link.data.isactive === true){
+                            return <MyLinkContainer title={link.data.title} url={link.data.url} />;
+                        }
                     })
                 }
             </div>
