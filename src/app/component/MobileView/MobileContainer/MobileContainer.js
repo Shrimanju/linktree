@@ -9,7 +9,7 @@ const MobileContainer = (props) =>{
     const [links, setlinks] = useState([]);
 
     useEffect(() => {
-        const unsubscribe = db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot)=>
+        const unsubscribe = db.collection('users').doc(auth.currentUser.uid).collection('links').orderBy('timestamp','desc').onSnapshot((snapshot)=>
             setlinks(snapshot.docs.map((doc)=>({
                 id : doc.id,
                 data : doc.data(),
@@ -24,12 +24,15 @@ const MobileContainer = (props) =>{
     return(
         <div className={classes.container}>
             <div className={classes.container_heading}>
-                <Avatar className={classes.avatar}/>
+                <Avatar className={classes.avatar} />
                 <span>@{props.user}</span>
             </div>
-            {links.map((link) => (
-                <MobileContainerView key={link.id} id={link.id} title={link.data.title} />
-            ))}
+            {links.map((link) => {
+                if (link.data.isactive === true) {
+                    return <MobileContainerView key={link.id} id={link.id} title={link.data.title} />
+                }
+            }
+            )}
         </div>
     );
 }

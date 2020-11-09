@@ -2,64 +2,41 @@ import React, { useEffect, useState } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import LinkContainer from '../component/LinkContainer/LinkContainer';
 import classes from '../../styles/Links/Links.module.css';
-import db,{auth} from '../../Firebase_config/firebase';
+import db,{auth, firebaseApp} from '../../Firebase_config/firebase';
+import firebase from 'firebase';
 
 const Link = () =>{
 
     const [links, setlinks] = useState([]);
 
-    const [linkIndex,setLinkIndex] = useState([]);
-
     useEffect(() => {
-        db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot) =>
+        db.collection('users').doc(auth.currentUser.uid).collection('links').orderBy('timestamp','desc').onSnapshot((snapshot) =>
             setlinks(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data(),
             })))
         )
-
-        db.collection('users').doc(auth.currentUser.uid).collection('links').onSnapshot((snapshot)=>{
-                if(snapshot.docs.length > 0){
-                    setLinkIndex(snapshot.docs.map((doc) =>  ({
-                        id : doc.data().id,
-                        title : doc.data().title,
-                        url : doc.data().url,
-                    })))
-                }
-                else{
-                    setLinkIndex([{id : 45.67}])
-                }
-            })
     }, [])
 
 
     const LinkAddHandler = () => {
-        const min = 1;
-        const max = 100;
-        const rand = min + Math.random() * (max - min);
-        setLinkIndex((olditem) => {
-            return [...olditem, {id:rand}];
-        });
+        db.collection('users').doc(auth.currentUser.uid).collection('links').add({ 
+            timestamp : firebase.firestore.FieldValue.serverTimestamp(),
+        })
     }
 
-    const setLinkData = (title,url,index) =>{
-        db.collection('users').doc(auth.currentUser.uid).collection('links').add({
-            id: index,
-            title: title,
-            url: url,
+    const setLinkData = (title,url,index,timestamp,checked) =>{
+        db.collection('users').doc(auth.currentUser.uid).collection('links').doc(index).set({
+            timestamp : timestamp,
+            title : title,
+            url : url,
+            isactive : checked,
         })
     }
 
     const onLinkDelete = (id) =>{
-        setLinkIndex((olditem)=>{
-            return olditem.filter((index)=>{
-                return index.id !== id;
-            })
-        });
-
-
         links.map((link)=>{
-            if(link.data.id === id){
+            if(link.id === id){
                 db.collection('users').doc(auth.currentUser.uid).collection('links').doc(link.id).delete();
             }
         })
@@ -68,15 +45,17 @@ const Link = () =>{
     return(
         <div className={classes.link_body}>
             <button className='btn btn-primary w-100 rounded-pill p-3' onClick={LinkAddHandler}>Add Link</button>
-            {linkIndex.map((index)=> {
+            {links.map((link)=> {
                 return (
                     <LinkContainer
-                        key={index.id}
-                        id={index.id}
+                        key={link.id}
+                        id={link.id}
                         linkData={setLinkData}
                         onDelete = {onLinkDelete}
-                        title = {index.title}
-                        url = {index.url}
+                        title = {link.data.title}
+                        url = {link.data.url}
+                        timestamp = {link.data.timestamp}
+                        isactive = {link.data.isactive}
                     />
                 );
             })}
