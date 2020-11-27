@@ -9,6 +9,7 @@ import { CenterFocusStrong } from "@material-ui/icons";
 // import CopyToClickBoard from "clipboard";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "../CopyToClipboard";
+import QRCode from "../QRCodeDialogBox/QRCode";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -77,6 +78,9 @@ export default function AccountPopover(props) {
                 Click here to copy the URL
               </Link> */}
               {/* <br /> */}
+            </Typography>
+            <Typography className={classes.typography}>
+              <QRCode />
             </Typography>
           </>
         ) : (

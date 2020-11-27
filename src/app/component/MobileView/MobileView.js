@@ -5,7 +5,7 @@ import classes from "../MobileView/MobileView.module.css";
 import MobileContainer from "./MobileContainer/MobileContainer";
 import db, { auth } from "../../../Firebase_config/firebase";
 import ShareLinkPopOver from "../Account_PopOver/AccountPopover";
-
+import { Base_URL } from "../../../utils/index";
 const MobileView = () => {
   const { mylinkid } = useParams();
   const [username, setUsername] = useState();
@@ -56,7 +56,7 @@ const MobileView = () => {
           My Link :{" "}
           <Link to={`/${username}`} className={classes.link}>
             {" "}
-            @{username}
+            {`${Base_URL}/${username}`}
           </Link>
         </span>
         <button className="btn btn-light" onClick={popoverOpen}>
