@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
+import { Base_URL } from "../../utils/index";
 function CopyToClipboardComponent(props) {
   const [value, setValue] = useState("");
   const [copied, setCopied] = useState(false);
   useEffect(() => {
-    setValue(`http://localhost:3000${props.url}`);
+    setValue(Base_URL + props.url);
   }, []);
   return (
     <div>
