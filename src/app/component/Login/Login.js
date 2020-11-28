@@ -67,7 +67,7 @@ const Login = () => {
               inputRef={register({ required: true })}
               style={{ minWidth: "470px" }}
               id="standard-basic"
-              label="E-mail"
+              label="Email"
             />
             <br></br>
             {errors.email && (

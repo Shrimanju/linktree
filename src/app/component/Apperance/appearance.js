@@ -16,17 +16,35 @@ const Appearance = () => {
   const [URL, setURL] = useState("");
 
   useEffect(() => {
-    // db.collection("users")
-    //   .doc(auth.currentUser.uid)
-    //   .collection("image")
-    //   .onSnapshot((snapshot) => {
-    //     setImage(
-    //       snapshot.docs.map((doc) => ({
-    //         // url: ,
-    //         data: doc.data(),
-    //       }))
-    //     );
-    //   });
+    // var path = storage.getPath;
+    setTimeout(() => {
+      if (URL === "") {
+        storage
+          .ref("images")
+          .child("UserLogo.jpg")
+          .getDownloadURL()
+          .then((url) => {
+            setURL(url);
+            // console.log(url);
+          });
+      }
+    }, 1000);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+
+    storage
+      .ref("images")
+      .listAll()
+      .then((imageList) => {
+        imageList.items.map((eachFile) => {
+          console.log(
+            "Image List",
+            imageList.items.lastIndexOf(eachFile),
+            eachFile
+          );
+        });
+      });
   }, []);
 
   //   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
@@ -35,18 +53,21 @@ const Appearance = () => {
     const getImageimage = e.target.files[0];
     setImage(getImageimage);
   };
-  const clickHandler = (data) => {
+  const clickHandler = (data, event) => {
     console.log("image", image);
     console.log(data);
     if (data == "imageUpload" && image != "") {
-      //   const key = db.ref() .child(auth.currentUser.uid).push().key;
+      // const key = db.ref().child(auth.currentUser.uid).push().key;
       const key = database.ref().child(auth.currentUser.uid).push().key;
-      const uploadImage = storage
-        .ref()
-        .child(auth.currentUser.uid)
-        .child(key)
-        .put(image);
-      //   const uploadImage = storage.ref(`images/${image.name}`).put(image); //put() upload image to firebase
+      // console.log("key:" + key);
+      // const uploadImage = storage
+      //   .ref()
+      //   .child(auth.currentUser.uid)
+      //   .child(key)
+      //   .put(image);
+      const uploadImage = storage.ref(`images/${image.name}`).put(image);
+
+      //put() upload image to firebase
       //   uploadImage.put(image);
 
       //   uploadImage.put(image).then((snap) => {
@@ -74,6 +95,12 @@ const Appearance = () => {
             });
         }
       );
+    } else if (data === "imageRemove") {
+      // console.log("clear button clicked ");
+      // console.log(image.name);
+      // storage.ref().remove();
+      storage.ref().child("images").child(image.name).delete();
+      setURL("");
     }
   };
 
@@ -86,7 +113,7 @@ const Appearance = () => {
         <div className="profile col-xs-12">
           <div className="info row">
             <div className="col-xs col-lg">
-              {image && URL ? (
+              {URL ? (
                 <>
                   <p> {console.log("image", image)}</p>
                   <p> {console.log("URL", URL)}</p>
@@ -139,13 +166,13 @@ const Appearance = () => {
                 variant="contained"
                 color="primary"
               >
-                Pic an Image
+                Pick an Image
               </Button>
             </div>
             <div className="buttons col-xs col-lg">
               <Button
-                onChange={() => {
-                  changeHandler("imageRemove");
+                onClick={() => {
+                  clickHandler("imageRemove");
                 }}
                 style={{
                   marginTop: "30px",

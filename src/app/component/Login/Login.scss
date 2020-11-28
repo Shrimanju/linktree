@@ -1,45 +1,46 @@
-body{
-    background-color: #f5f6f8;
+body {
+  background-color: #f5f6f8;
 }
-.logo{
-    margin-top: 80px;
-    align-items: center;
+.logo {
+  margin-top: 80px;
+  align-items: center;
   display: flex;
   justify-content: center;
-   
 }
-.text{
-    margin-top: 40px;
+.text {
+  margin-top: 40px;
 }
 
-.loginPart{
-    margin-top: 40px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: white;
-    width: 500px;
-    height: 800px;
+.loginPart {
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  width: 500px;
+  height: 800px;
 }
-.instaButton{
-    padding-top: 40px;
+.instaButton {
+  padding-top: 40px;
 }
-img{
-    width: 50px;
-    height: 50px;
-    float: left;
+img {
+  width: 50px;
+  height: 50px;
+  float: left;
 }
-.horizontalLine h5{
-    padding-top: 30px;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #000;
-    line-height: 0.1em;
-    margin: 10px 0 20px;
+.horizontalLine h5 {
+  padding-top: 30px;
+  width: 100%;
+  text-align: center;
+  //   border-bottom: 1px solid rgb(194, 46, 46);
+  border-bottom: 1px solid #000;
+
+  line-height: 0.1em;
+  margin: 10px 0 20px;
 }
 .horizontalLine h5 span {
-    background: #fff;
-    padding: 0 10px;
+  background: #fff;
+  padding: 0 10px;
 }
 .creatAccountPart {
-    margin-top: 20px;
- }
+  margin-top: 20px;
+}
