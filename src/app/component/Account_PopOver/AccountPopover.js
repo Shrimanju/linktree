@@ -80,7 +80,7 @@ export default function AccountPopover(props) {
               {/* <br /> */}
             </Typography>
             <Typography className={classes.typography}>
-              <QRCode />
+              <QRCode username={username} />
             </Typography>
           </>
         ) : (
