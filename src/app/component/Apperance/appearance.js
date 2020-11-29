@@ -14,18 +14,29 @@ import db, { auth } from "../../../Firebase_config/firebase";
 const Appearance = () => {
   const [image, setImage] = useState("");
   const [URL, setURL] = useState("");
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     // var path = storage.getPath;
     setTimeout(() => {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setUsername(doc.data().email);
+          } else {
+            console.log("Error in document");
+          }
+        });
       if (URL === "") {
         storage
-          .ref("images")
-          .child("UserLogo.jpg")
-          .getDownloadURL()
-          .then((url) => {
-            setURL(url);
-            // console.log(url);
+          .ref(username)
+          .listAll()
+          .then((imageList) => {
+            imageList.items.map((eachFile) => {
+              console.log("Image List", eachFile);
+            });
           });
       }
     }, 1000);
@@ -33,50 +44,31 @@ const Appearance = () => {
     //   clearInterval(interval);
     // };
 
-    storage
-      .ref("images")
-      .listAll()
-      .then((imageList) => {
-        imageList.items.map((eachFile) => {
-          console.log(
-            "Image List",
-            imageList.items.lastIndexOf(eachFile),
-            eachFile
-          );
-        });
-      });
+    // storage
+    //   .ref("images")
+    //   .listAll()
+    //   .then((imageList) => {
+    //     imageList.items.map((eachFile) => {
+    //       console.log(
+    //         "Image List",
+    //         imageList.items.lastIndexOf(eachFile),
+    //         eachFile
+    //       );
+    //     });
+    //   });
   }, []);
-
-  //   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
 
   const changeHandler = (e) => {
     const getImageimage = e.target.files[0];
     setImage(getImageimage);
   };
-  const clickHandler = (data, event) => {
+  const clickHandler = (data) => {
     console.log("image", image);
     console.log(data);
     if (data == "imageUpload" && image != "") {
-      // const key = db.ref().child(auth.currentUser.uid).push().key;
       const key = database.ref().child(auth.currentUser.uid).push().key;
-      // console.log("key:" + key);
-      // const uploadImage = storage
-      //   .ref()
-      //   .child(auth.currentUser.uid)
-      //   .child(key)
-      //   .put(image);
-      const uploadImage = storage.ref(`images/${image.name}`).put(image);
 
-      //put() upload image to firebase
-      //   uploadImage.put(image);
-
-      //   uploadImage.put(image).then((snap) => {
-      //     database
-      //       .ref()
-      //       .child(auth.currentUser.uid)
-      //       .child(key)
-      //       .set(setURL(snap.metadata.downloadURLs[0]));
-      //   });
+      const uploadImage = storage.ref(`${username}/${image.name}`).put(image);
 
       uploadImage.on(
         "state_changed",
@@ -86,7 +78,7 @@ const Appearance = () => {
         },
         () => {
           storage
-            .ref("images")
+            .ref(username)
             .child(image.name)
             .getDownloadURL()
             .then((url) => {
@@ -96,10 +88,7 @@ const Appearance = () => {
         }
       );
     } else if (data === "imageRemove") {
-      // console.log("clear button clicked ");
-      // console.log(image.name);
-      // storage.ref().remove();
-      storage.ref().child("images").child(image.name).delete();
+      storage.ref().child(username).child(image.name).delete();
       setURL("");
     }
   };
