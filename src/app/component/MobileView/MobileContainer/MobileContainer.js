@@ -32,7 +32,7 @@ const MobileContainer = (props) => {
     <div className={classes.container}>
       <div className={classes.container_heading}>
         <Avatar className={classes.avatar} />
-        <span>@{props.user}</span>
+        <span>{props.user}</span>
       </div>
       {links.map((link) => {
         if (link.data.isactive === true) {

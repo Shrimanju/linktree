@@ -9,6 +9,9 @@ import Color2 from "../../../Assets/color2.PNG";
 import Color3 from "../../../Assets/color3.PNG";
 import { storage, database } from "../../../Firebase_config/firebase";
 import db, { auth } from "../../../Firebase_config/firebase";
+import purple from "@material-ui/core/colors/purple";
+import pink from "@material-ui/core/colors/pink";
+import blue from "@material-ui/core/colors/blue";
 
 // import  from 'bootstrap'
 const Appearance = () => {
@@ -18,28 +21,28 @@ const Appearance = () => {
 
   useEffect(() => {
     // var path = storage.getPath;
-    setTimeout(() => {
-      db.collection("users")
-        .doc(auth.currentUser.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUsername(doc.data().email);
-          } else {
-            console.log("Error in document");
-          }
+    // setTimeout(() => {
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setUsername(doc.data().email);
+        } else {
+          console.log("Error in document");
+        }
+      });
+    // if (URL === "") {
+    storage
+      .ref(username)
+      .listAll()
+      .then((imageList) => {
+        imageList.items.map((eachFile) => {
+          console.log("eachFile", eachFile);
         });
-      if (URL === "") {
-        storage
-          .ref(username)
-          .listAll()
-          .then((imageList) => {
-            imageList.items.map((eachFile) => {
-              console.log("Image List", eachFile);
-            });
-          });
-      }
-    }, 1000);
+      });
+    // }
+    // }, 2000);
     // return () => {
     //   clearInterval(interval);
     // };
@@ -63,9 +66,23 @@ const Appearance = () => {
     setImage(getImageimage);
   };
   const clickHandler = (data) => {
-    console.log("image", image);
-    console.log(data);
+    var fullPath = [];
+    // console.log("image", image);
+    // console.log(data);
     if (data == "imageUpload" && image != "") {
+      storage
+        .ref(username)
+        .listAll()
+        .then((imageList) => {
+          imageList.items.map((imageList) => {
+            console.log("imageList", imageList.fullPath);
+            fullPath = imageList.fullPath.split("/");
+            console.log(fullPath[0]);
+            console.log(fullPath[1]);
+
+            storage.ref().child(fullPath[0]).child(fullPath[1]).delete();
+          });
+        });
       const key = database.ref().child(auth.currentUser.uid).push().key;
 
       const uploadImage = storage.ref(`${username}/${image.name}`).put(image);
@@ -186,14 +203,32 @@ const Appearance = () => {
       <div className="themes">
         <div className="row pt-2 pl-2 content">
           <div className="col col-xs">
-            <img src={Color1} style={{ width: "200px", height: "300px" }} />
+            <img
+              src={Color1}
+              // onClick={() => {
+              //   themeClickHandler("blue");
+              // }}
+              style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            />
             <br></br>
           </div>
           <div className="col col-xs">
-            <img src={Color2} style={{ width: "200px", height: "300px" }} />
+            <img
+              src={Color2}
+              // onClick={() => {
+              //   themeClickHandler("pink");
+              // }}
+              style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            />
           </div>
           <div className="col col-xs">
-            <img src={Color3} style={{ width: "200px", height: "300px" }} />
+            <img
+              src={Color3}
+              // onClick={() => {
+              //   themeClickHandler("violet");
+              // }}
+              style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            />
           </div>
         </div>
       </div>

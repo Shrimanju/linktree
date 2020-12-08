@@ -47,7 +47,7 @@ const Login = () => {
             variant="contained"
             startIcon={<InstagramIcon />}
           >
-            Sign in with Instagram
+            <span> Sign in with Instagram </span>
           </Button>
         </div>
 
@@ -65,6 +65,7 @@ const Login = () => {
               type="email"
               name="email"
               inputRef={register({ required: true })}
+              className="email"
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Email"
@@ -100,7 +101,7 @@ const Login = () => {
               color="default"
               variant="contained"
             >
-              Login
+              Log in
             </Button>
             <br></br>&nbsp;
             <a className="link_login" href="/fotgotPassword">

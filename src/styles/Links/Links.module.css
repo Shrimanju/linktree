@@ -5,6 +5,15 @@
   overflow-y: auto;
 }
 
+/* .btn {
+  background: green !important;
+} */
+
+.btn_link {
+  width: 500;
+  background: #7c41ff;
+}
+
 @media (max-width: 800px) {
   .link_body {
     border-right: 0;

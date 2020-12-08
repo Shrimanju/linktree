@@ -1,5 +1,7 @@
 .container {
-  background-color: #F5F6F8;
+  background-color: #f5f6f8;
+  /* background-color: pr; */
+
   width: 50%;
   height: 80%;
   border-radius: 30px;
@@ -10,8 +12,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 20px;
 }
 
@@ -21,11 +23,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .container .avatar {

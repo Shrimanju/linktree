@@ -85,7 +85,7 @@ export default function AccountPopover(props) {
           </>
         ) : (
           <Typography className={classes.typography}>
-            <span>My Account : @{username}</span>
+            <span>My Account : {username}</span>
             <br />
             <Button onClick={logout}>Logout</Button>
           </Typography>

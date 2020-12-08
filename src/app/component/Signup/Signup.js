@@ -20,14 +20,16 @@ const Signup = () => {
         .then((u) => {
           db.collection("users").doc(auth.currentUser.uid).set({
             email: data.email,
-            username: data.username,
+            name: data.name,
+            // password:data.pa
           });
+          history.push("/");
         })
         .catch((err) => {
           setErrorMessageFirebase(err.message);
           console.log(err);
         });
-      history.push("/");
+      // history.push("/");
       console.log(data);
     } else {
       setErrorMessage("Password is not match");
@@ -68,15 +70,15 @@ const Signup = () => {
             <br></br>
             <TextField
               type="text"
-              name="username"
+              name="name"
               inputRef={register({ required: true })}
               style={{ minWidth: "470px" }}
               id="standard-basic"
-              label="Username"
+              label="Name"
             />
             <br></br>
-            {errors.username && (
-              <span className="text-danger">Username field is required</span>
+            {errors.Name && (
+              <span className="text-danger">Name field is required</span>
             )}
             <br></br>
             <TextField
@@ -86,6 +88,8 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             {errors.password && (
@@ -99,6 +103,8 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Confirm Password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             <span className="text-danger">{ErrorMessage}</span>
