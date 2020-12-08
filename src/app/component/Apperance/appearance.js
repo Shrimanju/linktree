@@ -21,28 +21,28 @@ const Appearance = () => {
 
   useEffect(() => {
     // var path = storage.getPath;
-    // setTimeout(() => {
-    db.collection("users")
-      .doc(auth.currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setUsername(doc.data().email);
-        } else {
-          console.log("Error in document");
-        }
-      });
-    // if (URL === "") {
-    storage
-      .ref(username)
-      .listAll()
-      .then((imageList) => {
-        imageList.items.map((eachFile) => {
-          console.log("eachFile", eachFile);
+    setTimeout(() => {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setUsername(doc.data().email);
+          } else {
+            console.log("Error in document");
+          }
         });
-      });
-    // }
-    // }, 2000);
+      // if (URL === "") {
+      // storage
+      //   .ref(username)
+      //   .listAll()
+      //   .then((imageList) => {
+      //     imageList.items.map((eachFile) => {
+      //       console.log("eachFile", eachFile);
+      //     });
+      //   });
+      // }
+    }, 2000);
     // return () => {
     //   clearInterval(interval);
     // };

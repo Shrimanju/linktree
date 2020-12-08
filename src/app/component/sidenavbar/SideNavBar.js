@@ -5,7 +5,7 @@ import { Avatar, IconButton } from "@material-ui/core";
 import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
 import AnnouncementOutlinedIcon from "@material-ui/icons/AnnouncementOutlined";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
-
+import Logo from "../../../Assets/logo.png";
 import AccountPopover from "../Account_PopOver/AccountPopover";
 
 const SideNavBar = () => {
@@ -24,11 +24,13 @@ const SideNavBar = () => {
 
   return (
     <div className={classes.sidenavbar}>
-      <AnnouncementOutlinedIcon />
+      {/* <AnnouncementOutlinedIcon className={classes.avatar} /> */}
+      <img className={classes.logo} src={Logo} />
+
       {/* <div className={classes.}> */}
       <div className={classes.sidenavbar_buttom}>
-        <MessageOutlinedIcon />
-        <NotificationsActiveOutlinedIcon />
+        <MessageOutlinedIcon className={classes.icon} />
+        <NotificationsActiveOutlinedIcon className={classes.icon} />
         <IconButton aria-describedby={id} onClick={popoverOpen}>
           <Avatar className={classes.avatar} />
         </IconButton>

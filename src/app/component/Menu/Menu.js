@@ -6,26 +6,23 @@ const Menu = () => {
   return (
     <div className={classes.menucontainer}>
       <NavLink
-        exact
+        to="/"
         activeClassName={classes.activeclass}
         className={classes.link}
-        to="/"
       >
         Link
       </NavLink>
       <NavLink
-        exact
+        to="/appearance"
         activeClassName={classes.activeclass}
         className={classes.link}
-        to="/appearance"
       >
         Appearance
       </NavLink>
       <NavLink
-        exact
+        to="/settings"
         activeClassName={classes.activeclass}
         className={classes.link}
-        to="/settings"
       >
         Settings
       </NavLink>

@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import Mylink from "./app/pages/mylink";
 import Signup from "./app/component/Signup/Signup";
+import Appearance from "./app/component/Apperance/appearance";
+import Settings from "./app/pages/settings";
 import ForgotPassword from "./app/component/ForgotPassword/ForgotPassword";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -12,6 +14,8 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />;
+      <Route exact path="/appearance" component={App} />
+      <Route exact path="/settings" component={App} />
       <Route exact path="/signup" component={Signup} />;
       <Route exact path="/fotgotPassword" component={ForgotPassword} />;
       <Route exact path="/:mylinkid">

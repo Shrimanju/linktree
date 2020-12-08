@@ -13,7 +13,8 @@ const Signup = () => {
   const [ErrorMessage, setErrorMessage] = useState();
   const [ErrorMessageFirebase, setErrorMessageFirebase] = useState();
   const onSubmit = (data) => {
-    if (data.password === data.confpassword) {
+    alert(data.email + " " + data.password + " " + data.password);
+    if (data.password === data.password) {
       setErrorMessage("");
       auth
         .createUserWithEmailAndPassword(data.email, data.password)
@@ -88,8 +89,9 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Password"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+              // pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              // pattern="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,50})$"
+              // title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             {errors.password && (
@@ -103,8 +105,10 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Confirm Password"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+              // pattern="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,50})$"
+
+              // pattern="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$"
+              // title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             <span className="text-danger">{ErrorMessage}</span>
