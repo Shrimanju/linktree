@@ -12,6 +12,7 @@ import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
+import { ThemeProvider, MuiThemeProvider } from "@material-ui/core/styles";
 
 // import  from 'bootstrap'
 const Appearance = () => {
