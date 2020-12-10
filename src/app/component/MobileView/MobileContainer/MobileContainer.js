@@ -22,7 +22,7 @@ const MobileContainer = (props) => {
 
   const useStyles = makeStyles({
     typography: {
-      backgroundColor: red,
+      backgroundColor: "blue",
     },
   });
 
