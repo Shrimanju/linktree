@@ -30,7 +30,7 @@ export default function AccountPopover(props) {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          setUsername(doc.data().username);
+          setUsername(doc.data().name);
         } else {
           setUserError("No such information present");
         }
@@ -85,7 +85,7 @@ export default function AccountPopover(props) {
           </>
         ) : (
           <Typography className={classes.typography}>
-            <span>My Account : @{username}</span>
+            <span>My Account : {username}</span>
             <br />
             <Button onClick={logout}>Logout</Button>
           </Typography>

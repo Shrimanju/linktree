@@ -4,8 +4,10 @@
   display: -ms-flexbox;
   display: flex;
   margin-top: 6vh;
-  border-radius: 30px;
+  /* border-radius: 10px; */
   height: 150px;
+  zoom: 0.8; /* all browsers */
+  -moz-transform: scale(0.8); /* Firefox*/
 }
 
 .linkcontainer .drag_drop {

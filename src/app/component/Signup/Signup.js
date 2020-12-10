@@ -13,21 +13,24 @@ const Signup = () => {
   const [ErrorMessage, setErrorMessage] = useState();
   const [ErrorMessageFirebase, setErrorMessageFirebase] = useState();
   const onSubmit = (data) => {
-    if (data.password === data.confpassword) {
+    // alert(data.email + " " + data.password + " " + data.password);
+    if (data.password === data.password && !true) {
       setErrorMessage("");
       auth
         .createUserWithEmailAndPassword(data.email, data.password)
         .then((u) => {
           db.collection("users").doc(auth.currentUser.uid).set({
             email: data.email,
-            username: data.username,
+            name: data.name,
+            // password:data.pa
           });
+          history.push("/");
         })
         .catch((err) => {
           setErrorMessageFirebase(err.message);
           console.log(err);
         });
-      history.push("/");
+      // history.push("/");
       console.log(data);
     } else {
       setErrorMessage("Password is not match");
@@ -68,15 +71,15 @@ const Signup = () => {
             <br></br>
             <TextField
               type="text"
-              name="username"
+              name="name"
               inputRef={register({ required: true })}
               style={{ minWidth: "470px" }}
               id="standard-basic"
-              label="Username"
+              label="Name"
             />
             <br></br>
-            {errors.username && (
-              <span className="text-danger">Username field is required</span>
+            {errors.Name && (
+              <span className="text-danger">Name field is required</span>
             )}
             <br></br>
             <TextField
@@ -86,6 +89,9 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Password"
+              // pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              // pattern="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,50})$"
+              // title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             {errors.password && (
@@ -99,6 +105,10 @@ const Signup = () => {
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Confirm Password"
+              // pattern="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,50})$"
+
+              // pattern="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$"
+              // title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             />
             <br></br>
             <span className="text-danger">{ErrorMessage}</span>

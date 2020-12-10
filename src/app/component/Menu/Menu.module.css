@@ -6,15 +6,17 @@
   line-height: 50px;
   -ms-flex-pack: distribute;
   /* margin-left: 40px; */
-  justify-content: space-around;
+  justify-content: flex-start;
   background-color: white;
   border-bottom: 1px solid gray;
   border-right: 1px solid gray;
 }
 
 .menucontainer .link {
+  font-weight: 500;
+  margin-left: 5%;
   text-decoration: none;
-  color: rgb(95, 95, 97);
+  color: #7d7e7f;
 }
 
 .menucontainer a.activeclass {

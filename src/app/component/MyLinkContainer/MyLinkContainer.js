@@ -12,12 +12,14 @@ function MyLinkContainer(props) {
   const [links, setlinks] = useState([]);
 
   useEffect(() => {
+    // alert(props.url);
+
     db.collection("users")
       .doc(auth.currentUser.uid)
       .get()
       .then((doc) => {
         if (doc.exists) {
-          setUsername(doc.data().username);
+          setUsername(doc.data().name);
         } else {
           console.log("Error in document");
         }
