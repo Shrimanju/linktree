@@ -13,8 +13,8 @@ const Signup = () => {
   const [ErrorMessage, setErrorMessage] = useState();
   const [ErrorMessageFirebase, setErrorMessageFirebase] = useState();
   const onSubmit = (data) => {
-    alert(data.email + " " + data.password + " " + data.password);
-    if (data.password === data.password) {
+    // alert(data.email + " " + data.password + " " + data.password);
+    if (data.password === data.password && !true) {
       setErrorMessage("");
       auth
         .createUserWithEmailAndPassword(data.email, data.password)

@@ -16,7 +16,7 @@ function Mylink() {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            setUsername(doc.data().username);
+            setUsername(doc.data().name);
           } else {
             console.log("Error in document");
           }

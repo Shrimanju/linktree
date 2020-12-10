@@ -14,8 +14,8 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />;
-      <Route exact path="/appearance" component={App} />
-      <Route exact path="/settings" component={App} />
+      <Route exact path="/appearance" component={App} />;
+      <Route exact path="/settings" component={App} />;
       <Route exact path="/signup" component={Signup} />;
       <Route exact path="/fotgotPassword" component={ForgotPassword} />;
       <Route exact path="/:mylinkid">

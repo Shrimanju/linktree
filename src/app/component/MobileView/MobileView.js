@@ -19,7 +19,7 @@ const MobileView = () => {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          setUsername(doc.data().username);
+          setUsername(doc.data().name);
         } else {
           setUserError("No such information present");
         }
