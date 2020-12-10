@@ -4,21 +4,25 @@ import "./appearance.css";
 
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Color1 from "../../../Assets/color1.PNG";
-import Color2 from "../../../Assets/color2.PNG";
-import Color3 from "../../../Assets/color3.PNG";
+import Color1 from "../../../Assets/WhiteTheme.png";
+import Color2 from "../../../Assets/BlackTheme.png";
+import Color3 from "../../../Assets/GreyTheme.png";
 import { storage, database } from "../../../Firebase_config/firebase";
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
 import { ThemeProvider, MuiThemeProvider } from "@material-ui/core/styles";
-
+import getColorForThemeAction from "../../Redux/Action/getColorForThemeAction";
+import { useDispatch } from "react-redux";
 // import  from 'bootstrap'
 const Appearance = () => {
   const [image, setImage] = useState("");
   const [URL, setURL] = useState("");
   const [username, setUsername] = useState();
+  const [themeColor, setThemeColor] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // var path = storage.getPath;
@@ -109,6 +113,11 @@ const Appearance = () => {
       storage.ref().child(username).child(image.name).delete();
       setURL("");
     }
+  };
+
+  const themeClickHandler = (color) => {
+    setThemeColor(color);
+    dispatch(getColorForThemeAction(color));
   };
 
   return (
@@ -206,9 +215,9 @@ const Appearance = () => {
           <div className="col col-xs">
             <img
               src={Color1}
-              // onClick={() => {
-              //   themeClickHandler("blue");
-              // }}
+              onClick={() => {
+                themeClickHandler("white");
+              }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
             <br></br>
@@ -216,18 +225,18 @@ const Appearance = () => {
           <div className="col col-xs">
             <img
               src={Color2}
-              // onClick={() => {
-              //   themeClickHandler("pink");
-              // }}
+              onClick={() => {
+                themeClickHandler("darkslategray");
+              }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
           </div>
           <div className="col col-xs">
             <img
               src={Color3}
-              // onClick={() => {
-              //   themeClickHandler("violet");
-              // }}
+              onClick={() => {
+                themeClickHandler("dimgray");
+              }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
           </div>

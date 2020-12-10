@@ -16,23 +16,15 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
+import { useSelector } from "react-redux";
 
 const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
+  const [color, setColor] = useState("white");
 
-  const useStyles = makeStyles({
-    typography: {
-      backgroundColor: "blue",
-    },
-  });
-
-  const classed = useStyles();
-
-  const theme = createMuiTheme({
-    palette: {
-      red: purple,
-    },
-  });
+  const themeColors = useSelector((state) => state.themeColor);
+  console.log("themeColors", themeColors);
+  // setColor(themeColors);
 
   useEffect(() => {
     const unsubscribe = db
@@ -54,9 +46,30 @@ const MobileContainer = (props) => {
     };
   }, []);
 
+  const useStyles = makeStyles({
+    typography: {
+      backgroundColor: themeColors,
+      // backgroundColor: themeColors || color,
+    },
+  });
+
+  const classed = useStyles();
+
+  const theme = createMuiTheme({
+    palette: {
+      background: {
+        primary: orange,
+      },
+    },
+  });
+
   return (
     <MuiThemeProvider theme={theme}>
-      <div className={`${classes.container} ${classed.typography}`}>
+      <Typography
+        variant="contained"
+        // className={`${classes.container}`}
+        className={`${classes.container} ${classed.typography}`}
+      >
         <div className={classes.container_heading}>
           <Avatar className={classes.avatar} />
           <span>{props.user}</span>
@@ -72,7 +85,7 @@ const MobileContainer = (props) => {
             );
           }
         })}
-      </div>
+      </Typography>
     </MuiThemeProvider>
   );
 };
