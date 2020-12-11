@@ -2,7 +2,7 @@
   "name": "webknottree",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://gowebknot/github.io/links-listing",
+  "homepage": "http://gowebknot.github.io/links-listing",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -13,6 +13,7 @@
     "clipboard": "^2.0.6",
     "firebase": "^8.0.0",
     "gh-pages": "^3.1.0",
+    "local-storage": "^2.0.0",
     "qrcode.react": "^1.0.0",
     "react": "^17.0.1",
     "react-copy-to-clipboard": "^5.0.2",

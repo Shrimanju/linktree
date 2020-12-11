@@ -17,16 +17,55 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
 import { useSelector } from "react-redux";
+import ls from "local-storage";
 
 const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
-  const [color, setColor] = useState("white");
+  const [color, setColor] = useState("");
+  const [username, setUsername] = useState();
 
-  const themeColors = useSelector((state) => state.themeColor);
-  console.log("themeColors", themeColors);
+  // const themeColors = useSelector((state) => state.themeColor);
   // setColor(themeColors);
+  setInterval(() => {
+    var themeColorObject = ls.get("themeColorObject") || "";
+
+    if (themeColorObject) {
+      themeColorObject.map((getColor) => {
+        if (getColor.email === username) {
+          setColor(getColor.themeColor);
+        }
+      });
+    }
+    // console.log(
+    //   "local storage outside useEffect",
+    //   localStorage.getItem("themeColor")
+    // );
+  }, 2000);
 
   useEffect(() => {
+    var themeColors = ls.get("themeColor");
+    // console.log("themeColors", ls.get("themeColor"));
+
+    // fetch("http://localhost:3000/")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setColor({ arrayposts: data });
+    //   })
+    //   .catch((err) => console.log("can't get posts"));
+    setTimeout(() => {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setUsername(doc.data().email);
+          } else {
+            console.log("Error in document");
+          }
+        });
+    }, 2000);
+
     const unsubscribe = db
       .collection("users")
       .doc(auth.currentUser.uid)
@@ -48,7 +87,7 @@ const MobileContainer = (props) => {
 
   const useStyles = makeStyles({
     typography: {
-      backgroundColor: themeColors,
+      backgroundColor: color || "white",
       // backgroundColor: themeColors || color,
     },
   });
