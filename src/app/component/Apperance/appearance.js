@@ -35,7 +35,9 @@ const Appearance = () => {
     if (getURLFromLocalStorage) {
       getURLFromLocalStorage.map((userImage) => {
         if (userImage.email === username) {
-          // console.log("URL", userImage.url);
+          // console.log("URL", userImage.imageName);
+          // setImage("image", image);
+          setImage(userImage.imageName);
           setURL(userImage.url);
         }
       });
@@ -95,19 +97,19 @@ const Appearance = () => {
     // console.log("image", image);
     // console.log(data);
     if (data == "imageUpload" && image != "") {
-      storage
-        .ref(username)
-        .listAll()
-        .then((imageList) => {
-          imageList.items.map((imageList) => {
-            // console.log("imageList", imageList.fullPath);
-            fullPath = imageList.fullPath.split("/");
-            // console.log(fullPath[0]);
-            // console.log(fullPath[1]);
+      // storage
+      //   .ref(username)
+      //   .listAll()
+      //   .then((imageList) => {
+      //     imageList.items.map((imageList) => {
+      //       // console.log("imageList", imageList.fullPath);
+      //       fullPath = imageList.fullPath.split("/");
+      //       // console.log(fullPath[0]);
+      //       // console.log(fullPath[1]);
 
-            storage.ref().child(fullPath[0]).child(fullPath[1]).delete();
-          });
-        });
+      //       storage.ref().child(fullPath[0]).child(fullPath[1]).delete();
+      //     });
+      //   });
       const key = database.ref().child(auth.currentUser.uid).push().key;
 
       const uploadImage = storage.ref(`${username}/${image.name}`).put(image);
@@ -121,7 +123,7 @@ const Appearance = () => {
         () => {
           storage
             .ref(username)
-            .child(image.name)
+            .child(image.name || image)
             .getDownloadURL()
             .then((url) => {
               setURL(url);

@@ -53,10 +53,9 @@ const MobileView = () => {
     <div className={classes.container}>
       <div className={classes.mobileheader}>
         <span>
-          My Link :{" "}
+          My Link:
           <Link to={`/${username}`} className={classes.link}>
-            {" "}
-            {`${Base_URL}/${username}`}
+            <span> {`${Base_URL}/${username}`}</span>
           </Link>
         </span>
         <button className="btn btn-light" onClick={popoverOpen}>

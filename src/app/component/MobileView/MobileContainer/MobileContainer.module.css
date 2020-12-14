@@ -32,10 +32,10 @@
   background-color: lightgreen;
 }
 
-/* .container .link {
-  border: 1px solid green;
-  border-radius: 20px;
-} */
+.container .link {
+  /* border: 1px solid green; */
+  border-radius: 50px;
+}
 
 @media (max-width: 800px) {
   .container {

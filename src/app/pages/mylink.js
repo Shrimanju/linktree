@@ -3,11 +3,30 @@ import { Avatar } from "@material-ui/core";
 import classes from "../../styles/MyLink/Mylink.module.css";
 import MyLinkContainer from "../component/MyLinkContainer/MyLinkContainer";
 import db, { auth } from "../../Firebase_config/firebase";
+import ls from "local-storage";
 
 function Mylink() {
   const [username, setUsername] = useState();
-
+  const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
+
+  setInterval(() => {
+    var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
+
+    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
+    if (getURLFromLocalStorage) {
+      getURLFromLocalStorage.map((userImage) => {
+        if (userImage.email === username) {
+          // console.log("URL", userImage.url);
+          setURL(userImage.url);
+        }
+      });
+    }
+    // console.log(
+    //   "local storage outside useEffect",
+    //   localStorage.getItem("themeColor")
+    // );
+  }, 2000);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +71,15 @@ function Mylink() {
   return (
     <div className={classes.mylink_container}>
       <div className={classes.header}>
-        <Avatar className={classes.avatar} />
+        {URL ? (
+          <>
+            <img className={classes.link} src={URL} />
+          </>
+        ) : (
+          <>
+            <Avatar className={classes.avatar} />
+          </>
+        )}
         <span>@{username}</span>
       </div>
       <div className={classes.body}>
