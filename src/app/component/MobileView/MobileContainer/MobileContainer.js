@@ -23,6 +23,7 @@ const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [color, setColor] = useState("");
   const [username, setUsername] = useState();
+  const [URL, setURL] = useState("");
 
   // const themeColors = useSelector((state) => state.themeColor);
   // setColor(themeColors);
@@ -35,6 +36,29 @@ const MobileContainer = (props) => {
           setColor(getColor.themeColor);
         }
       });
+    }
+
+    var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
+
+    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
+    if (getURLFromLocalStorage) {
+      getURLFromLocalStorage.map((userImage) => {
+        if (userImage.email === username) {
+          // console.log("URL", userImage.url);
+          setURL(userImage.url);
+        }
+        // else {
+        //   setURL("");
+        // }
+      });
+
+      // if (
+      //   getURLFromLocalStorage.filter(
+      //     (getUsername) => getUsername.email === username
+      //   ).length === 0
+      // ) {
+      //   setURL("");
+      // }
     }
     // console.log(
     //   "local storage outside useEffect",
@@ -110,7 +134,15 @@ const MobileContainer = (props) => {
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          <Avatar className={classes.avatar} />
+          {URL ? (
+            <>
+              <img className={classes.link} src={URL} />
+            </>
+          ) : (
+            <>
+              <Avatar className={classes.avatar} />
+            </>
+          )}
           <span>{props.user}</span>
         </div>
         {links.map((link) => {

@@ -7,6 +7,7 @@ import ls from "local-storage";
 
 function Mylink() {
   const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
 
@@ -16,17 +17,13 @@ function Mylink() {
     // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
     if (getURLFromLocalStorage) {
       getURLFromLocalStorage.map((userImage) => {
-        if (userImage.email === username) {
+        if (userImage.email === email) {
           // console.log("URL", userImage.url);
           setURL(userImage.url);
         }
       });
     }
-    // console.log(
-    //   "local storage outside useEffect",
-    //   localStorage.getItem("themeColor")
-    // );
-  }, 2000);
+  }, 5000);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,6 +33,7 @@ function Mylink() {
         .then((doc) => {
           if (doc.exists) {
             setUsername(doc.data().name);
+            setEmail(doc.data().email);
           } else {
             console.log("Error in document");
           }

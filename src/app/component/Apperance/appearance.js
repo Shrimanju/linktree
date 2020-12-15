@@ -15,6 +15,7 @@ import blue from "@material-ui/core/colors/blue";
 import { ThemeProvider, MuiThemeProvider } from "@material-ui/core/styles";
 // import getColorForThemeAction from "../../Redux/Action/getColorForThemeAction";
 // import { useDispatch } from "react-redux";
+
 import ls from "local-storage";
 // import  from 'bootstrap'
 const Appearance = () => {
@@ -112,7 +113,9 @@ const Appearance = () => {
       //   });
       const key = database.ref().child(auth.currentUser.uid).push().key;
 
-      const uploadImage = storage.ref(`${username}/${image.name}`).put(image);
+      const uploadImage = storage
+        .ref(`${username}/${image.name || image}`)
+        .put(image);
 
       uploadImage.on(
         "state_changed",
@@ -255,7 +258,7 @@ const Appearance = () => {
   };
 
   return (
-    <div>
+    <div className="appearance">
       <div className="heading col-md-6">
         <h3>Profile</h3>
       </div>
@@ -299,31 +302,44 @@ const Appearance = () => {
             <div className="buttons buttonss col-xs col-lg">
               <input
                 style={{ width: "100px" }}
+                id="fileUpload"
+                style={{
+                  // width: "250px",
+                  // border: "1px solid green",
+                  display: "none",
+                  // background: "orange",
+                }}
                 type="file"
                 onChange={changeHandler}
               />
-              <Button
-                onClick={() => {
-                  clickHandler("imageUpload");
-                }}
+              <label
+                // onClick={() => {
+                //   clickHandler("imageUpload");
+                // }}
+                forHtml="fileUpload"
                 style={{
                   maxWidth: "400px",
                   maxHeight: "70px",
                   minWidth: "250px",
                   minHeight: "30px",
                   borderRadius: "50px",
+                  pointerEvents: "cursor",
+                  background: "blue",
+                  color: "white",
+                  textAlign: "center",
+                  // marginTop: "-20%",
                 }}
-                variant="contained"
-                color="primary"
+                // variant="contained"
+                // color="primary"
               >
                 Pick an Image
-              </Button>
+              </label>
             </div>
             <div className="buttons col-xs col-lg">
               <Button
-                onClick={() => {
-                  clickHandler("imageRemove");
-                }}
+                // onClick={() => {
+                //   clickHandler("imageRemove");
+                // }}
                 style={{
                   marginTop: "30px",
                   maxWidth: "400px",

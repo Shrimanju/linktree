@@ -53,12 +53,19 @@ const MobileView = () => {
     <div className={classes.container}>
       <div className={classes.mobileheader}>
         <span>
-          My Link:
+          <span style={{ fontWeight: "700" }}>My Link:</span>
           <Link to={`/${username}`} className={classes.link}>
-            <span> {`${Base_URL}/${username}`}</span>
+            <span style={{ marginLeft: "5%" }}>
+              {" "}
+              {`${Base_URL}/${username}`}
+            </span>
           </Link>
         </span>
-        <button className="btn btn-light" onClick={popoverOpen}>
+        <button
+          style={{ marginRight: "-40%" }}
+          className="btn btn-light"
+          onClick={popoverOpen}
+        >
           Share
         </button>
         <ShareLinkPopOver

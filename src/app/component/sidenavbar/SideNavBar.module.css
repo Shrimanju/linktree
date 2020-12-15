@@ -14,11 +14,16 @@
   -ms-flex-align: center;
   align-items: center;
   padding: 0.1vw;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  height: auto;
+  overflow: auto;
   /* border-right: 1px solid gray; */
 }
 
 .logo {
-  margin-top: 35%;
+  margin-top: 25%;
   height: 23px;
   width: 23px;
 }
