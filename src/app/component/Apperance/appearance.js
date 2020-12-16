@@ -13,8 +13,8 @@ import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
 import { ThemeProvider, MuiThemeProvider } from "@material-ui/core/styles";
-// import getColorForThemeAction from "../../Redux/Action/getColorForThemeAction";
-// import { useDispatch } from "react-redux";
+import { ImageUrlAction } from "../../Redux/Action/ActionFile";
+import { useSelector, useDispatch } from "react-redux";
 
 import ls from "local-storage";
 // import  from 'bootstrap'
@@ -23,32 +23,16 @@ const Appearance = () => {
   const [URL, setURL] = useState("");
   const [username, setUsername] = useState();
   const [themeColor, setThemeColor] = useState("");
+  const dispatch = useDispatch();
+  const selectorImage = useSelector((state) => state.imageUrl);
+
+  // console.log(selector);
 
   if (ls.get("ArrayOfImageDetails")) {
     var ArrayOfImageDetails = [];
   }
-  // var getDetails = ls.get("ArrayOfImageDetails") || [];
-
-  setInterval(() => {
-    var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
-
-    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
-    if (getURLFromLocalStorage) {
-      getURLFromLocalStorage.map((userImage) => {
-        if (userImage.email === username) {
-          // console.log("URL", userImage.imageName);
-          // setImage("image", image);
-          setImage(userImage.imageName);
-          setURL(userImage.url);
-        }
-      });
-    }
-
-    // setURL(getURLFromLocalStorage[0].url);
-  }, 1000);
 
   useEffect(() => {
-    // var path = storage.getPath;
     setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
@@ -60,61 +44,52 @@ const Appearance = () => {
             console.log("Error in document");
           }
         });
-      // if (URL === "") {
-      // storage
-      //   .ref(username)
-      //   .listAll()
-      //   .then((imageList) => {
-      //     imageList.items.map((eachFile) => {
-      //       console.log("eachFile", eachFile);
-      //     });
-      //   });
-      // }
     }, 2000);
-    // return () => {
-    //   clearInterval(interval);
-    // };
-
-    // storage
-    //   .ref("images")
-    //   .listAll()
-    //   .then((imageList) => {
-    //     imageList.items.map((eachFile) => {
-    //       console.log(
-    //         "Image List",
-    //         imageList.items.lastIndexOf(eachFile),
-    //         eachFile
-    //       );
-    //     });
-    //   });
   }, []);
 
+  // useEffect(() => {
+  storage
+    .ref(username)
+    .child("ProfileImage")
+    .child("ProfileImage.jpg")
+    .getDownloadURL()
+    .then((url) => {
+      setURL("");
+      setURL(url);
+
+      console.log("URL", url);
+    });
+  // }, [username]);
+
+  useEffect(() => {
+    if (URL) {
+      dispatch(ImageUrlAction(URL));
+    }
+  }, [username, URL]);
+
   const changeHandler = (e) => {
-    const getImageimage = e.target.files[0];
+    const getImageimage = e.target.value;
+    console.log("getImageimage", getImageimage);
+
     setImage(getImageimage);
   };
-  const clickHandler = (data) => {
-    var fullPath = [];
-    // console.log("image", image);
-    // console.log(data);
-    if (data == "imageUpload" && image != "") {
-      // storage
-      //   .ref(username)
-      //   .listAll()
-      //   .then((imageList) => {
-      //     imageList.items.map((imageList) => {
-      //       // console.log("imageList", imageList.fullPath);
-      //       fullPath = imageList.fullPath.split("/");
-      //       // console.log(fullPath[0]);
-      //       // console.log(fullPath[1]);
 
-      //       storage.ref().child(fullPath[0]).child(fullPath[1]).delete();
-      //     });
-      //   });
+  useEffect(() => {
+    if (image && username) {
+      console.log("Image", image);
+      clickHandler("imageUpload", image);
+    }
+  }, [image]);
+
+  const clickHandler = (e, data, image) => {
+    if (data == "imageUpload" && image != "") {
+      console.log("image", image);
+      console.log("Username", username);
+
       const key = database.ref().child(auth.currentUser.uid).push().key;
 
       const uploadImage = storage
-        .ref(`${username}/${image.name || image}`)
+        .ref(`${username}/ProfileImage/ProfileImage.jpg`)
         .put(image);
 
       uploadImage.on(
@@ -126,85 +101,22 @@ const Appearance = () => {
         () => {
           storage
             .ref(username)
-            .child(image.name || image)
+            .child("ProfileImage")
+            .child("ProfileImage.jpg")
             .getDownloadURL()
             .then((url) => {
               setURL(url);
-
-              var imageDetails = {
-                email: username,
-                imageName: image.name,
-                url: url,
-              };
-
-              var getDetails = ls.get("ArrayOfImageDetails") || [];
-              console.log(
-                "Filter of array",
-                getDetails.filter(
-                  (getUsername) => getUsername.email === username
-                ).length === 0
-              );
-
-              if (!ls.get("ArrayOfImageDetails")) {
-                console.log("ArrayOfImageDetails1", imageDetails);
-                ls.set("ArrayOfImageDetails", [imageDetails]);
-              } else if (
-                ls.get("ArrayOfImageDetails") &&
-                getDetails.filter(
-                  (getUsername) => getUsername.email === username
-                ).length >= 1
-              ) {
-                getDetails.map((userDetails, index) => {
-                  // console.log("userDetails", userDetails);
-                  if (userDetails.email === username) {
-                    console.log("ArrayOfImageDetails2", imageDetails);
-
-                    // console.log("getDetails[index].imageName", [
-                    //   getDetails[index].imageName,
-                    // ]);
-
-                    getDetails[index].imageName = imageDetails.imageName;
-
-                    ls.set("ArrayOfImageDetails", getDetails);
-
-                    // console.log("getDetails", getDetails);
-                  }
-                });
-              } else if (
-                getDetails.filter(
-                  (getUsername) => getUsername.email === username
-                ).length === 0
-              ) {
-                console.log("ArrayOfImageDetails3", imageDetails);
-
-                ls.set("ArrayOfImageDetails", [
-                  ...ls.get("ArrayOfImageDetails"),
-                  imageDetails,
-                ]);
-              }
-              // else if ([getDetails[index].email].indexOf(username) == -1) {
-
-              //              ls.set("ArrayOfImageDetails", ArrayOfImageDetails);
-
-              // console.log("url", url);
             });
         }
       );
     } else if (data === "imageRemove") {
       console.log("data", data);
 
-      var getDetails1 = ls.get("ArrayOfImageDetails") || [];
+      storage.ref(`${username}/ProfileImage/ProfileImage.jpg`).delete();
 
-      var getIndex = getDetails1.findIndex((index) => index.email === username);
-      console.log("Index", getIndex);
+      // .child("ProfileImage")
+      // .child("ProfileImage.jpg")
 
-      if (getDetails1 && getIndex >= 0) {
-        getDetails1.splice(getIndex, 1);
-        ls.set("ArrayOfImageDetails", getDetails1);
-      }
-
-      // storage.ref().child(username).child(image.name).delete();
-      // ls.remove("imageDetails");
       setURL("");
     }
   };
@@ -266,7 +178,7 @@ const Appearance = () => {
         <div className="profile col-xs-12">
           <div className="info row">
             <div className="col-xs col-lg">
-              {URL ? (
+              {selectorImage || URL ? (
                 <>
                   {/* <p> {console.log("image", image)}</p>
                   <p> {console.log("URL", URL)}</p> */}
@@ -279,7 +191,8 @@ const Appearance = () => {
                       borderRadius: "100px",
                       // backgroundColor: "lightgreen",
                     }}
-                    src={URL}
+                    src={selectorImage || URL}
+                    // src={selectorImage}
                   />
                 </>
               ) : (
@@ -301,52 +214,41 @@ const Appearance = () => {
             </div>
             <div className="buttons buttonss col-xs col-lg">
               <input
-                style={{ width: "100px" }}
+                // style={{ width: "100px" }}
                 id="fileUpload"
                 style={{
-                  // width: "250px",
-                  // border: "1px solid green",
+                  width: "250px",
                   display: "none",
-                  // background: "orange",
                 }}
                 type="file"
                 onChange={changeHandler}
               />
               <label
+                for="fileUpload"
                 // onClick={() => {
                 //   clickHandler("imageUpload");
                 // }}
-                forHtml="fileUpload"
-                style={{
-                  maxWidth: "400px",
-                  maxHeight: "70px",
-                  minWidth: "250px",
-                  minHeight: "30px",
-                  borderRadius: "50px",
-                  pointerEvents: "cursor",
-                  background: "blue",
-                  color: "white",
-                  textAlign: "center",
-                  // marginTop: "-20%",
-                }}
+                className="imageUploadButton"
+
                 // variant="contained"
                 // color="primary"
               >
-                Pick an Image
+                PICK AN IMAGE
               </label>
             </div>
             <div className="buttons col-xs col-lg">
               <Button
-                // onClick={() => {
-                //   clickHandler("imageRemove");
-                // }}
+                onClick={() => {
+                  clickHandler("imageRemove");
+                }}
                 style={{
                   marginTop: "30px",
                   maxWidth: "400px",
                   maxHeight: "70px",
                   minWidth: "250px",
                   minHeight: "30px",
-                  borderRadius: "50px",
+                  marginTop: "0%",
+                  // borderRadius: "10px",
                 }}
                 variant="contained"
               >

@@ -9,20 +9,29 @@ import Settings from "./app/pages/settings";
 import ForgotPassword from "./app/component/ForgotPassword/ForgotPassword";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import everyReducer from "./app/Redux/Reducer/index";
+import { createStore } from "redux";
+const store = createStore(
+  everyReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={App} />;
-      <Route exact path="/appearance" component={App} />;
-      <Route exact path="/settings" component={App} />;
-      <Route exact path="/signup" component={Signup} />;
-      <Route exact path="/fotgotPassword" component={ForgotPassword} />;
-      <Route exact path="/:mylinkid">
-        <Mylink />
-      </Route>
-    </Switch>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={App} />;
+        <Route exact path="/appearance" component={App} />;
+        <Route exact path="/settings" component={App} />;
+        <Route exact path="/signup" component={Signup} />;
+        <Route exact path="/fotgotPassword" component={ForgotPassword} />;
+        <Route exact path="/:mylinkid">
+          <Mylink />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

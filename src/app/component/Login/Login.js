@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { firebaseApp } from "../../../Firebase_config/firebase";
@@ -8,10 +8,18 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { storage, database } from "../../../Firebase_config/firebase";
+import db, { auth } from "../../../Firebase_config/firebase";
+// import { userDetailsAction } from "../../Redux/Action/ActionFile";
+// import { useSelector, useDispatch } from "react-redux";
 
 const Login = () => {
   const { handleSubmit, register, errors } = useForm();
   const [ErrorMessages, setErrorMessages] = useState();
+  // const [name, setName] = useState("");
+  // const [emailID, setEmailID] = useState("");
+  // const [URL, setURL] = useState("");
+  // const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     setErrorMessages("");
@@ -20,12 +28,35 @@ const Login = () => {
       .signInWithEmailAndPassword(data.email, data.password)
       .then((u) => {
         console.log(u);
+
+        //Email,Name and URL
+
+        // db.collection("users")
+        //   .doc(auth.currentUser.uid)
+        //   .get()
+        //   .then((doc) => {
+        //     console.log("Email");
+        //     if (doc.exists) {
+        //       console.log("EMail", doc.data().emailID);
+        //       setEmailID(doc.data().emailID);
+        //       setName(doc.data().name);
+        //     } else {
+        //       console.log("Error in document");
+        //     }
+        //   });
       })
       .catch((err) => {
         setErrorMessages(err.message);
         console.log(err);
       });
   };
+
+  // useEffect(() => {
+  //   if (name || emailID) {
+  //     dispatch(userDetailsAction(emailID, name));
+  //   }
+  //   // console.log("Email,name", emailID, name);
+  // }, [emailID, name]);
 
   return (
     <div className="login-body">

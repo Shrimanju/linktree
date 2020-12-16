@@ -7,16 +7,38 @@ import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import db, { auth } from "../../../Firebase_config/firebase";
+import { ImageUrlAction } from "../../Redux/Action/ActionFile";
+import { useSelector, useDispatch } from "react-redux";
+import { storage, database } from "../../../Firebase_config/firebase";
 
+// import { userDetailsAction } from "../../Redux/Action/ActionFile";
+// import { useSelector, useDispatch } from "react-redux";
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
-
+  const [username, setUsername] = useState();
   const [checked, setChecked] = useState();
-
+  const [imageURL, setImageURL] = useState("");
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
+  const dispatch = useDispatch();
 
+  // const [name, setName] = useState("");
+  // const [emailID, setEmailID] = useState("");
+  // const [URL, setURL] = useState("");
+  // const dispatch = useDispatch();
   useEffect(() => {
+    setTimeout(() => {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setUsername(doc.data().email);
+          } else {
+            console.log("Error in document");
+          }
+        });
+    }, 2000);
     db.collection("users")
       .doc(auth.currentUser.uid)
       .collection("links")
@@ -29,6 +51,31 @@ const LinkContainer = (props) => {
         )
       );
   }, []);
+
+  storage
+    .ref(username)
+    .child("ProfileImage")
+    .child("ProfileImage.jpg")
+    .getDownloadURL()
+    .then((url) => {
+      // setImageURL("");
+      setImageURL(url);
+
+      // console.log("URL", url);
+    });
+
+  useEffect(() => {
+    if (imageURL) {
+      dispatch(ImageUrlAction(imageURL));
+    }
+  }, [username, imageURL]);
+
+  // useEffect(() => {
+  //   if (name || emailID) {
+  //     dispatch(userDetailsAction(emailID, name));
+  //   }
+  //   console.log("Email,name", emailID, name);
+  // }, [emailID, name]);
 
   const titlehandler = (event) => {
     setTitle(event.target.value);

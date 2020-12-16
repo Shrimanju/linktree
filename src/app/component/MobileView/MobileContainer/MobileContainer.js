@@ -16,14 +16,16 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
-import { useSelector } from "react-redux";
 import ls from "local-storage";
+// import { selectorImage } from "../../../../utils/index";
+import { useSelector } from "react-redux";
 
 const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [color, setColor] = useState("");
   const [username, setUsername] = useState();
   const [URL, setURL] = useState("");
+  const selectorImage = useSelector((state) => state.imageUrl);
 
   // const themeColors = useSelector((state) => state.themeColor);
   // setColor(themeColors);
@@ -38,28 +40,28 @@ const MobileContainer = (props) => {
       });
     }
 
-    var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
+    // var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
 
-    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
-    if (getURLFromLocalStorage) {
-      getURLFromLocalStorage.map((userImage) => {
-        if (userImage.email === username) {
-          // console.log("URL", userImage.url);
-          setURL(userImage.url);
-        }
-        // else {
-        //   setURL("");
-        // }
-      });
+    // // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
+    // if (getURLFromLocalStorage) {
+    //   getURLFromLocalStorage.map((userImage) => {
+    //     if (userImage.email === username) {
+    //       // console.log("URL", userImage.url);
+    //       setURL(userImage.url);
+    //     }
+    //     // else {
+    //     //   setURL("");
+    //     // }
+    //   });
 
-      // if (
-      //   getURLFromLocalStorage.filter(
-      //     (getUsername) => getUsername.email === username
-      //   ).length === 0
-      // ) {
-      //   setURL("");
-      // }
-    }
+    // if (
+    //   getURLFromLocalStorage.filter(
+    //     (getUsername) => getUsername.email === username
+    //   ).length === 0
+    // ) {
+    //   setURL("");
+    // }
+    // }
     // console.log(
     //   "local storage outside useEffect",
     //   localStorage.getItem("themeColor")
@@ -77,6 +79,7 @@ const MobileContainer = (props) => {
     //     setColor({ arrayposts: data });
     //   })
     //   .catch((err) => console.log("can't get posts"));
+    // setTimeout(() => {
     setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
@@ -134,9 +137,9 @@ const MobileContainer = (props) => {
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          {URL ? (
+          {selectorImage || URL ? (
             <>
-              <img className={classes.link} src={URL} />
+              <img className={classes.link} src={selectorImage || URL} />
             </>
           ) : (
             <>
