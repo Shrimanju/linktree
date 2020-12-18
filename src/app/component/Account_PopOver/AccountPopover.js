@@ -10,6 +10,7 @@ import { CenterFocusStrong } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "../CopyToClipboard";
 import QRCode from "../QRCodeDialogBox/QRCode";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -23,6 +24,8 @@ export default function AccountPopover(props) {
   const [username, setUsername] = useState();
   const [userError, setUserError] = useState();
   const [databaseError, setDatabaseError] = useState();
+
+  const history = useHistory();
 
   useEffect(() => {
     db.collection("users")
@@ -43,6 +46,7 @@ export default function AccountPopover(props) {
   const classes = useStyles();
 
   const logout = () => {
+    history.push("/");
     auth.signOut();
   };
 

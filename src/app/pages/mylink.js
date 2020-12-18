@@ -3,20 +3,41 @@ import { Avatar } from "@material-ui/core";
 import classes from "../../styles/MyLink/Mylink.module.css";
 import MyLinkContainer from "../component/MyLinkContainer/MyLinkContainer";
 import db, { auth } from "../../Firebase_config/firebase";
+import ls from "local-storage";
+import { useSelector } from "react-redux";
+// import { selectorImage } from "../../utils/index";
 
 function Mylink() {
   const [username, setUsername] = useState();
-
+  const [email, setEmail] = useState();
+  const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
+  const selectorImage = useSelector((state) => state.imageUrl);
+
+  // setInterval(() => {
+  //   var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
+
+  //   // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
+  //   if (getURLFromLocalStorage) {
+  //     getURLFromLocalStorage.map((userImage) => {
+  //       if (userImage.email === email) {
+  //         // console.log("URL", userImage.url);
+  //         setURL(userImage.url);
+  //       }
+  //     });
+  //   }
+  // }, 1000);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // const interval =
+    setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
         .get()
         .then((doc) => {
           if (doc.exists) {
             setUsername(doc.data().name);
+            setEmail(doc.data().email);
           } else {
             console.log("Error in document");
           }
@@ -44,16 +65,24 @@ function Mylink() {
       };
     }, 2000);
 
-    return () => {
-      clearInterval(interval);
-    };
+    // return () => {
+    //   clearInterval(interval);
+    // };
   }, []);
 
   return (
     <div className={classes.mylink_container}>
       <div className={classes.header}>
-        <Avatar className={classes.avatar} />
-        <span>@{username}</span>
+        {selectorImage || URL ? (
+          <>
+            <img className={classes.link} src={selectorImage || URL} />
+          </>
+        ) : (
+          <>
+            <Avatar className={classes.avatar} />
+          </>
+        )}
+        <span>{username}</span>
       </div>
       <div className={classes.body}>
         {links.map((link) => {

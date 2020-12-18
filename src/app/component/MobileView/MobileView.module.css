@@ -6,8 +6,10 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  /* border: 1px solid green; */
+  /* overflow: auto; */
   /* background-color: green; */
-  background-color: green;
+  /* background-color: green; */
 }
 
 .container .mobileheader {
@@ -19,7 +21,7 @@
   justify-content: space-between;
   background-color: white;
   padding: 1vh;
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
 }
 
 .container .mobileheader span {
@@ -32,12 +34,14 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: "10%";
 }
 
 .container .mobileheader span .link {
   /* text-decoration: none; */
   color: #292b2c;
   font-size: 14px;
+  /* margin-left: 1%; */
 }
 
 .container .mobilebody {

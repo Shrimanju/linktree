@@ -14,7 +14,7 @@ const Signup = () => {
   const [ErrorMessageFirebase, setErrorMessageFirebase] = useState();
   const onSubmit = (data) => {
     // alert(data.email + " " + data.password + " " + data.password);
-    if (data.password === data.password && !true) {
+    if (data.password === data.confpassword) {
       setErrorMessage("");
       auth
         .createUserWithEmailAndPassword(data.email, data.password)
@@ -22,7 +22,6 @@ const Signup = () => {
           db.collection("users").doc(auth.currentUser.uid).set({
             email: data.email,
             name: data.name,
-            // password:data.pa
           });
           history.push("/");
         })

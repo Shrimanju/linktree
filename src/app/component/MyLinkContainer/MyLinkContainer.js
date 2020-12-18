@@ -3,13 +3,32 @@ import React, { useState, useEffect } from "react";
 import classes from "../MyLinkContainer/MyLinkContainer.module.css";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import db, { auth } from "../../../Firebase_config/firebase";
+import ls from "local-storage";
 
 // import db, { auth } from "../../Firebase_config/firebase";
 
 function MyLinkContainer(props) {
   const [username, setUsername] = useState();
-
+  const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
+
+  setInterval(() => {
+    var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
+
+    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
+    if (getURLFromLocalStorage) {
+      getURLFromLocalStorage.map((userImage) => {
+        if (userImage.email === username) {
+          // console.log("URL", userImage.url);
+          setURL(userImage.url);
+        }
+      });
+    }
+    // console.log(
+    //   "local storage outside useEffect",
+    //   localStorage.getItem("themeColor")
+    // );
+  }, 2000);
 
   useEffect(() => {
     // alert(props.url);

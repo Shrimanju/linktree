@@ -6,6 +6,15 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { auth } from "./Firebase_config/firebase";
 import Login from "./app/component/Login/Login";
 import { useEffect, useState } from "react";
+// import { Provider } from "react-redux";
+// import everyReducer from "./app/Redux/Reducer/index";
+// import { createStore } from "redux";
+import { Popover } from "@material-ui/core";
+
+// const store = createStore(
+//   everyReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 function App() {
   const [user, setuser] = useState();
@@ -21,6 +30,7 @@ function App() {
   });
 
   return (
+    // <Provider store={store}>
     <div>
       {user ? (
         <div className="app">
@@ -32,6 +42,7 @@ function App() {
         <Login />
       )}
     </div>
+    // </Provider>
   );
 }
 

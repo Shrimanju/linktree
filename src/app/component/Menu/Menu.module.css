@@ -4,12 +4,13 @@
   display: -ms-flexbox;
   display: flex;
   line-height: 50px;
+  margin-left: 7%;
   -ms-flex-pack: distribute;
   /* margin-left: 40px; */
   justify-content: flex-start;
   background-color: white;
-  border-bottom: 1px solid gray;
-  border-right: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
+  /* border-right: 1px solid gray; */
 }
 
 .menucontainer .link {
@@ -17,10 +18,11 @@
   margin-left: 5%;
   text-decoration: none;
   color: #7d7e7f;
+  border-bottom: 1px solid white;
 }
 
 .menucontainer a.activeclass {
-  border-bottom: 1px solid rgb(38, 50, 56);
+  border-bottom: 1px solid dimgray;
   /* border-bottom: 2px solid green;
   color: red; */
 }

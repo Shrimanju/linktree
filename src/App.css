@@ -1,5 +1,6 @@
-.app{
+.app {
   height: 100vh;
+  /* height: 100%; */
   display: flex;
 }
 
@@ -8,8 +9,13 @@
     flex-direction: column;
   }
 
-  .app :nth-child(1) { order: 1; }
-  .app :nth-child(2) { order: 3; }
-  .app :nth-child(3) { order: 2; }
+  .app :nth-child(1) {
+    order: 1;
+  }
+  .app :nth-child(2) {
+    order: 3;
+  }
+  .app :nth-child(3) {
+    order: 2;
+  }
 }
-

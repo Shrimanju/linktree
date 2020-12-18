@@ -1,25 +1,25 @@
-.menucontainer{
-    width: 100%;
-    display: flex;
-    line-height: 50px;
-    justify-content: space-around;
-    background-color: white;
-    border-bottom: 1px solid gray;
-    border-right: 1px solid gray;
+.menucontainer {
+  width: 100%;
+  display: flex;
+  line-height: 50px;
+  justify-content: space-around;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
 
-    .link{
-        text-decoration: none;
-        color: yellowgreen;
-    }
+  .link {
+    text-decoration: none;
+    color: yellowgreen;
+  }
 
-    a.activeclass{
-        border-bottom: 2px solid green;
-        color: red;
-    }
+  a.activeclass {
+    border-bottom: 2px solid green;
+    color: red;
+  }
 }
 
-@media (max-width:800px){
-    .menucontainer{
-        border-right: 0;
-    }
+@media (max-width: 800px) {
+  .menucontainer {
+    border-right: 0;
+  }
 }
