@@ -1,9 +1,7 @@
 .appearance {
-  /* overflow-y: scroll; */
-  /* display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; */
+  margin-left: 10%;
 }
+
 .imageUploadButton {
   width: 250px;
   height: 37px;

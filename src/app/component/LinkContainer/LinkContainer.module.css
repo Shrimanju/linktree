@@ -1,8 +1,10 @@
 .linkcontainer {
   background-color: white;
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  /* margin-left: 10%; */
   margin-top: 6vh;
   /* border-radius: 10px; */
   height: 150px;

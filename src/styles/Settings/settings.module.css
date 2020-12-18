@@ -1,0 +1,15 @@
+.settings {
+  margin: 5% 0 0 15%;
+}
+/* .heading {
+} */
+
+.changePassword {
+  width: 75%;
+  height: 60%;
+  /* border: 1px solid black; */
+  background: white;
+  margin-top: 5%;
+  /* margin-left: 10%; */
+  padding: 2% 0 0 5%;
+}

@@ -29,9 +29,8 @@ function Mylink() {
   // }, 1000);
 
   useEffect(() => {
-    // const interval = setInterval(() => {
-
-    setInterval(() => {
+    // const interval =
+    setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
         .get()

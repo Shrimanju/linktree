@@ -17,6 +17,7 @@ import { ImageUrlAction } from "../../Redux/Action/ActionFile";
 import { useSelector, useDispatch } from "react-redux";
 
 import ls from "local-storage";
+import { Check } from "@material-ui/icons";
 // import  from 'bootstrap'
 const Appearance = () => {
   const [image, setImage] = useState("");
@@ -57,7 +58,7 @@ const Appearance = () => {
       setURL("");
       setURL(url);
 
-      console.log("URL", url);
+      // console.log("URL", url);
     });
   // }, [username]);
 
@@ -121,52 +122,15 @@ const Appearance = () => {
     }
   };
 
-  const themeClickHandler = (color) => {
-    setThemeColor(color);
-
-    var themeColorObject = {
-      email: username,
-      themeColor: color,
-    };
-    var themeColorDetails = ls.get("themeColorObject") || [];
-
-    if (!ls.get("themeColorObject")) {
-      console.log("themeColorObject1", themeColorObject);
-      ls.set("themeColorObject", [themeColorObject]);
-    } else if (
-      ls.get("themeColorObject") &&
-      themeColorDetails.filter((getUsername) => getUsername.email === username)
-        .length >= 1
-    ) {
-      themeColorDetails.map((userDetails, index) => {
-        // console.log("userDetails", userDetails);
-        if (userDetails.email === username) {
-          console.log("themeColorObject2", themeColorObject);
-
-          // console.log("getDetails[index].imageName", [
-          //   getDetails[index].imageName,
-          // ]);
-
-          themeColorDetails[index].themeColor = themeColorObject.themeColor;
-
-          ls.set("themeColorObject", themeColorDetails);
-
-          // console.log("getDetails", getDetails);
-        }
+  const themeClickHandler = (backgroundColor, fontColor) => {
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .collection("themeColor")
+      .doc("color")
+      .set({
+        bgColor: backgroundColor,
+        fontColor: fontColor,
       });
-    } else if (
-      themeColorDetails.filter((getUsername) => getUsername.email === username)
-        .length === 0
-    ) {
-      console.log("themeColorObject3", themeColorObject);
-
-      ls.set("themeColorObject", [
-        ...ls.get("themeColorObject"),
-        themeColorObject,
-      ]);
-    }
-
-    // dispatch(getColorForThemeAction(color));
   };
 
   return (
@@ -227,6 +191,7 @@ const Appearance = () => {
                 for="fileUpload"
                 // onClick={() => {
                 //   clickHandler("imageUpload");
+
                 // }}
                 className="imageUploadButton"
 
@@ -268,7 +233,7 @@ const Appearance = () => {
             <img
               src={Color1}
               onClick={() => {
-                themeClickHandler("white");
+                themeClickHandler("white", "grey");
               }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
@@ -278,7 +243,7 @@ const Appearance = () => {
             <img
               src={Color2}
               onClick={() => {
-                themeClickHandler("#242322");
+                themeClickHandler("#242322", "white");
               }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
@@ -287,7 +252,7 @@ const Appearance = () => {
             <img
               src={Color3}
               onClick={() => {
-                themeClickHandler("dimgray");
+                themeClickHandler("dimgray", "white");
               }}
               style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />

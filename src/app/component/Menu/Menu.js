@@ -9,6 +9,7 @@ const Menu = () => {
         to="/"
         activeClassName={classes.activeclass}
         className={classes.link}
+        exact={true}
       >
         Link
       </NavLink>

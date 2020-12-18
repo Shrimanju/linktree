@@ -10,7 +10,6 @@ import db, { auth } from "../../../Firebase_config/firebase";
 import { ImageUrlAction } from "../../Redux/Action/ActionFile";
 import { useSelector, useDispatch } from "react-redux";
 import { storage, database } from "../../../Firebase_config/firebase";
-
 // import { userDetailsAction } from "../../Redux/Action/ActionFile";
 // import { useSelector, useDispatch } from "react-redux";
 const LinkContainer = (props) => {
@@ -163,7 +162,11 @@ const LinkContainer = (props) => {
           <Switch
             onChange={handleChange}
             checked={props.isactive ? props.isactive : checked}
+            checkedIcon={false}
+            uncheckedIcon={false}
           />
+
+          {/* <ToggleSwitch onChange={handleChange} /> */}
         </div>
 
         <div className={classes.url}>

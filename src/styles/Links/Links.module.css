@@ -1,8 +1,9 @@
 .link_body {
   padding: 8%;
-  border-right: 1px solid gray;
+  /* border-right: 1px solid gray; */
   height: 91.5vh;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  margin-left: 5%;
 }
 
 /* .btn {

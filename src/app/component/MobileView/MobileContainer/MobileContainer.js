@@ -22,64 +22,30 @@ import { useSelector } from "react-redux";
 
 const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState({});
   const [username, setUsername] = useState();
   const [URL, setURL] = useState("");
   const selectorImage = useSelector((state) => state.imageUrl);
 
-  // const themeColors = useSelector((state) => state.themeColor);
-  // setColor(themeColors);
-  setInterval(() => {
-    var themeColorObject = ls.get("themeColorObject") || "";
-
-    if (themeColorObject) {
-      themeColorObject.map((getColor) => {
-        if (getColor.email === username) {
-          setColor(getColor.themeColor);
-        }
-      });
-    }
-
-    // var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
-
-    // // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
-    // if (getURLFromLocalStorage) {
-    //   getURLFromLocalStorage.map((userImage) => {
-    //     if (userImage.email === username) {
-    //       // console.log("URL", userImage.url);
-    //       setURL(userImage.url);
-    //     }
-    //     // else {
-    //     //   setURL("");
-    //     // }
-    //   });
-
-    // if (
-    //   getURLFromLocalStorage.filter(
-    //     (getUsername) => getUsername.email === username
-    //   ).length === 0
-    // ) {
-    //   setURL("");
-    // }
-    // }
-    // console.log(
-    //   "local storage outside useEffect",
-    //   localStorage.getItem("themeColor")
-    // );
-  }, 2000);
+  // db.collection("users")
+  //   .doc(auth.currentUser.uid)
+  //   .collection("themeColor")
+  //   .doc("color")
+  //   .get()
+  //   .then(function (doc) {
+  //     if (doc.exists) {
+  //       // console.log("Document data:", doc.data());
+  //       setColor(doc.data());
+  //     } else {
+  //       // doc.data() will be undefined in this case
+  //       console.log("No such document!");
+  //     }
+  //   })
+  //   .catch(function (error) {
+  //     console.log("Error getting document:", error);
+  //   });
 
   useEffect(() => {
-    var themeColors = ls.get("themeColor");
-    // console.log("themeColors", ls.get("themeColor"));
-
-    // fetch("http://localhost:3000/")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setColor({ arrayposts: data });
-    //   })
-    //   .catch((err) => console.log("can't get posts"));
-    // setTimeout(() => {
     setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
@@ -92,6 +58,26 @@ const MobileContainer = (props) => {
           }
         });
     }, 2000);
+
+    // setInterval(() => {
+    //   db.collection("users")
+    //     .doc(auth.currentUser.uid)
+    //     .collection("themeColor")
+    //     .doc("color")
+    //     .get()
+    //     .then(function (doc) {
+    //       if (doc.exists) {
+    //         // console.log("Document data:", doc.data());
+    //         setColor(doc.data());
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //       }
+    //     })
+    //     .catch(function (error) {
+    //       console.log("Error getting document:", error);
+    //     });
+    // }, 2000);
 
     const unsubscribe = db
       .collection("users")
@@ -112,9 +98,35 @@ const MobileContainer = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("ThemeColor", color.bgColor);
+    console.log("ThemeColor", color.fontColor);
+
+    if (color) {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .collection("themeColor")
+        .doc("color")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            setColor(doc.data());
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  }, [color]);
+
   const useStyles = makeStyles({
     typography: {
-      backgroundColor: color || "white",
+      backgroundColor: color.bgColor || "white",
+      color: color.fontColor || "grey",
       // backgroundColor: themeColors || color,
     },
   });
