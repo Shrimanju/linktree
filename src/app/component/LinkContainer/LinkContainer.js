@@ -1,12 +1,14 @@
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import classes from "../LinkContainer/LinkContainer.module.css";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+// import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import DragIndicatorIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import TodayIcon from '@material-ui/icons/Today';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import EjectIcon from '@material-ui/icons/Eject';
 import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -111,30 +113,15 @@ const LinkContainer = (props) => {
       }
     }
   };
-  function closeModal(){
+  function closeModal() {
     setmodalIsOpen(false)
   }
-  
+
 
   return (
-   
-    <div className={classes.linkcontainer}>
-    
-       {/* <div > 
-   
 
-        <button
-        onClick={() => {
-          setmodalIsOpen(!modalIsOpen);
-        }}
-          >
-          close
-</button>
-{
-  modalIsOpen?<h2 className={classes.bottomcards}>xssssssssss</h2>:null
-    }
-    
-      </div> */}
+    <div className={classes.linkcontainer}>
+
       <div className={classes.drag_drop}>
         <DragIndicatorIcon />
       </div>
@@ -167,59 +154,52 @@ const LinkContainer = (props) => {
           <div className={classes.iconsleft}>
 
             <IconButton
-            
+
               className={classes.iconbtnleft}
-              // onClick={() => {
-              //   setmodalIsOpen(!modalIsOpen);
-              // }}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
             >
-            <DeleteOutlineOutlinedIcon />
-            {/* <div>
-      <AddMock
-        activeKey={activeKey}
-        setActiveKey={setActiveKey}
-        ref={accordElem}
-      /></div> */}
+              <EjectIcon />
             </IconButton>
-         
-  
+
+
             <IconButton
               className={classes.iconbtnleft}
-              // onClick={() => {
-              //   setmodalIsOpen(true);
-              // }}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
             >
-            <CropOriginalIcon />
+              <CropOriginalIcon />
             </IconButton>
-           
+
             <IconButton
               className={classes.iconbtnleft}
-              // onClick={() => {
-              //   setmodalIsOpen(true);
-              // }}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
             >
-            <StarOutlineIcon />
+              <StarOutlineIcon />
             </IconButton>
-           
+
             <IconButton
               className={classes.iconbtnleft}
-              // onClick={() => {
-              //   setmodalIsOpen(true);
-              // }}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
             >
-              <TodayIcon/>
+              <TodayIcon />
             </IconButton>
-           
+
             <IconButton
               className={classes.iconbtnleft}
-              // onClick={() => {
-              //      setmodalIsOpen(true);
-           
-              // }}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
             >
-            <BarChartIcon/>
+              <BarChartIcon />
             </IconButton>
-            
+
           </div>
           <div className={classes.icons}>
             <IconButton
@@ -228,11 +208,41 @@ const LinkContainer = (props) => {
                 props.onDelete(props.id);
               }}
             >
-            <DeleteOutlineOutlinedIcon />
+              <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div>
-          
+
+
         </div>
+        {
+          modalIsOpen ?
+            <div>
+
+              <Card>
+              <Card.Header>
+              <div className={classes.panelheader}>
+                
+                        <h5 className={classes.panelheadeheading}>Leap Link?</h5>
+                        <a 
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen(!modalIsOpen);}}
+                        >   X  
+                        </a>
+                        </div>
+                        </Card.Header>
+                        <Card.Body>
+    <Card.Text className={classes.cardtext}>
+    With Linktree PRO you can opt to temporarily forward all<br/> visitors directly to a destination, bypassing your<br/> Linktree altogether.
+    </Card.Text>
+    <Button  className={classes.cardbutton}>Find out more</Button>
+  </Card.Body>
+ </Card>
+            </div>
+            : null
+        }
+
+
+
       </div></div>
   );
 };
@@ -250,14 +260,14 @@ const LinkContainer = (props) => {
 
 //   return (
 //     <div className="row" ref={ref}>
-      
+
 //        {/* <button
 //           onClick={() => handleClickToggle("0")}
 //           >
 //             Add Mock
 //           </button> */}
 //     <Accordion activeKey={props.activeKey}>
-      
+
 //       <Card>
 //         <Accordion eventKey="0">
 //           <Card.Body>
