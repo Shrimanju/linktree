@@ -90,7 +90,7 @@ const Appearance = () => {
     //   .then((url) => {
     //     setURL(url);
 
-    //     console.log("URL", url);
+    console.log("URL", url);
     //   })
     //   .catch(() => {
     //     console.log("Error while fetching image");
