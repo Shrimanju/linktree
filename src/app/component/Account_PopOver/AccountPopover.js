@@ -11,7 +11,11 @@ import { Link } from "react-router-dom";
 import CopyToClipboard from "../CopyToClipboard";
 import QRCode from "../QRCodeDialogBox/QRCode";
 import { useHistory } from "react-router-dom";
-
+import {
+  firebaseApp,
+  storage,
+  database,
+} from "../../../Firebase_config/firebase";
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
@@ -46,8 +50,10 @@ export default function AccountPopover(props) {
   const classes = useStyles();
 
   const logout = () => {
+    // auth.signOut();
+
+    firebaseApp.auth().signOut();
     history.push("/");
-    auth.signOut();
   };
 
   return (

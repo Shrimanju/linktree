@@ -8,10 +8,13 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { useAlert } from "react-alert";
 
 const ForgotPassword = () => {
   const { handleSubmit, register, errors } = useForm();
   const [ErrorMessages, setErrorMessages] = useState();
+
+  const customAlert = useAlert();
 
   const onSubmit = (data) => {
     setErrorMessages("");
@@ -23,7 +26,7 @@ const ForgotPassword = () => {
 
       .then((u) => {
         console.log(u);
-        alert("Email has been sent to you, please check and verify");
+        customAlert("Email has been sent to you, please check and verify");
       })
       .catch((err) => {
         setErrorMessages(err.message);
