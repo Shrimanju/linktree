@@ -17,14 +17,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
 import ls from "local-storage";
+import { ImageUrlAction } from "../../../Redux/Action/ActionFile";
+
 // import { selectorImage } from "../../../../utils/index";
-import { useSelector } from "react-redux";
+import {
+  firebaseApp,
+  storage,
+  database,
+} from "../../../../Firebase_config/firebase";
+import { useSelector, useDispatch } from "react-redux";
 
 const MobileContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [color, setColor] = useState({});
   const [username, setUsername] = useState();
   const [URL, setURL] = useState("");
+  const dispatch = useDispatch();
   const selectorImage = useSelector((state) => state.imageUrl);
 
   // db.collection("users")
@@ -59,26 +67,6 @@ const MobileContainer = (props) => {
         });
     }, 2000);
 
-    // setInterval(() => {
-    //   db.collection("users")
-    //     .doc(auth.currentUser.uid)
-    //     .collection("themeColor")
-    //     .doc("color")
-    //     .get()
-    //     .then(function (doc) {
-    //       if (doc.exists) {
-    //         // console.log("Document data:", doc.data());
-    //         setColor(doc.data());
-    //       } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //       }
-    //     })
-    //     .catch(function (error) {
-    //       console.log("Error getting document:", error);
-    //     });
-    // }, 2000);
-
     const unsubscribe = db
       .collection("users")
       .doc(auth.currentUser.uid)
@@ -99,8 +87,9 @@ const MobileContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("ThemeColor", color.bgColor);
-    console.log("ThemeColor", color.fontColor);
+    // console.log("ThemeColor", color.bgColor);
+    // console.log("ThemeColor", color.fontColor);
+    var user = firebaseApp.auth().currentUser;
 
     if (color) {
       db.collection("users")
@@ -118,10 +107,30 @@ const MobileContainer = (props) => {
           }
         })
         .catch(function (error) {
-          console.log("Error getting document:", error);
+          console.log("Error in getting theme color:", error);
         });
     }
-  }, [color]);
+
+    // console.log("username", user.email);
+    // console.log("Image", image);
+    storage
+      .ref(user.email)
+      .child("ProfileImage")
+      .child("ProfileImage.jpg")
+      .getDownloadURL()
+      .then((url) => {
+        setURL(url);
+
+        if (url) {
+          dispatch(ImageUrlAction(url));
+        }
+      })
+      .catch(() => {
+        console.log("Error while fetching image");
+      });
+  });
+
+  // }, [color]);
 
   const useStyles = makeStyles({
     typography: {
@@ -150,8 +159,14 @@ const MobileContainer = (props) => {
       >
         <div className={classes.container_heading}>
           {selectorImage || URL ? (
+            // {URL ? (
             <>
-              <img className={classes.link} src={selectorImage || URL} />
+              <img
+                className={classes.link}
+                src={selectorImage || URL}
+                alt="No Image"
+              />
+              {/* <img className={classes.link} src={URL} alt="No Image" /> */}
             </>
           ) : (
             <>

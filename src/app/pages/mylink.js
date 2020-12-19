@@ -6,7 +6,7 @@ import db, { auth } from "../../Firebase_config/firebase";
 import ls from "local-storage";
 import { useSelector } from "react-redux";
 // import { selectorImage } from "../../utils/index";
-
+import { firebaseApp, storage, database } from "../../Firebase_config/firebase";
 function Mylink() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
@@ -30,52 +30,71 @@ function Mylink() {
 
   useEffect(() => {
     // const interval =
-    setTimeout(() => {
-      db.collection("users")
-        .doc(auth.currentUser.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUsername(doc.data().name);
-            setEmail(doc.data().email);
-          } else {
-            console.log("Error in document");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setUsername(doc.data().name);
+          setEmail(doc.data().email);
+        } else {
+          console.log("Error in document");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-      const unsubscribe = db
-        .collection("users")
-        .doc(auth.currentUser.uid)
-        .collection("links")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) =>
-          setlinks(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
-          )
-        );
+    const unsubscribe = db
+      .collection("users")
+      .doc(auth.currentUser.uid)
+      .collection("links")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setlinks(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
 
-      return () => {
-        unsubscribe();
-      };
-    }, 2000);
+    return () => {
+      unsubscribe();
+    };
 
     // return () => {
     //   clearInterval(interval);
     // };
   }, []);
 
+  useEffect(() => {
+    var user = firebaseApp.auth().currentUser;
+
+    // console.log("Image", image);
+    storage
+      .ref(user.email)
+      .child("ProfileImage")
+      .child("ProfileImage.jpg")
+      .getDownloadURL()
+      .then((url) => {
+        setURL(url);
+
+        console.log("URL", url);
+      })
+      .catch(() => {
+        console.log("Error while fetching image");
+      });
+  });
+
   return (
     <div className={classes.mylink_container}>
       <div className={classes.header}>
         {selectorImage || URL ? (
+          // {URL ? (
           <>
             <img className={classes.link} src={selectorImage || URL} />
+            {/* <img className={classes.link} src={URL} /> */}
           </>
         ) : (
           <>
