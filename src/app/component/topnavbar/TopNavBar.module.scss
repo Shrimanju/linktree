@@ -1,0 +1,11 @@
+.topnavbar{
+    flex: 0.6;
+    background-color: #F5F6F8;
+    
+}
+
+@media (max-width: 800px){
+    .topnavbar{
+        flex: 0.95;
+    }
+}

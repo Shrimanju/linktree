@@ -1,0 +1,15 @@
+.topnavbar {
+  -webkit-box-flex: 0.6;
+      -ms-flex: 0.6;
+          flex: 0.6;
+  background-color: #F5F6F8;
+}
+
+@media (max-width: 800px) {
+  .topnavbar {
+    -webkit-box-flex: 0.95;
+        -ms-flex: 0.95;
+            flex: 0.95;
+  }
+}
+/*# sourceMappingURL=TopNavBar.module.css.map */

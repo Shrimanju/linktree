@@ -1,0 +1,47 @@
+.qr_Card_box {
+  /* inline-di */
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  /* border: 1px solid green; */
+  border-radius: 40px;
+}
+
+.downloadLink,
+.downloadLink:hover {
+  display: block;
+  width: 250px;
+  height: 40px;
+  /* text-align: center; */
+  font-size: 90%;
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid;
+  background: black;
+  border-radius: 5px;
+  color: white;
+  margin: 50px 0 0 25px;
+  padding-top: 6px;
+}
+
+.logo_title {
+  font-weight: 500;
+  font-size: 25px;
+  margin-left: -24%;
+}
+
+.image {
+  /* border: 1px solid green; */
+
+  width: 10%;
+  height: 10%;
+  margin-top: 3%;
+  margin-left: 30%;
+}
+
+/* .link {
+  display: block;
+
+  font-size: 10px;
+  color: yellow;
+} */

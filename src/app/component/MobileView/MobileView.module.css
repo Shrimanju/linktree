@@ -1,0 +1,68 @@
+.container {
+  -webkit-box-flex: 0.4;
+  -ms-flex: 0.4;
+  flex: 0.4;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  /* background-color: green; */
+  background-color: green;
+}
+
+.container .mobileheader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1vh;
+  /* border-bottom: 1px solid gray; */
+}
+
+.container .mobileheader span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.container .mobileheader span .link {
+  /* text-decoration: none; */
+  color: #292b2c;
+  font-size: 14px;
+  /* margin-left: 1%; */
+}
+
+.container .mobilebody {
+  background-color: #f5f6f8;
+  height: 91.7vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@media (max-width: 800px) {
+  .container {
+    -webkit-box-flex: 0.05;
+    -ms-flex: 0.05;
+    flex: 0.05;
+  }
+  .container .mobilebody {
+    display: none;
+  }
+}
+/*# sourceMappingURL=MobileView.module.css.map */

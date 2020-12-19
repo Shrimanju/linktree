@@ -1,0 +1,47 @@
+.sidenavbar {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.1vw;
+  border-right: 1px solid gray;
+
+  .sidenavbar_buttom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // margin-top: 20%;
+    align-items: center;
+    min-height: 20vh;
+
+    .avatar {
+      background-color: lightgreen;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sidenavbar {
+    flex-direction: row;
+    padding: 0.1vh;
+    border-bottom: 1px solid gray;
+    border-right: 0;
+
+    .sidenavbar_buttom {
+      flex-direction: row;
+      min-width: 30vw;
+      min-height: 2vh;
+    }
+
+    .sidenavbar_buttom :nth-child(1) {
+      order: 1;
+    }
+    .sidenavbar_buttom :nth-child(2) {
+      order: 2;
+    }
+    .sidenavbar_buttom :nth-child(3) {
+      order: 3;
+    }
+  }
+}
