@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import Color1 from "../../../Assets/WhiteTheme.png";
 import Color2 from "../../../Assets/BlackTheme.png";
 import Color3 from "../../../Assets/GreyTheme.png";
-import { storage, database } from "../../../Firebase_config/firebase";
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
@@ -15,9 +14,17 @@ import blue from "@material-ui/core/colors/blue";
 import { ThemeProvider, MuiThemeProvider } from "@material-ui/core/styles";
 import { ImageUrlAction } from "../../Redux/Action/ActionFile";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  firebaseApp,
+  storage,
+  database,
+} from "../../../Firebase_config/firebase";
 
 import ls from "local-storage";
 import { Check } from "@material-ui/icons";
+// import ReactLoading from "react-loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 // import  from 'bootstrap'
 const Appearance = () => {
   const [image, setImage] = useState("");
@@ -27,13 +34,67 @@ const Appearance = () => {
   const dispatch = useDispatch();
   const selectorImage = useSelector((state) => state.imageUrl);
 
-  // console.log(selector);
+  // const forceUpdate = React.useState()[1].bind(null, {});
 
-  if (ls.get("ArrayOfImageDetails")) {
-    var ArrayOfImageDetails = [];
-  }
+  // forceUpdate();
+
+  // var user = firebaseApp.auth().currentUser;
+
+  //   console.log("username", user.email);
+  //   // console.log("Image", image);
+  //   storage
+  //     .ref(username)
+  //     .child("ProfileImage")
+  //     .child("ProfileImage.jpg")
+  //     .getDownloadURL()
+  //     .then((url) => {
+  //       setURL(url);
+
+  //       console.log("URL", url);
+  //     })
+  //     .catch(() => {
+  //       console.log("Error while fetching image");
+  //     });
 
   useEffect(() => {
+    console.log("Inside UseEffect");
+    // forceUpdate();
+
+    // var user = firebaseApp.auth().currentUser;
+
+    // storage
+    //   .ref(user.email)
+    //   .child("ProfileImage")
+    //   .child("ProfileImage.jpg")
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     setURL(url);
+    //     // if (url) {
+    //     //   // dispatch(ImageUrlAction(url));
+    //     // }
+    //     // console.log("URL", url);
+    //   })
+    //   .catch(() => {
+    //     console.log("Error while fetching image");
+    //   });
+
+    // var user = firebaseApp.auth().currentUser;
+
+    // console.log("username", user.email);
+    // // console.log("Image", image);
+    // storage
+    //   .ref(username)
+    //   .child("ProfileImage")
+    //   .child("ProfileImage.jpg")
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     setURL(url);
+
+    //     console.log("URL", url);
+    //   })
+    //   .catch(() => {
+    //     console.log("Error while fetching image");
+    //   });
     setTimeout(() => {
       db.collection("users")
         .doc(auth.currentUser.uid)
@@ -48,78 +109,122 @@ const Appearance = () => {
     }, 2000);
   }, []);
 
-  // useEffect(() => {
-  storage
-    .ref(username)
-    .child("ProfileImage")
-    .child("ProfileImage.jpg")
-    .getDownloadURL()
-    .then((url) => {
-      setURL("");
-      setURL(url);
+  // console.log("username", user.email);
+  // console.log("Image", image);
 
-      // console.log("URL", url);
-    });
+  // setURL(
+  //   `https://firebasestorage.googleapis.com/v0/b/${user.email}/ProfileImage/ProfileImage.jpg`
+  // );
+  // var storageImage = firebaseApp.storage();
+
+  // storageImage
+  //   .refFromURL(
+  //     "gs://linktree-8e19d.appspot.com/abc@mail.com/ProfileImage/ProfileImage.jpg"
+  //   )
+  //   .getDownloadURL()
+  //   .then((url) => {
+  //     setURL(url);
+
+  //     console.log("URL", url);
+  //   })
+  //   .catch(() => {
+  //     console.log("Error while fetching image");
+  //   });
+
+  useEffect(() => {
+    // forceUpdate();
+    var user = firebaseApp.auth().currentUser;
+
+    storage
+      .ref(user.email)
+      .child("ProfileImage")
+      .child("ProfileImage.jpg")
+      .getDownloadURL()
+      .then((url) => {
+        // setURL(url);
+        // if (url) {
+        //   dispatch(ImageUrlAction(url));
+        // }
+      })
+      .catch(() => {
+        console.log("Error while fetching image");
+      });
+  });
+
+  // useEffect(() => {
+  // storage
+  //   .ref(username)
+  //   .child("ProfileImage")
+  //   .child("ProfileImage.jpg")
+  //   .getDownloadURL()
+  //   .then((url) => {
+  //     setURL("");
+  //     setURL(url);
+
+  //     // console.log("URL", url);
+  //   });
   // }, [username]);
 
-  useEffect(() => {
-    if (URL) {
-      dispatch(ImageUrlAction(URL));
+  // useEffect(() => {
+  //
+  // }, [username, URL]);
+
+  const clickHandler = (e) => {
+    const getImageimage = e.target.files[0];
+    // console.log("getImageimage", getImageimage);
+    if (getImageimage) {
+      storage
+        .ref(`${username}/ProfileImage/ProfileImage.jpg`)
+        .put(getImageimage);
+
+      setImage(getImageimage);
     }
-  }, [username, URL]);
-
-  const changeHandler = (e) => {
-    const getImageimage = e.target.value;
-    console.log("getImageimage", getImageimage);
-
-    setImage(getImageimage);
   };
 
-  useEffect(() => {
-    if (image && username) {
-      console.log("Image", image);
-      clickHandler("imageUpload", image);
-    }
-  }, [image]);
+  // const clickHandler = (e, data, image) => {
+  //   if (data == "imageUpload" && image != "") {
+  //     console.log("image", image);
+  //     console.log("Username", username);
 
-  const clickHandler = (e, data, image) => {
-    if (data == "imageUpload" && image != "") {
-      console.log("image", image);
-      console.log("Username", username);
+  //     const key = database.ref().child(auth.currentUser.uid).push().key;
 
-      const key = database.ref().child(auth.currentUser.uid).push().key;
+  //     const uploadImage = storage
+  //       .ref(`${username}/ProfileImage/ProfileImage.jpg`)
+  //       .put(image);
 
-      const uploadImage = storage
-        .ref(`${username}/ProfileImage/ProfileImage.jpg`)
-        .put(image);
+  //     uploadImage.on(
+  //       "state_changed",
+  //       (snapshot) => {},
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //       () => {
+  //         storage
+  //           .ref(username)
+  //           .child("ProfileImage")
+  //           .child("ProfileImage.jpg")
+  //           .getDownloadURL()
+  //           .then((url) => {
+  //             setURL(url);
+  //           });
+  //       }
+  //     );
+  //   } else if (data === "imageRemove") {
+  //     console.log("data", data);
 
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {},
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          storage
-            .ref(username)
-            .child("ProfileImage")
-            .child("ProfileImage.jpg")
-            .getDownloadURL()
-            .then((url) => {
-              setURL(url);
-            });
-        }
-      );
-    } else if (data === "imageRemove") {
-      console.log("data", data);
+  //     storage.ref(`${username}/ProfileImage/ProfileImage.jpg`).delete();
 
-      storage.ref(`${username}/ProfileImage/ProfileImage.jpg`).delete();
+  //     // .child("ProfileImage")
+  //     // .child("ProfileImage.jpg")
 
-      // .child("ProfileImage")
-      // .child("ProfileImage.jpg")
+  //     setURL("");
+  //   }
+  // };
 
-      setURL("");
-    }
+  const clickRemoveImageHandler = () => {
+    dispatch(ImageUrlAction(""));
+
+    storage.ref(`${username}/ProfileImage/ProfileImage.jpg`).delete();
   };
 
   const themeClickHandler = (backgroundColor, fontColor) => {
@@ -142,10 +247,22 @@ const Appearance = () => {
         <div className="profile col-xs-12">
           <div className="info row">
             <div className="col-xs col-lg">
-              {selectorImage || URL ? (
+              {selectorImage !== "" ? (
+                // {URL ? (
                 <>
                   {/* <p> {console.log("image", image)}</p>
                   <p> {console.log("URL", URL)}</p> */}
+
+                  {/* <LazyLoadImage
+                    alt="No Image"
+                    height="100px"
+                    width="120px"
+                    border="1px solid #d8d7de"
+                    borderRadius="100px"
+                    src={URL} // use normal <img> attributes as props
+                    width={image.width}
+                  /> */}
+
                   <img
                     className="avatar"
                     style={{
@@ -156,6 +273,8 @@ const Appearance = () => {
                       // backgroundColor: "lightgreen",
                     }}
                     src={selectorImage || URL}
+                    // src={URL}
+                    alt="No Image"
                     // src={selectorImage}
                   />
                 </>
@@ -185,7 +304,8 @@ const Appearance = () => {
                   display: "none",
                 }}
                 type="file"
-                onChange={changeHandler}
+                // onChange={changeHandler}
+                onChange={clickHandler}
               />
               <label
                 for="fileUpload"
@@ -193,6 +313,7 @@ const Appearance = () => {
                 //   clickHandler("imageUpload");
 
                 // }}
+
                 className="imageUploadButton"
 
                 // variant="contained"
@@ -203,9 +324,7 @@ const Appearance = () => {
             </div>
             <div className="buttons col-xs col-lg">
               <Button
-                onClick={() => {
-                  clickHandler("imageRemove");
-                }}
+                onClick={clickRemoveImageHandler}
                 style={{
                   marginTop: "30px",
                   maxWidth: "400px",
