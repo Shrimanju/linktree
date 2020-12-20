@@ -1,43 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import classes from "../LinkContainer/LinkContainer.module.css";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+// import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import DragIndicatorIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import CropOriginalIcon from '@material-ui/icons/CropOriginal';
+import TodayIcon from '@material-ui/icons/Today';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import EjectIcon from '@material-ui/icons/Eject';
 import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import db, { auth } from "../../../Firebase_config/firebase";
-import { ImageUrlAction } from "../../Redux/Action/ActionFile";
-import { useSelector, useDispatch } from "react-redux";
-import { storage, database } from "../../../Firebase_config/firebase";
-// import { userDetailsAction } from "../../Redux/Action/ActionFile";
-// import { useSelector, useDispatch } from "react-redux";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Card, Accordion, Button } from "react-bootstrap";
+
+
+import Modal from 'react-modal'
+
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
-  const [username, setUsername] = useState();
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [checked, setChecked] = useState();
-  const [imageURL, setImageURL] = useState("");
+  const [activeKey, setActiveKey] = useState("");
+
+  // we are going to need a ref to the Accordion element to get its position/use the scrollIntoView function
+  const accordElem = useRef(null);
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
-  const dispatch = useDispatch();
 
-  // const [name, setName] = useState("");
-  // const [emailID, setEmailID] = useState("");
-  // const [URL, setURL] = useState("");
-  // const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      db.collection("users")
-        .doc(auth.currentUser.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUsername(doc.data().email);
-          } else {
-            console.log("Error in document");
-          }
-        });
-    }, 2000);
     db.collection("users")
       .doc(auth.currentUser.uid)
       .collection("links")
@@ -50,31 +44,6 @@ const LinkContainer = (props) => {
         )
       );
   }, []);
-
-  storage
-    .ref(username)
-    .child("ProfileImage")
-    .child("ProfileImage.jpg")
-    .getDownloadURL()
-    .then((url) => {
-      // setImageURL("");
-      setImageURL(url);
-
-      // console.log("URL", url);
-    });
-
-  useEffect(() => {
-    if (imageURL) {
-      dispatch(ImageUrlAction(imageURL));
-    }
-  }, [username, imageURL]);
-
-  // useEffect(() => {
-  //   if (name || emailID) {
-  //     dispatch(userDetailsAction(emailID, name));
-  //   }
-  //   console.log("Email,name", emailID, name);
-  // }, [emailID, name]);
 
   const titlehandler = (event) => {
     setTitle(event.target.value);
@@ -144,15 +113,22 @@ const LinkContainer = (props) => {
       }
     }
   };
+  function closeModal() {
+    setmodalIsOpen(false)
+  }
+
 
   return (
+
     <div className={classes.linkcontainer}>
+
       <div className={classes.drag_drop}>
         <DragIndicatorIcon />
       </div>
       <div className={classes.link_body}>
         <div className={classes.title}>
           <input
+            id="text"
             type="text"
             value={props.title}
             placeholder="Enter Title &#xf044;"
@@ -162,11 +138,7 @@ const LinkContainer = (props) => {
           <Switch
             onChange={handleChange}
             checked={props.isactive ? props.isactive : checked}
-            checkedIcon={false}
-            uncheckedIcon={false}
           />
-
-          {/* <ToggleSwitch onChange={handleChange} /> */}
         </div>
 
         <div className={classes.url}>
@@ -178,19 +150,100 @@ const LinkContainer = (props) => {
             onChange={urlhandler}
           />
         </div>
+        <div className={classes.iconsbottom}>
+          <div className={classes.iconsleft}>
 
-        <div className={classes.icons}>
-          <IconButton
-            className={classes.iconbtn}
-            onClick={() => {
-              props.onDelete(props.id);
-            }}
-          >
-            <DeleteOutlineOutlinedIcon />
-          </IconButton>
+            <IconButton
+
+              className={classes.iconbtnleft}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
+            >
+              <EjectIcon />
+            </IconButton>
+
+
+            <IconButton
+              className={classes.iconbtnleft}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
+            >
+              <CropOriginalIcon />
+            </IconButton>
+
+            <IconButton
+              className={classes.iconbtnleft}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
+            >
+              <StarOutlineIcon />
+            </IconButton>
+
+            <IconButton
+              className={classes.iconbtnleft}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
+            >
+              <TodayIcon />
+            </IconButton>
+
+            <IconButton
+              className={classes.iconbtnleft}
+              onClick={() => {
+                setmodalIsOpen(!modalIsOpen);
+              }}
+            >
+              <BarChartIcon />
+            </IconButton>
+
+          </div>
+          <div className={classes.icons}>
+            <IconButton
+              className={classes.iconbtn}
+              onClick={() => {
+                props.onDelete(props.id);
+              }}
+            >
+              <DeleteOutlineOutlinedIcon />
+            </IconButton>
+          </div>
+
+
         </div>
-      </div>
-    </div>
+        {
+          modalIsOpen ?
+            <div>
+
+              <Card>
+              <Card.Header>
+              <div className={classes.panelheader}>
+                
+                        <h5 className={classes.panelheadeheading}>Leap Link?</h5>
+                        <a 
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen(!modalIsOpen);}}
+                        >   X  
+                        </a>
+                        </div>
+                        </Card.Header>
+                        <Card.Body>
+    <Card.Text className={classes.cardtext}>
+    With Linktree PRO you can opt to temporarily forward all<br/> visitors directly to a destination, bypassing your<br/> Linktree altogether.
+    </Card.Text>
+    <Button  className={classes.cardbutton}>Find out more</Button>
+  </Card.Body>
+ </Card>
+            </div>
+            : null
+        }
+
+
+
+      </div></div>
   );
 };
 

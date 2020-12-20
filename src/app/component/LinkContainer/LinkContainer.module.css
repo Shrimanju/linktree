@@ -1,22 +1,28 @@
 .linkcontainer {
   background-color: white;
-
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* margin-left: 10%; */
   margin-top: 6vh;
-  /* border-radius: 10px; */
-  height: 150px;
-  zoom: 0.8; /* all browsers */
-  -moz-transform: scale(0.8); /* Firefox*/
+  height: auto;
+  zoom: 0.8; 
+  -moz-transform: scale(0.8); 
 }
+.dragbutton{
+  display: flex;
+  /* position: absolute; */
+  margin:40px 10px;
 
-.linkcontainer .drag_drop {
+
+  background-color: white;
+
+}
+ .drag_drop {
   padding: 1vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 160px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -24,9 +30,14 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  border-right: 1px solid gray;
+  border-right: 1px solid rgb(245, 241, 241);
 }
-
+.linkcontainer .drag_drop1 {
+ 
+  width: 33px;
+  height: 30px;
+  justify-content: center;
+}
 .linkcontainer .link_body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -36,6 +47,7 @@
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+  
 }
 
 .linkcontainer .link_body .title {
@@ -56,7 +68,12 @@
 .linkcontainer .link_body .url {
   padding: 1vw;
 }
+.linkcontainer .link_body .iconsbottom {
+  justify-content: space-between;
+  display: flex;
 
+  
+}
 .linkcontainer .link_body .icons {
   margin-top: -3%;
   padding-right: 15px;
@@ -72,11 +89,107 @@
   color: white;
   background-color: red;
 }
+.linkcontainer .link_body .iconsleft {
+  margin-top:0%;
+  padding-left: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-start;
+}
+.linkcontainer .link_body.iconbtnleft{
+ margin-top: -2%;
+  padding-left: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-start;
+}
+
+.iconbtnleft:active {
+  color: rgb(63, 115, 212);
+  background-color: rgb(63, 115, 212);
+}
 
 input {
   border: none;
   outline: 0;
 }
+.linkcontainercard {
+  background-color: rgb(236, 19, 19);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 6vh;
+  height: auto;
+  zoom: 0.8; 
+  -moz-transform: scale(0.8); 
+}
+.linkcontainercard {
+  background-color: rgb(236, 19, 19);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 6vh;
+  height: auto;
+  zoom: 0.8; 
+  -moz-transform: scale(0.8); 
+}
+.mockbody{
+display: flex;
+
+}
+.panelheader{
+  display:flex;
+  
+}
+.panelheadeheading{
+  width: 100%;
+    display: inline-block;
+    text-align: center;
+  color: #272b2b;
+  font-size: 20px;
+}
+.cardtext{
+  width: 100%;
+    display: inline-block;
+    text-align: center;
+  color: #414242;
+  font-size: 20px;
+}
+.panelheadebutton{
+  position: absolute;
+  right:0;
+color: #414242;
+margin: 1px 1px;
+padding:1px 17px;
+text-decoration: none;
+/* font-weight: bold; */
+font-size: 20px;
+}
+.cardbutton{
+  margin:auto;
+  display:block;
+}
+
+.cardbutton{
+  padding:16px 32px;
+  font-family:helvetica;
+  font-size:16px;
+  font-weight:100;
+  border:0;
+  font-weight:100;
+  background-color: #7852cf;
+  color: #fff;
+  padding: 15px 300px;
+  border-radius: 10px;
+ 
+}
+
 
 @media (max-width: 800px) {
   .link_body :nth-child(1) {
@@ -95,4 +208,3 @@ input {
     order: 3;
   }
 }
-/*# sourceMappingURL=LinkContainer.module.css.map */
