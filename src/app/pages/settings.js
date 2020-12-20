@@ -49,7 +49,7 @@ const Settings = () => {
             });
         })
         .catch((err) => {
-          setErrorMessages(err.message);
+          setErrorMessages("Pasword not changed, check old password");
           console.log(err);
         });
 

@@ -54,9 +54,9 @@ const MobileContainer = (props) => {
   //   });
 
   useEffect(() => {
-    setTimeout(() => {
+    firebaseApp.auth().onAuthStateChanged((user1) => {
       db.collection("users")
-        .doc(auth.currentUser.uid)
+        .doc(user1.uid)
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -65,69 +65,72 @@ const MobileContainer = (props) => {
             console.log("Error in document");
           }
         });
-    }, 2000);
 
-    const unsubscribe = db
-      .collection("users")
-      .doc(auth.currentUser.uid)
-      .collection("links")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setlinks(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        )
-      );
+      const unsubscribe = db
+        .collection("users")
+        .doc(user1.uid)
+        .collection("links")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) =>
+          setlinks(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          )
+        );
 
-    return () => {
-      unsubscribe();
-    };
+      return () => {
+        unsubscribe();
+      };
+    });
   }, []);
 
   useEffect(() => {
     // console.log("ThemeColor", color.bgColor);
     // console.log("ThemeColor", color.fontColor);
+
     var user = firebaseApp.auth().currentUser;
 
-    if (color) {
-      db.collection("users")
-        .doc(auth.currentUser.uid)
-        .collection("themeColor")
-        .doc("color")
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            // console.log("Document data:", doc.data());
-            setColor(doc.data());
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+    if (user) {
+      if (color) {
+        db.collection("users")
+          .doc(auth.currentUser.uid)
+          .collection("themeColor")
+          .doc("color")
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              // console.log("Document data:", doc.data());
+              setColor(doc.data());
+            } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+            }
+          })
+          .catch(function (error) {
+            console.log("Error in getting theme color:", error);
+          });
+      }
+
+      // console.log("username", user.email);
+      // console.log("Image", image);
+      storage
+        .ref(user.email)
+        .child("ProfileImage")
+        .child("ProfileImage.jpg")
+        .getDownloadURL()
+        .then((url) => {
+          setURL(url);
+
+          if (url) {
+            dispatch(ImageUrlAction(url));
           }
         })
-        .catch(function (error) {
-          console.log("Error in getting theme color:", error);
+        .catch(() => {
+          console.log("Error while fetching image");
         });
     }
-
-    // console.log("username", user.email);
-    // console.log("Image", image);
-    storage
-      .ref(user.email)
-      .child("ProfileImage")
-      .child("ProfileImage.jpg")
-      .getDownloadURL()
-      .then((url) => {
-        setURL(url);
-
-        if (url) {
-          dispatch(ImageUrlAction(url));
-        }
-      })
-      .catch(() => {
-        console.log("Error while fetching image");
-      });
   });
 
   // }, [color]);

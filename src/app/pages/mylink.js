@@ -13,78 +13,67 @@ function Mylink() {
   const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
   const selectorImage = useSelector((state) => state.imageUrl);
-
-  // setInterval(() => {
-  //   var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
-
-  //   // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
-  //   if (getURLFromLocalStorage) {
-  //     getURLFromLocalStorage.map((userImage) => {
-  //       if (userImage.email === email) {
-  //         // console.log("URL", userImage.url);
-  //         setURL(userImage.url);
-  //       }
-  //     });
-  //   }
-  // }, 1000);
+  console.log("Image", selectorImage);
 
   useEffect(() => {
-    // const interval =
-    db.collection("users")
-      .doc(auth.currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setUsername(doc.data().name);
-          setEmail(doc.data().email);
-        } else {
-          console.log("Error in document");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    firebaseApp.auth().onAuthStateChanged((user1) => {
+      console.log("user", user1.uid);
 
-    const unsubscribe = db
-      .collection("users")
-      .doc(auth.currentUser.uid)
-      .collection("links")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setlinks(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        )
-      );
+      db.collection("users")
+        .doc(user1.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setUsername(doc.data().name);
+            setEmail(doc.data().email);
+          } else {
+            console.log("Error in document");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-    return () => {
-      unsubscribe();
-    };
+      const unsubscribe = db
+        .collection("users")
+        .doc(user1.uid)
+        .collection("links")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) =>
+          setlinks(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          )
+        );
 
-    // return () => {
-    //   clearInterval(interval);
-    // };
+      return () => {
+        unsubscribe();
+      };
+    });
   }, []);
 
   useEffect(() => {
-    var user = firebaseApp.auth().currentUser;
+    // var user = firebaseApp.auth().currentUser;
 
     // console.log("Image", image);
-    storage
-      .ref(user.email)
-      .child("ProfileImage")
-      .child("ProfileImage.jpg")
-      .getDownloadURL()
-      .then((url) => {
-        setURL(url);
 
-        console.log("URL", url);
-      })
-      .catch(() => {
-        console.log("Error while fetching image");
-      });
+    if (email) {
+      storage
+        .ref(email)
+        .child("ProfileImage")
+        .child("ProfileImage.jpg")
+        .getDownloadURL()
+        .then((url) => {
+          setURL(url);
+
+          console.log("URL", url);
+        })
+        .catch(() => {
+          console.log("Error while fetching image");
+        });
+    }
   });
 
   return (

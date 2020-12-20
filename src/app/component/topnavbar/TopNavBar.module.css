@@ -5,6 +5,7 @@
   background-color: #f5f6f8;
 }
 
+/* @media (max-width: 800px) { */
 @media (max-width: 800px) {
   .topnavbar {
     -webkit-box-flex: 0.95;

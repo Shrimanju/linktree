@@ -71,3 +71,78 @@ img {
 }
 
 /*# sourceMappingURL=Signup.css.map */
+
+.text-danger1{  
+
+  background-color: #ff4c63;
+  color: #fff;
+  display: inline-block;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 17px;
+  white-space: nowrap;
+  padding: 5px 150px;
+  line-height: 20px;
+}
+.text-danger2{  
+
+  background-color: #ff4c63;
+  color: #fff;
+  display: inline-block;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 17px;
+  white-space: nowrap;
+  padding: 5px 110px;
+  line-height: 20px;
+}
+.text-danger3{  
+
+  background-color: #ff4c63;
+  color: #fff;
+  display: inline-block;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 17px;
+  white-space: nowrap;
+  padding: 5px 140px;
+  line-height: 20px;
+}
+.text-danger4{  
+
+  background-color: #ff4c63;
+  color: #fff;
+  display: inline-block;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 17px;
+  white-space: nowrap;
+  padding: 5px 95px;
+  line-height: 20px;
+}
+
+
+input.error {
+  border-color: red;
+}
+
+.input-feedback {
+  color: rgb(235, 54, 54);
+  margin-top: -15px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: rgb(18, 187, 238);
+  color: white;
+  border: 1px solid rgb(70, 153, 179);
+  background-color: 250ms;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(11, 12, 12);
+}

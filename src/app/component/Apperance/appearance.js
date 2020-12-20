@@ -90,14 +90,14 @@ const Appearance = () => {
     //   .then((url) => {
     //     setURL(url);
 
-    //     console.log("URL", url);
+    // console.log("URL", url);
     //   })
     //   .catch(() => {
     //     console.log("Error while fetching image");
     //   });
-    setTimeout(() => {
+    firebaseApp.auth().onAuthStateChanged((user1) => {
       db.collection("users")
-        .doc(auth.currentUser.uid)
+        .doc(user1.uid)
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -106,7 +106,7 @@ const Appearance = () => {
             console.log("Error in document");
           }
         });
-    }, 2000);
+    });
   }, []);
 
   // console.log("username", user.email);
@@ -133,22 +133,24 @@ const Appearance = () => {
 
   useEffect(() => {
     // forceUpdate();
-    var user = firebaseApp.auth().currentUser;
 
-    storage
-      .ref(user.email)
-      .child("ProfileImage")
-      .child("ProfileImage.jpg")
-      .getDownloadURL()
-      .then((url) => {
-        // setURL(url);
-        // if (url) {
-        //   dispatch(ImageUrlAction(url));
-        // }
-      })
-      .catch(() => {
-        console.log("Error while fetching image");
-      });
+    var user = firebaseApp.auth().currentUser;
+    if (user) {
+      storage
+        .ref(user.email)
+        .child("ProfileImage")
+        .child("ProfileImage.jpg")
+        .getDownloadURL()
+        .then((url) => {
+          // setURL(url);
+          // if (url) {
+          //   dispatch(ImageUrlAction(url));
+          // }
+        })
+        .catch(() => {
+          console.log("Error while fetching image");
+        });
+    }
   });
 
   // useEffect(() => {
@@ -222,9 +224,17 @@ const Appearance = () => {
   // };
 
   const clickRemoveImageHandler = () => {
-    dispatch(ImageUrlAction(""));
+    console.log("username", username);
 
-    storage.ref(`${username}/ProfileImage/ProfileImage.jpg`).delete();
+    // storage.refFromURL(`${username}/ProfileImage/ProfileImage.jpg`).delete();
+    storage
+      .ref(username)
+      .child("ProfileImage")
+      .child("ProfileImage.jpg")
+      .delete();
+
+    dispatch(ImageUrlAction(""));
+    setURL("");
   };
 
   const themeClickHandler = (backgroundColor, fontColor) => {

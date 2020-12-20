@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { firebaseApp } from "../../../Firebase_config/firebase";
@@ -8,55 +8,61 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { storage, database } from "../../../Firebase_config/firebase";
-import db, { auth } from "../../../Firebase_config/firebase";
-// import { userDetailsAction } from "../../Redux/Action/ActionFile";
-// import { useSelector, useDispatch } from "react-redux";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
+const schema = yup.object().shape({
+  email: yup.string()
+    .email()
+    .required("Email id should Required"),
+ 
+  password: yup.string()
+    .required("No password provided.")
+    .min(6, "Password should be 6 chars minimum.")
+    .matches(/(?=.*[0-9])/, "Password must contain a number."),
+   
+}); 
 const Login = () => {
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, errors } = useForm(
+    {
+      resolver: yupResolver(schema),
+    }
+  );
+
   const [ErrorMessages, setErrorMessages] = useState();
-  // const [name, setName] = useState("");
-  // const [emailID, setEmailID] = useState("");
-  // const [URL, setURL] = useState("");
-  // const dispatch = useDispatch();
+  
 
   const onSubmit = (data) => {
     setErrorMessages("");
+
     firebaseApp
-      .auth()
+    .auth()
       .signInWithEmailAndPassword(data.email, data.password)
+    
       .then((u) => {
         console.log(u);
-
-        //Email,Name and URL
-
-        // db.collection("users")
-        //   .doc(auth.currentUser.uid)
-        //   .get()
-        //   .then((doc) => {
-        //     console.log("Email");
-        //     if (doc.exists) {
-        //       console.log("EMail", doc.data().emailID);
-        //       setEmailID(doc.data().emailID);
-        //       setName(doc.data().name);
-        //     } else {
-        //       console.log("Error in document");
-        //     }
-        //   });
       })
-      .catch((err) => {
-        setErrorMessages(err.message);
-        console.log(err);
-      });
-  };
 
-  // useEffect(() => {
-  //   if (name || emailID) {
-  //     dispatch(userDetailsAction(emailID, name));
-  //   }
-  //   // console.log("Email,name", emailID, name);
-  // }, [emailID, name]);
+      .catch(function (error) {
+        // Handle Errors here.
+        setErrorMessages(error.message);
+        console.log(error);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error({ ErrorCode: errorCode, ErrorMessage: errorMessage });
+        if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+        }
+        else {
+            alert(errorMessage);
+        }
+        console.log(error);
+    });
+      // .catch((err) => {
+      //   setErrorMessages(err.message);
+      //   console.log(err);
+      // });
+  };
 
   return (
     <div className="login-body">
@@ -88,10 +94,13 @@ const Login = () => {
           </h5>
         </div>
         <div className="text-center">
-          <span className="text-danger">{ErrorMessages}</span>
+          <p className="text-danger">{ErrorMessages}</p>
         </div>
         <div className="">
           <form onSubmit={handleSubmit(onSubmit)}>
+
+
+            
             <TextField
               type="email"
               name="email"
@@ -101,11 +110,11 @@ const Login = () => {
               id="standard-basic"
               label="Email"
             />
+        
             <br></br>
-            {errors.email && (
-              <span className="text-danger">E-mail field is required</span>
-            )}
+            {errors.email?.message && <span className="text-danger1">{errors.email?.message}</span>} 
             <br></br>
+            
             <TextField
               type="password"
               name="password"
@@ -115,9 +124,7 @@ const Login = () => {
               label="Password"
             />
             <br></br>
-            {errors.password && (
-              <span className="text-danger">Password field is required</span>
-            )}
+            {errors.password?.message && <span className="text-danger4">{errors.password?.message}</span>} 
             <br></br>
             <FormControlLabel
               style={{ minWidth: "470px" }}
