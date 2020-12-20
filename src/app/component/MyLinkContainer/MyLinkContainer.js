@@ -14,8 +14,6 @@ function MyLinkContainer(props) {
 
   setInterval(() => {
     var getURLFromLocalStorage = ls.get("ArrayOfImageDetails") || "";
-
-    // console.log("getURLFromLocalStorage", getURLFromLocalStorage);
     if (getURLFromLocalStorage) {
       getURLFromLocalStorage.map((userImage) => {
         if (userImage.email === username) {
