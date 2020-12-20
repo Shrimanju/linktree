@@ -9,11 +9,17 @@ import classed from "../../styles/Settings/settings.module.css";
 import { Email } from "@material-ui/icons";
 import { useAlert } from "react-alert";
 import firebase from "firebase";
+import HideOrShowPassword from "../../app/component/HideOrShowPassword/HideOrShowPassword";
+// HideOrShowPassword/HideOrShowPassword";
 
 const Settings = () => {
   const { handleSubmit, register, errors } = useForm();
   const [ErrorMessages, setErrorMessages] = useState();
-
+  const [showPassword, setShowPassword] = useState({
+    oldpwd: false,
+    pwd: false,
+    cpwd: false,
+  });
   const customAlert = useAlert();
 
   const onSubmit = (data) => {
@@ -83,12 +89,24 @@ const Settings = () => {
       <div className={classed.changePassword}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            type="password"
+            type={showPassword.oldpwd ? "text" : "password"}
             name="currentPassword"
             inputRef={register({ required: true })}
-            style={{ minWidth: "85%" }}
+            style={{ minWidth: "97%" }}
             id="standard-basic"
             label="Current Password"
+          />
+          <HideOrShowPassword
+            showPwd={(pwd1) => {
+              // setShowPassword({ ...updateState, updateState });
+              setShowPassword({
+                oldpwd: pwd1,
+                pwd: showPassword.pwd,
+                cpwd: showPassword.cpwd,
+              });
+
+              // setShowPassword(pwd);
+            }}
           />
           <br></br>
           {errors.currentPassword && (
@@ -98,12 +116,23 @@ const Settings = () => {
           )}
           <br></br>
           <TextField
-            type="password"
+            type={showPassword.pwd ? "text" : "password"}
             name="password"
             inputRef={register({ required: true })}
-            style={{ minWidth: "85%" }}
+            style={{ minWidth: "97%" }}
             id="standard-basic"
             label="New Password"
+          />
+          <HideOrShowPassword
+            showPwd={(pwd1) => {
+              setShowPassword({
+                oldpwd: showPassword.oldpwd,
+                pwd: pwd1,
+                cpwd: showPassword.cpwd,
+              });
+
+              // setShowPassword(pwd);
+            }}
           />
           <br></br>
           {errors.password && (
@@ -111,12 +140,21 @@ const Settings = () => {
           )}
           <br></br>
           <TextField
-            type="password"
+            type={showPassword.cpwd ? "text" : "password"}
             name="confpassword"
             inputRef={register({ required: true })}
-            style={{ minWidth: "85%" }}
+            style={{ minWidth: "97%" }}
             id="standard-basic"
             label="Confirm New Password"
+          />
+          <HideOrShowPassword
+            showPwd={(pwd1) => {
+              setShowPassword({
+                oldpwd: showPassword.oldpwd,
+                pwd: showPassword.pwd,
+                cpwd: pwd1,
+              });
+            }}
           />
           <br></br>
           <span className="text-danger">{ErrorMessages}</span>
