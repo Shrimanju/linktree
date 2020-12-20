@@ -18,7 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Accordion, Button } from "react-bootstrap";
 
 
-import Modal from 'react-modal'
+// import Modal from 'react-modal'
 
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
