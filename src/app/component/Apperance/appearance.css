@@ -13,6 +13,13 @@
   cursor: pointer;
 }
 
+.load-bar {
+  height: 20px;
+  width: 0px;
+  background: lime;
+  animation: grow 5s linear forwards;
+}
+
 .heading {
   margin-top: 30px;
   margin-left: 20px;
