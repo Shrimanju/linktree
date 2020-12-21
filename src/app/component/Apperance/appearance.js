@@ -31,6 +31,7 @@ const Appearance = () => {
   const [URL, setURL] = useState("");
   const [username, setUsername] = useState();
   const [themeColor, setThemeColor] = useState("");
+  const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
   const selectorImage = useSelector((state) => state.imageUrl);
 
@@ -177,7 +178,17 @@ const Appearance = () => {
     if (getImageimage) {
       storage
         .ref(`${username}/ProfileImage/ProfileImage.jpg`)
-        .put(getImageimage);
+        .put(getImageimage)
+        .on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          (error) => console.log("Error Message")
+        );
 
       setImage(getImageimage);
     }
@@ -305,6 +316,7 @@ const Appearance = () => {
                 </>
               )}
             </div>
+
             <div className="buttons buttonss col-xs col-lg">
               <input
                 // style={{ width: "100px" }}
@@ -348,6 +360,9 @@ const Appearance = () => {
               >
                 Remove
               </Button>
+              <p>
+                <span className="load-bar">{progress}</span>
+              </p>
             </div>
           </div>
         </div>
