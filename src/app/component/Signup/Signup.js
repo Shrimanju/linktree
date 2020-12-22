@@ -9,7 +9,6 @@
   import { useHistory } from "react-router-dom";
   import { yupResolver } from '@hookform/resolvers/yup';
   import * as yup from 'yup';
-  
   const schema = yup.object().shape({
     email: yup.string()
       .email()
@@ -22,9 +21,7 @@
       confpassword:yup.string().required(" Confirm Password field is required")
       .oneOf([yup.ref('password'), null], "Passwords don't match!")
   }); 
-  
-   
-  
+
   const Signup = () => {
   
    
@@ -157,7 +154,7 @@
           </a>
         </div>
         <p className="footer">
-          <span>Trust Centre</span> <span>Report a Violation</span>
+          <span>Trust Centre</span> <span>Report a Violation.</span>
           <span>Careers</span>
         </p>
       </div>

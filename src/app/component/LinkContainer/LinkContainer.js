@@ -23,11 +23,11 @@ import { Container, Card, Accordion, Button } from "react-bootstrap";
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const [modalIsOpen1, setmodalIsOpen1] = useState(false);
+  const [modalIsOpen2, setmodalIsOpen2] = useState(false);
+  const [modalIsOpen3, setmodalIsOpen3] = useState(false);
+  const [modalIsOpen4, setmodalIsOpen4] = useState(false);
   const [checked, setChecked] = useState();
-  const [activeKey, setActiveKey] = useState("");
-
-  // we are going to need a ref to the Accordion element to get its position/use the scrollIntoView function
-  const accordElem = useRef(null);
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
 
@@ -113,9 +113,6 @@ const LinkContainer = (props) => {
       }
     }
   };
-  function closeModal() {
-    setmodalIsOpen(false)
-  }
 
 
   return (
@@ -126,6 +123,7 @@ const LinkContainer = (props) => {
         <DragIndicatorIcon />
       </div>
       <div className={classes.link_body}>
+    
         <div className={classes.title}>
           <input
             id="text"
@@ -159,6 +157,7 @@ const LinkContainer = (props) => {
               onClick={() => {
                 setmodalIsOpen(!modalIsOpen);
               }}
+            
             >
               <EjectIcon />
             </IconButton>
@@ -167,7 +166,7 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen1(!modalIsOpen1);
               }}
             >
               <CropOriginalIcon />
@@ -176,7 +175,7 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen2(!modalIsOpen2);
               }}
             >
               <StarOutlineIcon />
@@ -185,7 +184,7 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen3(!modalIsOpen3);
               }}
             >
               <TodayIcon />
@@ -194,7 +193,7 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen4(!modalIsOpen4);
               }}
             >
               <BarChartIcon />
@@ -214,36 +213,151 @@ const LinkContainer = (props) => {
 
 
         </div>
-        {
-          modalIsOpen ?
-            <div>
+        <div>
+          {
+            modalIsOpen ?
+              <div>
 
-              <Card>
-              <Card.Header>
-              <div className={classes.panelheader}>
-                
-                        <h5 className={classes.panelheadeheading}>Leap Link?</h5>
-                        <a 
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Leap Link?</h5>
+                      <a
                         className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen(!modalIsOpen);}}
-                        >   X  
+                        onClick={() => { setmodalIsOpen(!modalIsOpen); }}
+                      >   X
                         </a>
-                        </div>
-                        </Card.Header>
-                        <Card.Body>
-    <Card.Text className={classes.cardtext}>
-    With Linktree PRO you can opt to temporarily forward all<br/> visitors directly to a destination, bypassing your<br/> Linktree altogether.
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className={classes.cardtext}>
+                      With Linktree PRO you can opt to temporarily forward all visitors directly to a destination,<br/> bypassing your Linktree altogether.
     </Card.Text>
-    <Button  className={classes.cardbutton}>Find out more</Button>
-  </Card.Body>
- </Card>
-            </div>
-            : null
-        }
+                    <Button className={classes.cardbutton}>Find out more</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+        </div>
+        <div>
+          {
+            modalIsOpen1 ?
+              <div>
 
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
 
+                      <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen1(!modalIsOpen1); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className={classes.cardtext}>
+                    With Linktree PRO you can add a thumbnail to your links.
+    </Card.Text>
+                    <Button className={classes.cardbutton}>Find out more</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+        </div>
+        <div>
+          {
+            modalIsOpen2 ?
+              <div>
 
-      </div></div>
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Priority Link</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen2(!modalIsOpen2); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className={classes.cardtext}>
+                    With Linktree PRO you can highlight your most important links with priority links.
+    </Card.Text>
+                    <Button className={classes.cardbutton}>Find out more</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+
+              : null
+          }
+        </div>
+        <div>
+          {
+            modalIsOpen3 ?
+              <div>
+
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Schedule Link</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen3(!modalIsOpen3); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className={classes.cardtext}>
+                    With Linktree PRO you can schedule when your links go live.
+    </Card.Text>
+                    <Button className={classes.cardbutton}>Find out more</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+        </div>
+        <div>
+          {
+            modalIsOpen4 ?
+              <div>
+
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Link Analytics</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen4(!modalIsOpen4); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className={classes.cardtext}>
+                    <p className={classes.p}>This link has been clicked 0 times.</p>
+                    <p className={classes.p}>More analytics available in <a href="">PRO.</a></p>
+    </Card.Text>
+                    <Button className={classes.cardbutton1}>Signup for PRO </Button >
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+
+        </div>
+      </div>
+    </div>
   );
 };
 
