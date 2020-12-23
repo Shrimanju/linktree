@@ -12,8 +12,12 @@ function Mylink() {
   const [email, setEmail] = useState();
   const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
-  const selectorImage = useSelector((state) => state.imageUrl);
-  console.log("Image", selectorImage);
+  var selectorImage = useSelector((state) => state.imageUrl);
+  // console.log("Image", selectorImage);
+
+  // setTimeout(() => {
+  //   selectorImage = useSelector((state) => state.imageUrl);
+  // }, 3000);
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
@@ -82,7 +86,11 @@ function Mylink() {
         {selectorImage || URL ? (
           // {URL ? (
           <>
-            <img className={classes.link} src={selectorImage || URL} />
+            <img
+              className={classes.link}
+              src={selectorImage || URL}
+              alt={Avatar}
+            />
             {/* <img className={classes.link} src={URL} /> */}
           </>
         ) : (

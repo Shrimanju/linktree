@@ -41,6 +41,8 @@
   /* text-decoration: none; */
   color: #292b2c;
   font-size: 14px;
+  border: orange;
+  cursor: pointer;
   /* margin-left: 1%; */
 }
 

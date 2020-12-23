@@ -3,14 +3,47 @@
 }
 
 .imageUploadButton {
-  width: 250px;
-  height: 37px;
+  /* width: 250px; */
+  /* margin-left: -30%;
+  width: 130%;
+  /* height: 53%; */
+  width: 120%;
+  height: 55%;
+  /* height: 37px; */
   background: blueviolet;
-  color: black;
+  color: rgb(236, 234, 247);
   text-align: center;
   border-radius: 5px;
-  padding-top: 5px;
+  padding-top: 7px;
   cursor: pointer;
+  margin-left: -45%;
+  font-family: sans-serif;
+}
+
+/* style={{
+  marginTop: "30px",
+  maxWidth: "400px",
+  maxHeight: "70px",
+  minWidth: "250px",
+  minHeight: "30px",
+  marginTop: "0%",
+  // borderRadius: "10px",
+}} */
+
+.clearButton,
+.clearButton:hover {
+  /* margin-top: 5%; */
+  width: 120%;
+  height: 55%;
+  color: black;
+  background: gainsboro;
+  border: none;
+  border-radius: 5px;
+  margin-left: -25%;
+  padding-top: 7px;
+  font-family: sans-serif;
+
+  /* min-width: 10%; */
 }
 
 .load-bar {

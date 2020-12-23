@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
 import ls from "local-storage";
 import { ImageUrlAction } from "../../../Redux/Action/ActionFile";
+import ReactLoading from "../../ImageLoader/spinner";
 
 // import { selectorImage } from "../../../../utils/index";
 import {
@@ -33,25 +34,9 @@ const MobileContainer = (props) => {
   const [username, setUsername] = useState();
   const [URL, setURL] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const selectorImage = useSelector((state) => state.imageUrl);
-
-  // db.collection("users")
-  //   .doc(auth.currentUser.uid)
-  //   .collection("themeColor")
-  //   .doc("color")
-  //   .get()
-  //   .then(function (doc) {
-  //     if (doc.exists) {
-  //       // console.log("Document data:", doc.data());
-  //       setColor(doc.data());
-  //     } else {
-  //       // doc.data() will be undefined in this case
-  //       console.log("No such document!");
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error getting document:", error);
-  //   });
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
@@ -87,10 +72,11 @@ const MobileContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log("ThemeColor", color.bgColor);
-    // console.log("ThemeColor", color.fontColor);
-
     var user = firebaseApp.auth().currentUser;
+
+    if (selectorImage) {
+      setLoading(false);
+    }
 
     if (user) {
       if (color) {
@@ -101,10 +87,8 @@ const MobileContainer = (props) => {
           .get()
           .then(function (doc) {
             if (doc.exists) {
-              // console.log("Document data:", doc.data());
               setColor(doc.data());
             } else {
-              // doc.data() will be undefined in this case
               console.log("No such document!");
             }
           })
@@ -113,8 +97,6 @@ const MobileContainer = (props) => {
           });
       }
 
-      // console.log("username", user.email);
-      // console.log("Image", image);
       storage
         .ref(user.email)
         .child("ProfileImage")
@@ -122,24 +104,27 @@ const MobileContainer = (props) => {
         .getDownloadURL()
         .then((url) => {
           setURL(url);
+          setLoading(false);
 
           if (url) {
+            console.log("url", url);
+
             dispatch(ImageUrlAction(url));
           }
         })
-        .catch(() => {
-          console.log("Error while fetching image");
-        });
-    }
-  });
+        .catch(() => {});
 
-  // }, [color]);
+      if (!selectorImage) {
+        dispatch(ImageUrlAction(""));
+        console.log("Image deleted ");
+      }
+    }
+  }, [color]);
 
   const useStyles = makeStyles({
     typography: {
       backgroundColor: color.bgColor || "white",
       color: color.fontColor || "grey",
-      // backgroundColor: themeColors || color,
     },
   });
 
@@ -157,19 +142,19 @@ const MobileContainer = (props) => {
     <MuiThemeProvider theme={theme}>
       <Typography
         variant="contained"
-        // className={`${classes.container}`}
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          {selectorImage || URL ? (
+          {loading ? (
+            <ReactLoading spin={loading} />
+          ) : selectorImage ? (
             // {URL ? (
             <>
               <img
                 className={classes.link}
                 src={selectorImage || URL}
-                alt="No Image"
+                alt={Avatar}
               />
-              {/* <img className={classes.link} src={URL} alt="No Image" /> */}
             </>
           ) : (
             <>
