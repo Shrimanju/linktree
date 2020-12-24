@@ -1,84 +1,129 @@
-// import React, { useState, useEffect } from "react";
-// import {
-//   firebaseApp,
-//   storage,
-//   database,
-// } from "../../../Firebase_config/firebase";
+import React, { useState, useEffect } from "react";
 
-// const ImageUpload = () => {
-//   const [URL, setURL] = useState("");
-//   const [image, setImage] = useState("");
+import {
+  firebaseApp,
+  storage,
+  database,
+} from "../../../Firebase_config/firebase";
+import ReactLoading from "../ImageLoader/spinner";
+import { useSelector, useDispatch } from "react-redux";
+import { Avatar } from "@material-ui/core";
+import db, { auth } from "../../../Firebase_config/firebase";
+import ReactCropImage from "../CropImage/cropImage";
+import { ImageUrlAction } from "../../Redux/Action/ActionFile";
 
-//   useEffect(() => {
-//     var user = firebaseApp.auth().currentUser;
+const ImageUpload = (props) => {
+  const [URL, setURL] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [cropImage, setCropImage] = useState("");
+  const [username, setUsername] = useState();
 
-//     console.log("username", user.email);
-//     // console.log("Image", image);
-//     storage
-//       .ref(user.email)
-//       .child("ProfileImage")
-//       .child("ProfileImage.jpg")
-//       .getDownloadURL()
-//       .then((url) => {
-//         setURL(url);
+  const selectorImage = useSelector((state) => state.imageUrl);
+  const dispatch = useDispatch();
 
-//         console.log("URL", url);
-//       })
-//       .catch(() => {
-//         console.log("Error while fetching image");
-//       });
-//   });
+  useEffect(() => {
+    // console.log("props.getImage");
+    // setImage(props.getImage);
+    firebaseApp.auth().onAuthStateChanged((user1) => {
+      db.collection("users")
+        .doc(user1.uid)
+        .collection("imageURL")
+        .doc("url")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            // setColor(doc.data());
+            setURL(doc.data().URL);
+            setLoading(false);
+            dispatch(ImageUrlAction(doc.data().URL));
+            if (props.disableRemoveButton) {
+              props.disableRemoveButton(false);
+            }
+          } else {
+            setLoading(false);
 
-//   const clickHandler = (e) => {
-//     const getImageimage = e.target.files[0];
-//     // console.log("getImageimage", getImageimage);
-//     if (getImageimage) {
-//       const uploadImage = storage
-//         .ref(`${username}/ProfileImage/ProfileImage.jpg`)
-//         .put(getImageimage);
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error in getting URL:", error);
+        });
+    });
+  }, []);
 
-//       setImage(getImageimage);
-//     }
-//   };
+  useEffect(() => {
+    if (cropImage) {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .collection("imageURL")
+        .doc("url")
+        .set({
+          URL: cropImage,
+        })
+        .then(() => {
+          setLoading(false);
 
-//   return (
-//     <div className="col-xs col-lg">
-//       {URL ? (
-//         <>
-//           {/* <p> {console.log("image", image)}</p>
-//                   <p> {console.log("URL", URL)}</p> */}
-//           <img
-//             className="avatar"
-//             style={{
-//               width: "120px",
-//               height: "100px",
-//               border: "1px solid #d8d7de",
-//               borderRadius: "100px",
-//               // backgroundColor: "lightgreen",
-//             }}
-//             src={URL}
-//             alt="No Image"
-//             // src={selectorImage}
-//           />
-//         </>
-//       ) : (
-//         <>
-//           {/* <p> {console.log("image", image)}</p>
-//                   <p> {console.log("URL", URL)}</p> */}
-//           <Avatar
-//             className="avatar"
-//             style={{
-//               width: "120px",
-//               height: "100px",
-//               backgroundColor: "lightgreen",
-//               border: "1px solid #d8d7de",
-//               borderRadius: "100px",
-//             }}
-//           />
-//         </>
-//       )}
-//     </div>
-//   );
-// };
+          props.disableRemoveButton(false);
+        })
+        .catch((err) => {
+          console.log("err while setting image");
+        });
+    }
 
-// export default ImageUpload;
+    // .ref(`${username}/ProfileImage/ProfileImage.jpg`)
+  }, [cropImage]);
+
+  return (
+    <div key={props.getImage}>
+      <div>
+        {selectorImage || (URL && cropImage) ? (
+          <>
+            <img
+              className="avatar"
+              style={{
+                width: props.width,
+                height: props.height,
+                border: "1px solid #d8d7de",
+                borderRadius: "100px",
+                //   // backgroundColor: "lightgreen",
+              }}
+              src={selectorImage || URL}
+              // src={URL}
+              // alt={Avatar}
+              // src={selectorImage}
+            />
+          </>
+        ) : loading && !URL ? (
+          <ReactLoading spin={loading} />
+        ) : (
+          <>
+            {/* <p> {console.log("image", image)}</p>
+                  <p> {console.log("URL", URL)}</p> */}
+            <Avatar
+              className="avatar"
+              style={{
+                width: props.width,
+                height: props.height,
+                border: "1px solid #d8d7de",
+                borderRadius: "100px",
+                backgroundColor: "lightgreen",
+              }}
+            />
+          </>
+        )}
+      </div>
+      {props.getImage ? (
+        <ReactCropImage
+          imageFile={props.getImage}
+          onOpen={true}
+          getImageURL={(imageURL) => {
+            setCropImage(imageURL);
+          }}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default ImageUpload;

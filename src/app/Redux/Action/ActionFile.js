@@ -12,6 +12,10 @@ export const ImageUrlAction = (value) => {
   };
 };
 
+// export const DisplayImage=()=>{
+//   return
+// }
+
 // export const userDetailsAction = (value1, value2) => {
 //   return {
 //     type: "UserInfo",

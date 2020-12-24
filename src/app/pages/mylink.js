@@ -7,13 +7,19 @@ import ls from "local-storage";
 import { useSelector } from "react-redux";
 // import { selectorImage } from "../../utils/index";
 import { firebaseApp, storage, database } from "../../Firebase_config/firebase";
+import ImageUploadWithCrop from "../component/ImageUpload/imageUpload";
+
 function Mylink() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
-  const selectorImage = useSelector((state) => state.imageUrl);
-  console.log("Image", selectorImage);
+  var selectorImage = useSelector((state) => state.imageUrl);
+  // console.log("Image", selectorImage);
+
+  // setTimeout(() => {
+  //   selectorImage = useSelector((state) => state.imageUrl);
+  // }, 3000);
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
@@ -55,41 +61,41 @@ function Mylink() {
   }, []);
 
   useEffect(() => {
-    // var user = firebaseApp.auth().currentUser;
-
-    // console.log("Image", image);
-
-    if (email) {
-      storage
-        .ref(email)
-        .child("ProfileImage")
-        .child("ProfileImage.jpg")
-        .getDownloadURL()
-        .then((url) => {
-          setURL(url);
-
-          console.log("URL", url);
-        })
-        .catch(() => {
-          console.log("Error while fetching image");
-        });
-    }
+    // if (email) {
+    //   storage
+    //     .ref(email)
+    //     .child("ProfileImage")
+    //     .child("ProfileImage.jpg")
+    //     .getDownloadURL()
+    //     .then((url) => {
+    //       setURL(url);
+    //       console.log("URL", url);
+    //     })
+    //     .catch(() => {
+    //       console.log("Error while fetching image");
+    //     });
+    // }
   });
 
   return (
     <div className={classes.mylink_container}>
       <div className={classes.header}>
-        {selectorImage || URL ? (
-          // {URL ? (
+        {/* {selectorImage || URL ? (
           <>
-            <img className={classes.link} src={selectorImage || URL} />
-            {/* <img className={classes.link} src={URL} /> */}
+            <img
+              className={classes.link}
+              src={selectorImage || URL}
+              alt={Avatar}
+            />
+            <img className={classes.link} src={URL} />
           </>
         ) : (
           <>
             <Avatar className={classes.avatar} />
           </>
-        )}
+        )} */}
+        <ImageUploadWithCrop width={"100px"} height={"100px"} />
+
         <span>{username}</span>
       </div>
       <div className={classes.body}>

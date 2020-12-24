@@ -3,14 +3,55 @@
 }
 
 .imageUploadButton {
-  width: 250px;
-  height: 37px;
+  /* width: 250px; */
+  /* margin-left: -30%;
+  width: 130%;
+  /* height: 53%; */
+  width: 120%;
+  height: 55%;
+  /* height: 37px; */
   background: blueviolet;
-  color: black;
+  color: rgb(236, 234, 247);
   text-align: center;
   border-radius: 5px;
-  padding-top: 5px;
+  padding-top: 7px;
   cursor: pointer;
+  margin-left: -45%;
+  /* margin-top: -50%; */
+
+  font-family: sans-serif;
+}
+
+/* style={{
+  marginTop: "30px",
+  maxWidth: "400px",
+  maxHeight: "70px",
+  minWidth: "250px",
+  minHeight: "30px",
+  marginTop: "0%",
+  // borderRadius: "10px",
+}} */
+
+.clearButton,
+.clearButton:hover {
+  /* margin-top: 5%; */
+  width: 120%;
+  height: 55%;
+  color: black;
+  background: gainsboro;
+  border: none;
+  border-radius: 5px;
+  margin-left: -25%;
+  padding-top: 7px;
+  font-family: sans-serif;
+
+  /* min-width: 10%; */
+}
+.clearButton:active {
+  background: grey;
+}
+.clearButton:disabled {
+  cursor: not-allowed;
 }
 
 .load-bar {
@@ -27,10 +68,12 @@
 }
 
 .profile {
-  margin-top: -20px;
-  margin-left: 50px;
-  width: 700px;
-  height: 200px;
+  margin-top: -2%;
+  margin-left: 8%;
+  padding-top: -10%;
+  padding-bottom: 7%;
+  width: 90%;
+  height: 100%;
   position: relative;
   display: block;
   background-color: white;
@@ -73,6 +116,11 @@
   border-radius: 0;
   border-width: 0;
 }
+/* .profile-update {
+    display: block;
+    width: 30% !important;
+    height: 10% !important;
+  } */
 
 @media screen and (max-width: 800px) {
   .heading {
@@ -82,8 +130,8 @@
   .profile {
     margin-top: -20px;
     margin-left: 40px;
-    width: 500px;
-    height: 200px;
+    width: 80%;
+    height: 40%;
     position: relative;
     display: block;
     background-color: white;
@@ -92,6 +140,12 @@
     border-radius: 0;
     border-width: 0;
   }
+  /* .profile-update {
+    display: block;
+    width: 30% !important;
+    height: 10% !important;
+  } */
+
   .avtaar {
     margin-top: 10px;
   }

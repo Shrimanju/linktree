@@ -32,6 +32,7 @@ const options = {
 ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
+      {/* <BrowserRouter forceRefresh> */}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={App} />;
