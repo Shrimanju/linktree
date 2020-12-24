@@ -53,10 +53,6 @@ const ImageUpload = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("Image");
-  }, [image]);
-
-  useEffect(() => {
     if (cropImage) {
       db.collection("users")
         .doc(auth.currentUser.uid)

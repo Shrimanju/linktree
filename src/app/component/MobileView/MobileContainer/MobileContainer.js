@@ -41,16 +41,43 @@ const MobileContainer = (props) => {
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
-      db.collection("users")
+      // db.collection("users")
+      //   .doc(user1.uid)
+      //   .get()
+      //   .then((doc) => {
+      //     if (doc.exists) {
+      //       setUsername(doc.data().email);
+      //     } else {
+      //       console.log("Error in document");
+      //     }
+      //   });
+
+      const changeThemeColor = db
+        .collection("users")
         .doc(user1.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUsername(doc.data().email);
+        .collection("themeColor")
+        .doc("color")
+        .onSnapshot((snapshot) => {
+          if (snapshot.exists) {
+            setColor(snapshot.data());
           } else {
-            console.log("Error in document");
+            setColor({});
           }
         });
+      // .doc("color")
+      // .get()
+
+      // .then(function (doc) {
+      //   console.log("Theme Color in Firestore");
+      //   if (doc.exists) {
+      //     setColor(doc.data());
+      //   } else {
+      //     console.log("No such document!");
+      //   }
+      // })
+      // .catch(function (error) {
+      //   console.log("Error in getting theme color:", error);
+      // });
 
       const unsubscribe = db
         .collection("users")
@@ -68,61 +95,35 @@ const MobileContainer = (props) => {
 
       return () => {
         unsubscribe();
+        changeThemeColor();
       };
     });
   }, []);
 
-  useEffect(() => {
-    var user = firebaseApp.auth().currentUser;
+  // useEffect(() => {
+  //   var user = firebaseApp.auth().currentUser;
 
-    // if (selectorImage) {
-    //   setLoading(false);
-    // }
-
-    if (user) {
-      if (color) {
-        db.collection("users")
-          .doc(user.uid)
-          .collection("themeColor")
-          .doc("color")
-          .get()
-          .then(function (doc) {
-            console.log("Theme Color in Firestore");
-            if (doc.exists) {
-              setColor(doc.data());
-            } else {
-              console.log("No such document!");
-            }
-          })
-          .catch(function (error) {
-            console.log("Error in getting theme color:", error);
-          });
-      }
-    }
-    // storage
-    //   .ref(user.email)
-    //   .child("ProfileImage")
-    //   .child("ProfileImage.jpg")
-    //   .getDownloadURL()
-    //   .then((url) => {
-    //     setURL(url);
-    //     setLoading(false);
-
-    //     if (url) {
-    //       console.log("url", url);
-
-    //       dispatch(ImageUrlAction(url));
-    //     }
-    //   })
-    //   .catch(() => {});
-
-    // }
-
-    // if (!selectorImage) {
-    //   dispatch(ImageUrlAction(""));
-    //   console.log("Image deleted ");
-    // }
-  }, [color]);
+  //   if (user) {
+  //     if (color) {
+  //       db.collection("users")
+  //         .doc(user.uid)
+  //         .collection("themeColor")
+  //         .doc("color")
+  //         .get()
+  //         .then(function (doc) {
+  //           console.log("Theme Color in Firestore");
+  //           if (doc.exists) {
+  //             setColor(doc.data());
+  //           } else {
+  //             console.log("No such document!");
+  //           }
+  //         })
+  //         .catch(function (error) {
+  //           console.log("Error in getting theme color:", error);
+  //         });
+  //     }
+  //   }
+  // }, [links]);
 
   const useStyles = makeStyles({
     typography: {
@@ -142,7 +143,7 @@ const MobileContainer = (props) => {
   });
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme} key={props.user}>
       <Typography
         variant="contained"
         className={`${classes.container} ${classed.typography}`}

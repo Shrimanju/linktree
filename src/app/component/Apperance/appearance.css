@@ -50,6 +50,9 @@
 .clearButton:active {
   background: grey;
 }
+.clearButton:disabled {
+  cursor: not-allowed;
+}
 
 .load-bar {
   height: 20px;

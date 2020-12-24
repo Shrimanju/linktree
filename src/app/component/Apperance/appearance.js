@@ -114,7 +114,7 @@ const Appearance = () => {
     } else if (e.target) {
       files = e.target.files;
     }
-    if (files !== "undefined") {
+    if (files[0] !== "undefined") {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
