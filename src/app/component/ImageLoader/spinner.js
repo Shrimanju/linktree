@@ -10,7 +10,7 @@ const Spinner = (props) => {
           color="#00BFFF"
           height={50}
           width={50}
-          // timeout={3000}
+          // timeout={2}
         />
       ) : null}
     </div>

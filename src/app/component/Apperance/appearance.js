@@ -24,6 +24,9 @@ import firebase from "firebase";
 import ls from "local-storage";
 import { Check } from "@material-ui/icons";
 import ReactLoading from "../ImageLoader/spinner";
+// import ReactCropper from "react-cropper";
+import ReactCropImage from "../CropImage/cropImage";
+import ImageUploadWithCrop from "../ImageUpload/imageUpload";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import  from 'bootstrap'
@@ -35,10 +38,11 @@ const Appearance = () => {
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const selectorImage = useSelector((state) => state.imageUrl);
+  // const selectorImage = useSelector((state) => state.imageUrl);
   const [disableButton, setDisableButton] = useState(true);
-
-  const forceUpdate = React.useState()[1].bind(null, {});
+  const [cropImage, setCropImage] = useState("");
+  // const forceUpdate = React.useState()[1].bind(null, {});
+  const [imageDelete, setImageDeleted] = useState(false);
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
@@ -55,92 +59,144 @@ const Appearance = () => {
     });
   }, []);
 
-  useEffect(() => {
-    // forceUpdate();
+  // useEffect(() => {
+  //   if (username) {
+  //     db.collection("users")
+  //       .doc(auth.currentUser.uid)
+  //       .collection("imageURL")
+  //       .doc("url")
+  //       .get()
+  //       .then(function (doc) {
+  //         if (doc.exists) {
+  //           // setColor(doc.data());
+  //           console.log("URL", doc.data());
 
-    // if (selectorImage) {
-    //   setLoading(false);
-    //   // setDisableButton(false);
-    // }
-    // else if (URL || selectorImage) {
-    //   setLoading(true);
-    // }
-
-    var user = firebaseApp.auth().currentUser;
-    if (user) {
-      storage
-        .ref(user.email)
-        .child("ProfileImage")
-        .child("ProfileImage.jpg")
-        .getDownloadURL()
-        .then((url) => {
-          setURL(url);
-          setDisableButton(false);
-          // if (url) {
-          //   dispatch(ImageUrlAction(url));
-          // }
-        })
-        .catch(() => {
-          console.log("Error while fetching image");
-        });
-    }
-  });
+  //           setURL(doc.data().URL);
+  //         } else {
+  //           console.log("No such document!");
+  //         }
+  //       })
+  //       .catch(function (error) {
+  //         console.log("Error in getting URL:", error);
+  //       });
+  //   }
+  // }, [username]);
 
   // useEffect(() => {
-  //   storage
-  //     .ref(username)
-  //     .child("ProfileImage")
-  //     .child("ProfileImage.jpg")
-  //     .getDownloadURL()
-  //     .then((url) => {
-  //       // setURL("");
-  //       setURL(url);
-  //       setLoading(false);
-
-  //       // console.log("URL", url);
-  //     });
-
+  //   // if (username && !URL && !selectorImage) {
+  //   //   storage
+  //   //     .ref("abc@mail.com")
+  //   //     .child("ProfileImage")
+  //   //     .child("ProfileImage.jpg")
+  //   //     .getDownloadURL()
+  //   //     .then((url) => {
+  //   //       // setURL("");
+  //   //       setURL(url);
+  //   //       console.log("CropURL", URL);
+  //   //       setLoading(false);
+  //   //       console.log("URL", url);
+  //   //     });
+  //   // }
+  //   // .ref(username)
   //   // else {
   //   //   setLoading(true);
   //   // }
   // }, [username, selectorImage]);
 
-  useEffect(() => {}, [username, URL]);
+  // useEffect(() => {}, [username, URL]);
 
   const clickHandler = (e) => {
-    const getImageimage = e.target.files[0];
-    // console.log("getImageimage", getImageimage);
-    if (getImageimage) {
-      storage
-        .ref(`${username}/ProfileImage/ProfileImage.jpg`)
-        .put(getImageimage)
-        .then(() => {
-          // setLoading(true);
-          setDisableButton(false);
-        });
-
-      setImage(getImageimage);
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+      console.log("Files", files);
+    } else if (e.target) {
+      files = e.target.files;
     }
+    if (files !== "undefined") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(files[0]);
+    }
+
+    ///------------------------------------------------------------///
+
+    // const getImageimage = e.target.files[0];
+    // console.log("getImageimage", getImageimage);
+    // if (getImageimage) {
+    // storage
+    //   .ref(`${username}/ProfileImage/ProfileImage.jpg`)
+    //   .put(getImageimage)
+    //   .then(() => {
+    //     // setLoading(true);
+    //     setDisableButton(false);
+    //   });
+    // setImage(getImageimage);
+    // }
   };
 
+  useEffect(() => {
+    console.log("Image", image);
+  }, [image]);
+
+  useEffect(() => {
+    if (cropImage) {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .collection("imageURL")
+        .doc("url")
+        .set({
+          URL: cropImage,
+        });
+
+      // storage
+      //   .ref(`abc@mail.com/ProfileImage/ProfileImage.jpg`)
+      //   .put(cropImage)
+      //   .then(() => {
+      //     // setLoading(true);
+      //     setDisableButton(false);
+      //   });
+    }
+
+    // .ref(`${username}/ProfileImage/ProfileImage.jpg`)
+  }, [cropImage]);
+
   const clickRemoveImageHandler = () => {
-    setDisableButton(false);
-    storage
-      .ref(username)
-      .child("ProfileImage")
-      .child("ProfileImage.jpg")
+    setDisableButton(true);
+
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .collection("imageURL")
+      .doc("url")
       .delete()
       .then(() => {
         dispatch(ImageUrlAction(""));
-        setLoading(false);
-
-        // forceUpdate();
-        setURL("");
-        console.log("Image deleted in firebase");
+        // setImageDeleted(true);
+        //     setLoading(false);
       })
       .catch(() => {
         console.log("ERROR Deleting image");
       });
+
+    // storage
+    //   .ref(username)
+    //   .child("ProfileImage")
+    //   .child("ProfileImage.jpg")
+    //   .delete()
+    //   .then(() => {
+    //     dispatch(ImageUrlAction(""));
+    //     setLoading(false);
+
+    //     // forceUpdate();
+    //     setURL("");
+    //     console.log("Image deleted in firebase");
+    //   })
+    //   .catch(() => {
+    //     console.log("ERROR Deleting image");
+    //   });
   };
 
   // useEffect(() => {
@@ -166,14 +222,24 @@ const Appearance = () => {
       <div className="heading col-md-6">
         <h3>Profile</h3>
       </div>
-      <div className="row">
+      <div className="row profile-update">
         <div className="profile col-xs-12">
           <div className="info row">
             <div className="col-xs col-lg">
-              {loading ? (
+              <ImageUploadWithCrop
+                getImage={image}
+                disableLoading={disableButton}
+                disableRemoveButton={(enable) => {
+                  setDisableButton(enable);
+                }}
+                width={"100px"}
+                height={"100px"}
+                // PassImageDeletedValue={imageDelete}
+              />
+              {/* {loading ? (
                 <ReactLoading spin={loading} />
-              ) : selectorImage || URL ? (
-                // {URL ? (
+              ) :
+              {URL || cropImage ? (
                 <>
                   <img
                     className="avatar"
@@ -184,7 +250,7 @@ const Appearance = () => {
                       borderRadius: "100px",
                       // backgroundColor: "lightgreen",
                     }}
-                    src={selectorImage || URL}
+                    src={cropImage || URL}
                     // src={URL}
                     alt={Avatar}
                     // src={selectorImage}
@@ -192,8 +258,8 @@ const Appearance = () => {
                 </>
               ) : (
                 <>
-                  {/* <p> {console.log("image", image)}</p>
-                  <p> {console.log("URL", URL)}</p> */}
+                   <p> {console.log("image", image)}</p>
+                  <p> {console.log("URL", URL)}</p> 
                   <Avatar
                     className="avatar"
                     style={{
@@ -205,7 +271,7 @@ const Appearance = () => {
                     }}
                   />
                 </>
-              )}
+              )} */}
             </div>
 
             <div className="buttons buttonss col-xs col-lg">
@@ -274,6 +340,15 @@ const Appearance = () => {
             </div>
           </div>
         </div>
+        {/* {image ? (
+          <ReactCropImage
+            imageFile={image}
+            onOpen={true}
+            getImageURL={(imageURL) => {
+              setCropImage(imageURL);
+            }}
+          />
+        ) : null} */}
       </div>
 
       <div className="heading_themes">

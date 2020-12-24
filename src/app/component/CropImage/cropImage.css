@@ -1,0 +1,10 @@
+.box {
+  width: 50%;
+  height: 50%;
+  display: inline-block;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+.img-preview {
+  overflow: hidden;
+}

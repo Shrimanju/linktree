@@ -7,6 +7,7 @@ import AnnouncementOutlinedIcon from "@material-ui/icons/AnnouncementOutlined";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import Logo from "../../../Assets/logo.png";
 import AccountPopover from "../Account_PopOver/AccountPopover";
+import ImageUploadWithCrop from "../ImageUpload/imageUpload";
 
 const SideNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,7 +33,8 @@ const SideNavBar = () => {
         <MessageOutlinedIcon className={classes.icon} />
         <NotificationsActiveOutlinedIcon className={classes.icon} />
         <IconButton aria-describedby={id} onClick={popoverOpen}>
-          <Avatar className={classes.avatar} />
+          {/* <Avatar className={classes.avatar} /> */}
+          <ImageUploadWithCrop className={classes.avatar} />
         </IconButton>
         <AccountPopover
           id={id}

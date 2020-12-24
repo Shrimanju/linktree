@@ -19,6 +19,7 @@ import { green } from "@material-ui/core/colors";
 import ls from "local-storage";
 import { ImageUrlAction } from "../../../Redux/Action/ActionFile";
 import ReactLoading from "../../ImageLoader/spinner";
+import ImageUploadWithCrop from "../../ImageUpload/imageUpload";
 
 // import { selectorImage } from "../../../../utils/index";
 import {
@@ -74,18 +75,19 @@ const MobileContainer = (props) => {
   useEffect(() => {
     var user = firebaseApp.auth().currentUser;
 
-    if (selectorImage) {
-      setLoading(false);
-    }
+    // if (selectorImage) {
+    //   setLoading(false);
+    // }
 
     if (user) {
       if (color) {
         db.collection("users")
-          .doc(auth.currentUser.uid)
+          .doc(user.uid)
           .collection("themeColor")
           .doc("color")
           .get()
           .then(function (doc) {
+            console.log("Theme Color in Firestore");
             if (doc.exists) {
               setColor(doc.data());
             } else {
@@ -96,29 +98,30 @@ const MobileContainer = (props) => {
             console.log("Error in getting theme color:", error);
           });
       }
-
-      storage
-        .ref(user.email)
-        .child("ProfileImage")
-        .child("ProfileImage.jpg")
-        .getDownloadURL()
-        .then((url) => {
-          setURL(url);
-          setLoading(false);
-
-          if (url) {
-            console.log("url", url);
-
-            dispatch(ImageUrlAction(url));
-          }
-        })
-        .catch(() => {});
-
-      if (!selectorImage) {
-        dispatch(ImageUrlAction(""));
-        console.log("Image deleted ");
-      }
     }
+    // storage
+    //   .ref(user.email)
+    //   .child("ProfileImage")
+    //   .child("ProfileImage.jpg")
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     setURL(url);
+    //     setLoading(false);
+
+    //     if (url) {
+    //       console.log("url", url);
+
+    //       dispatch(ImageUrlAction(url));
+    //     }
+    //   })
+    //   .catch(() => {});
+
+    // }
+
+    // if (!selectorImage) {
+    //   dispatch(ImageUrlAction(""));
+    //   console.log("Image deleted ");
+    // }
   }, [color]);
 
   const useStyles = makeStyles({
@@ -145,7 +148,7 @@ const MobileContainer = (props) => {
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          {loading ? (
+          {/* {loading ? (
             <ReactLoading spin={loading} />
           ) : selectorImage ? (
             // {URL ? (
@@ -160,7 +163,9 @@ const MobileContainer = (props) => {
             <>
               <Avatar className={classes.avatar} />
             </>
-          )}
+          )} */}
+          <ImageUploadWithCrop />
+
           <span>{props.user}</span>
         </div>
         {links.map((link) => {
