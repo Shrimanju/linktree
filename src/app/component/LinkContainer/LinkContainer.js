@@ -13,9 +13,18 @@ import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import db, { auth } from "../../../Firebase_config/firebase";
-
+import { Avatar } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Accordion, Button } from "react-bootstrap";
+import Grid from '@material-ui/core/Grid';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 
 // import Modal from 'react-modal'
@@ -30,7 +39,11 @@ const LinkContainer = (props) => {
   const [checked, setChecked] = useState();
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
+const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   useEffect(() => {
     db.collection("users")
       .doc(auth.currentUser.uid)
@@ -150,19 +163,6 @@ const LinkContainer = (props) => {
         </div>
         <div className={classes.iconsbottom}>
           <div className={classes.iconsleft}>
-
-            <IconButton
-
-              className={classes.iconbtnleft}
-              onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
-              }}
-            
-            >
-              <EjectIcon />
-            </IconButton>
-
-
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
@@ -172,14 +172,6 @@ const LinkContainer = (props) => {
               <CropOriginalIcon />
             </IconButton>
 
-            <IconButton
-              className={classes.iconbtnleft}
-              onClick={() => {
-                setmodalIsOpen2(!modalIsOpen2);
-              }}
-            >
-              <StarOutlineIcon />
-            </IconButton>
 
             <IconButton
               className={classes.iconbtnleft}
@@ -193,14 +185,14 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen4(!modalIsOpen4);
+                props.onDelete(props.id);
               }}
             >
-              <BarChartIcon />
+             <DeleteOutlineOutlinedIcon />
             </IconButton>
 
           </div>
-          <div className={classes.icons}>
+          {/* <div className={classes.icons}>
             <IconButton
               className={classes.iconbtn}
               onClick={() => {
@@ -209,38 +201,11 @@ const LinkContainer = (props) => {
             >
               <DeleteOutlineOutlinedIcon />
             </IconButton>
-          </div>
+          </div> */}
 
 
         </div>
-        <div>
-          {
-            modalIsOpen ?
-              <div>
-
-                <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-                      <h5 className={classes.panelheadeheading}>Leap Link?</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen(!modalIsOpen); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Text className={classes.cardtext}>
-                      With Linktree PRO you can opt to temporarily forward all visitors directly to a destination,<br/> bypassing your Linktree altogether.
-    </Card.Text>
-                    <Button className={classes.cardbutton}>Find out more</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              : null
-          }
-        </div>
+       
         <div>
           {
             modalIsOpen1 ?
@@ -259,45 +224,40 @@ const LinkContainer = (props) => {
                     </div>
                   </Card.Header>
                   <Card.Body>
-                    <Card.Text className={classes.cardtext}>
-                    With Linktree PRO you can add a thumbnail to your links.
-    </Card.Text>
-                    <Button className={classes.cardbutton}>Find out more</Button>
+                    <div  className={classes.avatar}>
+                  <Avatar
+                 
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      backgroundColor: "#000000",
+                      border: "1px solid #d8d7de",
+                      borderRadius: "100px",
+                    }}
+                  />
+                  </div>
+                  <div className={classes.thumbnail}>
+                    <Button style={{ backgroundColor: "lightgreen", }}
+                     className={classes.thumbnailbutton}
+                    >
+                      Upload Image
+                      </Button>
+
+                      <Button style={{ backgroundColor: "#FF0000", }}
+                    className={classes.thumbnailbutton}>
+                      Remove Image
+                      </Button>
+
+                      </div>
+                
+                    
                   </Card.Body>
                 </Card>
               </div>
               : null
           }
         </div>
-        <div>
-          {
-            modalIsOpen2 ?
-              <div>
-
-                <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-                      <h5 className={classes.panelheadeheading}>Priority Link</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen2(!modalIsOpen2); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Text className={classes.cardtext}>
-                    With Linktree PRO you can highlight your most important links with priority links.
-    </Card.Text>
-                    <Button className={classes.cardbutton}>Find out more</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-
-              : null
-          }
-        </div>
+        
         <div>
           {
             modalIsOpen3 ?
@@ -316,46 +276,51 @@ const LinkContainer = (props) => {
                     </div>
                   </Card.Header>
                   <Card.Body>
-                    <Card.Text className={classes.cardtext}>
-                    With Linktree PRO you can schedule when your links go live.
-    </Card.Text>
-                    <Button className={classes.cardbutton}>Find out more</Button>
+
+
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid >
+        <div className={classes.startsAt}>
+
+        <KeyboardDatePicker
+        className={classes.dateinput}
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker"
+          format="MM/dd/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        
+
+        <KeyboardTimePicker
+        className={classes.dateinput}
+          margin="normal"
+          id="time-picker"
+          label="Time picker"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change time',
+          }}
+        />
+        <Button className={classes.schedulelinkbutton}>Submit</Button>
+</div>
+      </Grid>
+    </MuiPickersUtilsProvider>
+
+
+                   
                   </Card.Body>
                 </Card>
               </div>
               : null
           }
         </div>
-        <div>
-          {
-            modalIsOpen4 ?
-              <div>
-
-                <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-                      <h5 className={classes.panelheadeheading}>Link Analytics</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen4(!modalIsOpen4); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Text className={classes.cardtext}>
-                    <p className={classes.p}>This link has been clicked 0 times.</p>
-                    <p className={classes.p}>More analytics available in <a href="">PRO.</a></p>
-    </Card.Text>
-                    <Button className={classes.cardbutton1}>Signup for PRO </Button >
-                  </Card.Body>
-                </Card>
-              </div>
-              : null
-          }
-
-        </div>
+        
       </div>
     </div>
   );

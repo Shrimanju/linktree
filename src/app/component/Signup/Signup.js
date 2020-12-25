@@ -61,18 +61,18 @@
   
     return (
       <div className="login-body">
-        <div className="logo">
+        <div className="signuplogo">
           <img src={Logo} />
           &nbsp;
           <h1>Linktree</h1>
         </div>
-        <div className="text-center text">
-          <h5 className="reset-password-heading">
+        <div className="signuptext">
+          <h5 className="signuptext1">
             Sign up for your Linktree account
           </h5>
         </div>
   
-        <div className="loginPart text-center" style={{ height: "450px" }}>
+        <div className="signupPart text-center" style={{ height: "450px" }}>
           <div className="formPart">
             <div className="text-center">
               <span className="text-danger">{ErrorMessageFirebase}</span>
@@ -84,7 +84,7 @@
                 type="text" 
                 name="email"
                 inputRef={register({ required: true })}
-                style={{ minWidth: "470px" }}
+                style={{ minWidth: "420px" }}
                 id="standard-basic"
                 label="Email"
   
@@ -97,7 +97,7 @@
                 type="text"
                 name="name"
                 inputRef={register({ required: true })}
-                style={{ minWidth: "470px" }}
+                style={{ minWidth: "420px" }}
                 id="standard-basic"
                 label="Name"
           
@@ -110,7 +110,7 @@
                 type="password"
                 name="password"
                 inputRef={register({ required: true })}
-                style={{ minWidth: "470px" }}
+                style={{ minWidth: "420px" }}
                 id="standard-basic"
                 label="Password"
             
@@ -123,7 +123,7 @@
                 type="password"
                 name="confpassword"
                 inputRef={register({ required: true })}
-                style={{ minWidth: "470px" }}
+                style={{ minWidth: "420px" }}
                 id="standard-basic"
                 label="Confirm Password"
           
@@ -135,7 +135,7 @@
               <br></br>
               <Button
                 type="submit"
-                style={{ minWidth: "400px" }}
+                style={{ minWidth: "420px" }}
                 color="default"
                 variant="contained"
               >
@@ -153,9 +153,9 @@
             <h6>Already have an account?</h6>
           </a>
         </div>
-        <p className="footer">
-          <span>Trust Centre</span> <span>Report a Violation.</span>
-          <span>Careers</span>
+        <p className="signupfooter">
+          <span className="signupfooter1"> Trust Centre</span> <span className="signupfooter1">Report a Violation.</span>
+          <span className="signupfooter1">Careers</span>
         </p>
       </div>
     );

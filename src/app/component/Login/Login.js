@@ -105,17 +105,17 @@ const signinwithgoogle=()=>{
 
   return (
     <div className="login-body">
-      <div className="logo">
+      <div className="logo1">
         <img src={Logo} />
         &nbsp;
         <h1>linktree</h1>
       </div>
 
-      <div className="text-center text">
+      <div className="text1">
         <h5>Log in to continue to your Linktree admin</h5>
       </div>
 
-      <div className="loginPart text-center" style={{ height: "500px" }}>
+      <div className="loginPart1 text-center" style={{ height: "500px" }}>
         <div className="instaButton">
           <Button
             style={{ minWidth: "400px", fontWeight: "700", fontSize: "75%" }}
@@ -203,14 +203,14 @@ const signinwithgoogle=()=>{
           </form>
         </div>
       </div>
-      <div className="creatAccountPart text-center">
-        <a className="link_login" href="/signup">
+      <div className="logincreatAccountPart">
+        <a className="logincreatAccountPart1" href="/signup">
           <p>Don't have an account?</p>
         </a>
       </div>
-      <p className="footer">
-        <span>Trust Centre</span> <span>Report a Violation</span>
-        <span>Careers</span>
+      <p className="footer1">
+        <span className="footer12">Trust Centre</span> <span className="footer12">Report a Violation</span>
+        <span className="footer12">Careers</span>
       </p>
     </div>
   );

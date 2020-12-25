@@ -116,7 +116,7 @@ const Settings = () => {
             inputRef={register({ required: true })}
             style={{ minWidth: "85%" }}
             id="standard-basic"
-            label="Confirm New Password"
+            label="Confirm Password"
           />
           <br></br>
           <span className="text-danger">{ErrorMessages}</span>
@@ -128,7 +128,7 @@ const Settings = () => {
           <br></br>
           <Button
             type="submit"
-            style={{ minWidth: "80%", marginLeft: "3%" }}
+             className={classed.settingsbutton}
             color="default"
             variant="contained"
           >

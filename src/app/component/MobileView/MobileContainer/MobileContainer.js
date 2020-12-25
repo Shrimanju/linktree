@@ -115,21 +115,21 @@ const MobileContainer = (props) => {
 
       // console.log("username", user.email);
       // console.log("Image", image);
-      storage
-        .ref(user.email)
-        .child("ProfileImage")
-        .child("ProfileImage.jpg")
-        .getDownloadURL()
-        .then((url) => {
-          setURL(url);
+      // storage
+      //   .ref(user.email)
+      //   .child("ProfileImage")
+      //   .child("ProfileImage.jpg")
+      //   .getDownloadURL()
+      //   .then((url) => {
+      //     setURL(url);
 
-          if (url) {
-            dispatch(ImageUrlAction(url));
-          }
-        })
-        .catch(() => {
-          console.log("Error while fetching image");
-        });
+      //     if (url) {
+      //       dispatch(ImageUrlAction(url));
+      //     }
+      //   })
+      //   .catch(() => {
+      //     console.log("Error while fetching image");
+      //   });
     }
   });
 
