@@ -14,26 +14,28 @@ import AppleIcon from '@material-ui/icons/Apple';
 import Google from '@material-ui/icons/GTranslate';
 import * as yup from 'yup';
 import firebase from 'firebase'
+// import { yupResolver } from "@hookform/resolvers/yup";
+import HideOrShowPassword from "../HideOrShowPassword/HideOrShowPassword";
+
+// import * as yup from "yup";
+
 const schema = yup.object().shape({
-  email: yup.string()
-    .email()
-    .required("Email id should Required"),
- 
-  password: yup.string()
+  email: yup.string().email().required("Email id should Required"),
+
+  password: yup
+    .string()
     .required("No password provided.")
     .min(6, "Password should be 6 chars minimum.")
     .matches(/(?=.*[0-9])/, "Password must contain a number."),
-   
-}); 
+});
 const Login = () => {
-  const { handleSubmit, register, errors } = useForm(
-    {
-      resolver: yupResolver(schema),
-    }
-  );
+  const { handleSubmit, register, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const [ErrorMessages, setErrorMessages] = useState();
   const [remember,setRemember] = useState();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data) => {
       firebaseApp.auth().setPersistence(remember?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION)
@@ -99,7 +101,7 @@ const signinwithgoogle=()=>{
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
 
-    // ...
+  
   });
   }
 
@@ -151,9 +153,6 @@ const signinwithgoogle=()=>{
         </div>
         <div className="">
           <form onSubmit={handleSubmit(onSubmit)}>
-
-
-            
             <TextField
               type="email"
               name="email"
@@ -163,21 +162,28 @@ const signinwithgoogle=()=>{
               id="standard-basic"
               label="Email"
             />
-        
             <br></br>
-            {errors.email?.message && <span className="text-danger1">{errors.email?.message}</span>} 
+            {errors.email?.message && (
+              <span className="text-danger1">{errors.email?.message}</span>
+            )}
             <br></br>
-            
             <TextField
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               inputRef={register({ required: true })}
               style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Password"
             />
+            <HideOrShowPassword
+              showPwd={(pwd) => {
+                setShowPassword(pwd);
+              }}
+            />
             <br></br>
-            {errors.password?.message && <span className="text-danger4">{errors.password?.message}</span>} 
+            {errors.password?.message && (
+              <span className="text-danger4">{errors.password?.message}</span>
+            )}
             <br></br>
             <FormControlLabel
               style={{ minWidth: "470px" }}

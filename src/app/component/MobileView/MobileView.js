@@ -56,7 +56,6 @@ const MobileView = () => {
           <span className={classes.mylink}>My Link:</span>
           <Link to={`/${username}`} className={classes.link}>
             <span style={{ marginLeft: "5%" }}>
-              {" "}
               {`${Base_URL}/${username}`}
             </span>
           </Link>

@@ -8,6 +8,8 @@ import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsAct
 import Logo from "../../../Assets/logo.png";
 import AccountPopover from "../Account_PopOver/AccountPopover";
 import DehazeIcon from '@material-ui/icons/Dehaze';
+import ImageUploadWithCrop from "../ImageUpload/imageUpload";
+
 const SideNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -23,30 +25,37 @@ const SideNavBar = () => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className={classes.sidebar}>
-    <img className={classes.logo} src={Logo} />
-    <div className={classes.sidebar_buttom}>
-      <MessageOutlinedIcon className={classes.icon1} />
-      <AccountPopover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        handleClose={popoverClose}
-      />
-      <NotificationsActiveOutlinedIcon className={classes.icon2} />
-      
-     
-      <IconButton aria-describedby={id} onClick={popoverOpen}>
-        <Avatar className={classes.avatar} />
-      </IconButton>
-      
-      <DehazeIcon aria-describedby={id} onClick={popoverOpen} 
+    <div className={classes.sidenavbar}>
+      {/* <AnnouncementOutlinedIcon className={classes.avatar} /> */}
+      <img className={classes.logo} src={Logo} />
+
+      {/* <div className={classes.}> */}
+      <div className={classes.sidenavbar_buttom}>
+        <MessageOutlinedIcon className={classes.icon} />
+
+
+        <NotificationsActiveOutlinedIcon className={classes.icon} />
+        <IconButton aria-describedby={id} onClick={popoverOpen}>
+          {/* <Avatar className={classes.avatar} /> */}
+          <ImageUploadWithCrop className={classes.avatar} />
+        </IconButton>
+        <AccountPopover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          handleClose={popoverClose}
+        />
+
+<DehazeIcon aria-describedby={id} onClick={popoverOpen} 
       className={classes.avatar1}
       >
 
       </DehazeIcon>
+
+      </div>
+
     </div>
-  </div>
+  
 
 
     // <div className={classes.sidenavbar}>

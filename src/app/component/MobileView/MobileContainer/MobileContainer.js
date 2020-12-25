@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import { green } from "@material-ui/core/colors";
 import ls from "local-storage";
 import { ImageUrlAction } from "../../../Redux/Action/ActionFile";
+import ReactLoading from "../../ImageLoader/spinner";
+import ImageUploadWithCrop from "../../ImageUpload/imageUpload";
 
 // import { selectorImage } from "../../../../utils/index";
 import {
@@ -33,38 +35,49 @@ const MobileContainer = (props) => {
   const [username, setUsername] = useState();
   const [URL, setURL] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const selectorImage = useSelector((state) => state.imageUrl);
-
-  // db.collection("users")
-  //   .doc(auth.currentUser.uid)
-  //   .collection("themeColor")
-  //   .doc("color")
-  //   .get()
-  //   .then(function (doc) {
-  //     if (doc.exists) {
-  //       // console.log("Document data:", doc.data());
-  //       setColor(doc.data());
-  //     } else {
-  //       // doc.data() will be undefined in this case
-  //       console.log("No such document!");
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error getting document:", error);
-  //   });
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
-      db.collection("users")
+      // db.collection("users")
+      //   .doc(user1.uid)
+      //   .get()
+      //   .then((doc) => {
+      //     if (doc.exists) {
+      //       setUsername(doc.data().email);
+      //     } else {
+      //       console.log("Error in document");
+      //     }
+      //   });
+
+      const changeThemeColor = db
+        .collection("users")
         .doc(user1.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUsername(doc.data().email);
+        .collection("themeColor")
+        .doc("color")
+        .onSnapshot((snapshot) => {
+          if (snapshot.exists) {
+            setColor(snapshot.data());
           } else {
-            console.log("Error in document");
+            setColor({});
           }
         });
+      // .doc("color")
+      // .get()
+
+      // .then(function (doc) {
+      //   console.log("Theme Color in Firestore");
+      //   if (doc.exists) {
+      //     setColor(doc.data());
+      //   } else {
+      //     console.log("No such document!");
+      //   }
+      // })
+      // .catch(function (error) {
+      //   console.log("Error in getting theme color:", error);
+      // });
 
       const unsubscribe = db
         .collection("users")
@@ -82,64 +95,40 @@ const MobileContainer = (props) => {
 
       return () => {
         unsubscribe();
+        changeThemeColor();
       };
     });
   }, []);
 
-  useEffect(() => {
-    // console.log("ThemeColor", color.bgColor);
-    // console.log("ThemeColor", color.fontColor);
+  // useEffect(() => {
+  //   var user = firebaseApp.auth().currentUser;
 
-    var user = firebaseApp.auth().currentUser;
-
-    if (user) {
-      if (color) {
-        db.collection("users")
-          .doc(auth.currentUser.uid)
-          .collection("themeColor")
-          .doc("color")
-          .get()
-          .then(function (doc) {
-            if (doc.exists) {
-              // console.log("Document data:", doc.data());
-              setColor(doc.data());
-            } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
-            }
-          })
-          .catch(function (error) {
-            console.log("Error in getting theme color:", error);
-          });
-      }
-
-      // console.log("username", user.email);
-      // console.log("Image", image);
-      // storage
-      //   .ref(user.email)
-      //   .child("ProfileImage")
-      //   .child("ProfileImage.jpg")
-      //   .getDownloadURL()
-      //   .then((url) => {
-      //     setURL(url);
-
-      //     if (url) {
-      //       dispatch(ImageUrlAction(url));
-      //     }
-      //   })
-      //   .catch(() => {
-      //     console.log("Error while fetching image");
-      //   });
-    }
-  });
-
-  // }, [color]);
+  //   if (user) {
+  //     if (color) {
+  //       db.collection("users")
+  //         .doc(user.uid)
+  //         .collection("themeColor")
+  //         .doc("color")
+  //         .get()
+  //         .then(function (doc) {
+  //           console.log("Theme Color in Firestore");
+  //           if (doc.exists) {
+  //             setColor(doc.data());
+  //           } else {
+  //             console.log("No such document!");
+  //           }
+  //         })
+  //         .catch(function (error) {
+  //           console.log("Error in getting theme color:", error);
+  //         });
+  //     }
+  //   }
+  // }, [links]);
 
   const useStyles = makeStyles({
     typography: {
       backgroundColor: color.bgColor || "white",
       color: color.fontColor || "grey",
-      // backgroundColor: themeColors || color,
     },
   });
 
@@ -154,28 +143,30 @@ const MobileContainer = (props) => {
   });
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme} key={props.user}>
       <Typography
         variant="contained"
-        // className={`${classes.container}`}
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          {selectorImage || URL ? (
+          {/* {loading ? (
+            <ReactLoading spin={loading} />
+          ) : selectorImage ? (
             // {URL ? (
             <>
               <img
                 className={classes.link}
                 src={selectorImage || URL}
-                alt="No Image"
+                alt={Avatar}
               />
-              {/* <img className={classes.link} src={URL} alt="No Image" /> */}
             </>
           ) : (
             <>
               <Avatar className={classes.avatar} />
             </>
-          )}
+          )} */}
+          <ImageUploadWithCrop />
+
           <span>{props.user}</span>
         </div>
         {links.map((link) => {

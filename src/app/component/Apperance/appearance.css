@@ -1,7 +1,59 @@
 .appearance {
   margin-left:16%;
   height: 100%;
+}
+.imageUploadButton {
 
+  width: 120%;
+  height: 55%;
+
+  background: blueviolet;
+  color: rgb(236, 234, 247);
+  text-align: center;
+  border-radius: 5px;
+  padding-top: 7px;
+  cursor: pointer;
+  margin-left: -45%;
+  font-family: sans-serif;
+}
+
+/* style={{
+  marginTop: "30px",
+  maxWidth: "400px",
+  maxHeight: "70px",
+  minWidth: "250px",
+  minHeight: "30px",
+  marginTop: "0%",
+  // borderRadius: "10px",
+}} */
+
+.clearButton,
+.clearButton:hover {
+  /* margin-top: 5%; */
+  width: 120%;
+  height: 55%;
+  color: black;
+  background: gainsboro;
+  border: none;
+  border-radius: 5px;
+  margin-left: -25%;
+  padding-top: 7px;
+  font-family: sans-serif;
+
+  /* min-width: 10%; */
+}
+.clearButton:active {
+  background: grey;
+}
+.clearButton:disabled {
+  cursor: not-allowed;
+}
+
+.load-bar {
+  height: 20px;
+  width: 0px;
+  background: lime;
+  animation: grow 5s linear forwards;
 }
 .heading {
   width:50%;
@@ -12,10 +64,12 @@
 
 
 .profile {
-  margin-top: -20px;
-  
-width: 100%;
-height: 130%;
+  margin-top: -2%;
+  margin-left: 8%;
+  padding-top: -10%;
+  padding-bottom: 7%;
+  width: 90%;
+  height: 100%;
   position: relative;
   background-color: white;
   text-align: left;

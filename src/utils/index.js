@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 //   .doc(auth.currentUser.uid)
 //   .get();
 
-// export const Base_URL = "https://link-listing.netlify.app";
+export const Base_URL = "https://link-listing.netlify.app";
 
-export const Base_URL = "http://localhost:3000";
+// export const Base_URL = "http://localhost:3000";
 
 // export const selectorImage = () => {
 //   return useSelector((state) => state.imageUrl);

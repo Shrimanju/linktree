@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import classes from "../LinkContainer/LinkContainer.module.css";
 // import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import DragIndicatorIcon from '@material-ui/icons/MoreVert';
+import DragIndicatorIcon from "@material-ui/icons/MoreVert";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import StarOutlineIcon from '@material-ui/icons/StarOutline';
-import CropOriginalIcon from '@material-ui/icons/CropOriginal';
-import TodayIcon from '@material-ui/icons/Today';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import EjectIcon from '@material-ui/icons/Eject';
+import StarOutlineIcon from "@material-ui/icons/StarOutline";
+import CropOriginalIcon from "@material-ui/icons/CropOriginal";
+import TodayIcon from "@material-ui/icons/Today";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import EjectIcon from "@material-ui/icons/Eject";
 import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -24,7 +24,6 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-
 
 
 // import Modal from 'react-modal'
@@ -126,12 +125,12 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
       }
     }
   };
-
+  function closeModal() {
+    setmodalIsOpen(false);
+  }
 
   return (
-
     <div className={classes.linkcontainer}>
-
       <div className={classes.drag_drop}>
         <DragIndicatorIcon />
       </div>
@@ -149,6 +148,8 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
           <Switch
             onChange={handleChange}
             checked={props.isactive ? props.isactive : checked}
+            checkedIcon={false}
+            uncheckedIcon={false}
           />
         </div>
 
@@ -190,7 +191,6 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
             >
              <DeleteOutlineOutlinedIcon />
             </IconButton>
-
           </div>
           {/* <div className={classes.icons}>
             <IconButton
