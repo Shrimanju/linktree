@@ -13,23 +13,36 @@ import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import db, { auth } from "../../../Firebase_config/firebase";
-
+import { Avatar } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Accordion, Button } from "react-bootstrap";
+import Grid from '@material-ui/core/Grid';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 // import Modal from 'react-modal'
 
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const [modalIsOpen1, setmodalIsOpen1] = useState(false);
+  const [modalIsOpen2, setmodalIsOpen2] = useState(false);
+  const [modalIsOpen3, setmodalIsOpen3] = useState(false);
+  const [modalIsOpen4, setmodalIsOpen4] = useState(false);
   const [checked, setChecked] = useState();
-  const [activeKey, setActiveKey] = useState("");
-
-  // we are going to need a ref to the Accordion element to get its position/use the scrollIntoView function
-  const accordElem = useRef(null);
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
+const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   useEffect(() => {
     db.collection("users")
       .doc(auth.currentUser.uid)
@@ -122,6 +135,7 @@ const LinkContainer = (props) => {
         <DragIndicatorIcon />
       </div>
       <div className={classes.link_body}>
+    
         <div className={classes.title}>
           <input
             id="text"
@@ -153,34 +167,17 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
-              }}
-            >
-              <EjectIcon />
-            </IconButton>
-
-            <IconButton
-              className={classes.iconbtnleft}
-              onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen1(!modalIsOpen1);
               }}
             >
               <CropOriginalIcon />
             </IconButton>
 
-            <IconButton
-              className={classes.iconbtnleft}
-              onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
-              }}
-            >
-              <StarOutlineIcon />
-            </IconButton>
 
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                setmodalIsOpen3(!modalIsOpen3);
               }}
             >
               <TodayIcon />
@@ -189,13 +186,13 @@ const LinkContainer = (props) => {
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
-                setmodalIsOpen(!modalIsOpen);
+                props.onDelete(props.id);
               }}
             >
-              <BarChartIcon />
+             <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div>
-          <div className={classes.icons}>
+          {/* <div className={classes.icons}>
             <IconButton
               className={classes.iconbtn}
               onClick={() => {
@@ -204,36 +201,126 @@ const LinkContainer = (props) => {
             >
               <DeleteOutlineOutlinedIcon />
             </IconButton>
-          </div>
+          </div> */}
+
+
         </div>
-        {modalIsOpen ? (
-          <div>
-            <Card>
-              <Card.Header>
-                <div className={classes.panelheader}>
-                  <h5 className={classes.panelheadeheading}>Leap Link?</h5>
-                  <a
-                    className={classes.panelheadebutton}
-                    onClick={() => {
-                      setmodalIsOpen(!modalIsOpen);
+       
+        <div>
+          {
+            modalIsOpen1 ?
+              <div>
+
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen1(!modalIsOpen1); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    <div  className={classes.avatar}>
+                  <Avatar
+                 
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      backgroundColor: "#000000",
+                      border: "1px solid #d8d7de",
+                      borderRadius: "100px",
                     }}
-                  >
-                    {" "}
-                    X
-                  </a>
-                </div>
-              </Card.Header>
-              <Card.Body>
-                <Card.Text className={classes.cardtext}>
-                  With Linktree PRO you can opt to temporarily forward all
-                  <br /> visitors directly to a destination, bypassing your
-                  <br /> Linktree altogether.
-                </Card.Text>
-                <Button className={classes.cardbutton}>Find out more</Button>
-              </Card.Body>
-            </Card>
-          </div>
-        ) : null}
+                  />
+                  </div>
+                  <div className={classes.thumbnail}>
+                    <Button style={{ backgroundColor: "lightgreen", }}
+                     className={classes.thumbnailbutton}
+                    >
+                      Upload Image
+                      </Button>
+
+                      <Button style={{ backgroundColor: "#FF0000", }}
+                    className={classes.thumbnailbutton}>
+                      Remove Image
+                      </Button>
+
+                      </div>
+                
+                    
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+        </div>
+        
+        <div>
+          {
+            modalIsOpen3 ?
+              <div>
+
+                <Card className={classes.card}>
+                  <Card.Header>
+                    <div className={classes.panelheader}>
+
+                      <h5 className={classes.panelheadeheading}>Schedule Link</h5>
+                      <a
+                        className={classes.panelheadebutton}
+                        onClick={() => { setmodalIsOpen3(!modalIsOpen3); }}
+                      >   X
+                        </a>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+
+
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid >
+        <div className={classes.startsAt}>
+
+        <KeyboardDatePicker
+        className={classes.dateinput}
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker"
+          format="MM/dd/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        
+
+        <KeyboardTimePicker
+        className={classes.dateinput}
+          margin="normal"
+          id="time-picker"
+          label="Time picker"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change time',
+          }}
+        />
+        <Button className={classes.schedulelinkbutton}>Submit</Button>
+</div>
+      </Grid>
+    </MuiPickersUtilsProvider>
+
+
+                   
+                  </Card.Body>
+                </Card>
+              </div>
+              : null
+          }
+        </div>
+        
       </div>
     </div>
   );

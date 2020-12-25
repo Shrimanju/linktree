@@ -7,6 +7,7 @@ import AnnouncementOutlinedIcon from "@material-ui/icons/AnnouncementOutlined";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import Logo from "../../../Assets/logo.png";
 import AccountPopover from "../Account_PopOver/AccountPopover";
+import DehazeIcon from '@material-ui/icons/Dehaze';
 import ImageUploadWithCrop from "../ImageUpload/imageUpload";
 
 const SideNavBar = () => {
@@ -31,6 +32,8 @@ const SideNavBar = () => {
       {/* <div className={classes.}> */}
       <div className={classes.sidenavbar_buttom}>
         <MessageOutlinedIcon className={classes.icon} />
+
+
         <NotificationsActiveOutlinedIcon className={classes.icon} />
         <IconButton aria-describedby={id} onClick={popoverOpen}>
           {/* <Avatar className={classes.avatar} /> */}
@@ -42,9 +45,39 @@ const SideNavBar = () => {
           anchorEl={anchorEl}
           handleClose={popoverClose}
         />
+
+<DehazeIcon aria-describedby={id} onClick={popoverOpen} 
+      className={classes.avatar1}
+      >
+
+      </DehazeIcon>
+
       </div>
-      {/* </div> */}
+
     </div>
+  
+
+
+    // <div className={classes.sidenavbar}>
+    //   {/* <AnnouncementOutlinedIcon className={classes.avatar} /> */}
+    //   <img className={classes.logo} src={Logo} />
+
+    //   {/* <div className={classes.}> */}
+    //   <div className={classes.sidenavbar_buttom}>
+    //     <MessageOutlinedIcon className={classes.icon} />
+    //     <NotificationsActiveOutlinedIcon className={classes.icon} />
+    //     <IconButton aria-describedby={id} onClick={popoverOpen}>
+    //       <Avatar className={classes.avatar} />
+    //     </IconButton>
+    //     <AccountPopover
+    //       id={id}
+    //       open={open}
+    //       anchorEl={anchorEl}
+    //       handleClose={popoverClose}
+    //     />
+    //   </div>
+    //   {/* </div> */}
+    // </div>
   );
 };
 

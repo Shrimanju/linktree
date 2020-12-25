@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const TopNavBar = () => {
   return (
+
     <div className={classes.topnavbar}>
       <BrowserRouter>
         <Menu />

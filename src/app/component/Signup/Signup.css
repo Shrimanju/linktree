@@ -7,29 +7,49 @@ body {
   -moz-transform: scale(0.9); /* Firefox*/
 }
 
-.logo {
+.signuplogo{
   margin-top: 80px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+      margin-right: auto;
+      margin-left: auto;
+    
+      width: 500px;
+    
+    
+  
+}
+
+.signuptext {
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
+   width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-left: 80px;
+    transform: translate(0%, -50%)
+    
 }
 
-.text {
-  margin-top: 40px;
+.signuptext1{
+  text-align: center;
+  padding: 0px 0px;
+  white-space: normal;
+  /* padding-left: 10px; */
 }
 
-.loginPart {
+.signupPart {
+  display: block;
   margin-top: 40px;
   margin-right: auto;
   margin-left: auto;
   background-color: white;
-  width: 500px;
+  /* background-color: rgb(31, 76, 148); */
+
+  width: 480px;
   height: 800px;
 }
 
@@ -55,22 +75,23 @@ img {
   color: black;
   text-decoration: none;
 }
-
-.footer {
-  /* text-align: center; */
-  font-size: 80%;
-  color: gray;
-  font-weight: 500;
-  width: 400px;
-  /* border: 1px solid green; */
-  margin-top: 60px;
-  margin-left: 37%;
+.signupfooter{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-}
+ justify-content: center;
+ align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 500px;
 
-/*# sourceMappingURL=Signup.css.map */
+}
+.signupfooter1{
+padding-right:32px;
+  font-size: 80%;
+  color: gray;
+  margin-top: 30px;
+  
+}
 
 .text-danger1{  
 
@@ -146,3 +167,54 @@ button:hover {
   background-color: white;
   color: rgb(11, 12, 12);
 }
+@media (max-width: 360px) {
+  .signuptext {
+      margin-left: 70px;
+  }
+.creatAccountPart{
+  margin-left: 60px;
+}
+  
+  }
+
+  @media (max-width: 420px) {
+    .signuptext {
+        margin-left: 50px;
+    }
+    }
+   
+    @media (max-width: 320px) {
+      .signuptext {
+          margin-left: 80px;
+      }
+      .creatAccountPart{
+        margin-left: 77px;
+      }
+      }
+      @media (max-width: 414px) {
+    
+        .creatAccountPart{
+          margin-left: 7px;
+        }
+        }
+        @media (max-width: 375px) {
+    
+          .creatAccountPart{
+            margin-left: 27px;
+          }
+          }
+      @media (max-width: 768px) {
+        .signuptext {
+            margin-left: 50px;
+        }
+        }
+        @media (max-width: 1024px) {
+          .signuptext {
+              margin-left: 45px;
+          }
+          }
+          @media (max-width: 280px) {
+            .signuptext {
+                margin-left: 65px;
+            }
+            }

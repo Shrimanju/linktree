@@ -6,28 +6,54 @@ body {
   zoom: 0.9; /* all browsers */
   -moz-transform: scale(0.9); /* Firefox*/
 }
-.logo {
+
+.logo1 {
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+  
+    width: 500px;
+  
+  
+}
+
+.logo1 {
   margin-top: 80px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  
 }
 .email ::placeholder {
   /* font-family: sans-serif; */
   color: green !important;
 }
-.text {
+.text1 {
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    padding:auto;
+  
+    width:500px;
+}
+
+.text1 {
   margin-top: 40px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   /* font-family: "myFont", Arial, Helvetica, sans-serif; */
 }
 
-.loginPart {
+.loginPart1 {
   display: block;
   margin-top: 40px;
   margin-right: auto;
@@ -47,6 +73,9 @@ body {
 .instaButton {
   padding-top: 40px;
 }
+.instaButton1 {
+  padding-top: 20px;
+}
 /* div.instaButton Button {
   padding-left: 0px;
 }
@@ -59,9 +88,19 @@ img {
   height: 50px;
   float: left;
 }
-.link_login,
-.link_login:hover {
-  color: black;
+.link_login1,
+.link_login1:hover {
+  display: flex;
+  flex-direction: row;
+ justify-content: center;
+ align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 500px;
+}
+.link_login1,
+.link_login1:hover {
+  color: rgb(56, 54, 54);
   text-decoration: none;
   border: none;
   box-shadow: none;
@@ -84,21 +123,105 @@ div.horizontalLine h5 span {
   color: rgb(185, 185, 185);
 }
 
-.creatAccountPart {
-  margin-top: 20px;
+.link_login1 {
+  margin-left: 20px;
 }
-
-.footer {
-  /* text-align: center; */
-  font-size: 80%;
-  color: gray;
-  font-weight: 500;
-  width: 400px;
-  /* border: 1px solid green; */
-  margin-top: 60px;
-  margin-left: 37%;
+.footer1{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+ justify-content: center;
+ align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 500px;
+
+}
+.footer12{
+padding-right:32px;
+  font-size: 80%;
+  color: gray;
+  margin-top: 30px;
+  
+}
+.logincreatAccountPart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.logincreatAccountPart1 {
+  text-decoration: none;
+  margin-top: 20px;
+  color: rgb(150, 152, 153);
+  font-size: "70%";
+  margin:0px 0px;
+  padding:0px 0px;
+
+}
+.logincreatAccountPart1{
+padding-right:32px;
+  font-size: 80%;
+  color: gray;
+  margin-top: 30px;
+  
 }
 /*# sourceMappingURL=Login.css.map */
+@media (max-width: 360px) {
+  .text1 {
+      margin-left: 10px;
+  }
+  .logincreatAccountPart1{
+  margin-left: 75px;
+}
+.loginPart {
+  margin-left:10px;
+
+}
+  }
+
+  /* @media (max-width: 420px) {
+    .signuptext {
+        margin-left: 50px;
+    }
+    } */
+   
+    @media (max-width: 280px) {
+      .loginPart1 {
+        margin-left:18px;
+      
+      }
+      }
+      @media (max-width: 411px) {
+        .text1 {
+          margin-left: 15px;
+      }
+    .creatAccountPart1{
+      margin-left: -25px;
+    }
+    .loginPart {
+      margin-left:8px;
+    
+    }
+        }
+      
+        /* @media (max-width: 375px) {
+    
+          .creatAccountPart{
+            margin-left: 27px;
+          }
+          } */
+          @media (max-width:768px) {
+            .creatAccountPart1{
+              margin-left: 5px;
+            }
+            }
+        @media (max-width: 1024px) {
+          .creatAccountPart1{
+            margin-left: 305px;
+          }
+          }
+          @media (max-width: 540px) {
+            .creatAccountPart1{
+              margin-left: 15px;
+            }
+            }
