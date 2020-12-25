@@ -2,15 +2,15 @@
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   line-height: 50px;
   margin-left: 8%;
   -ms-flex-pack: distribute;
   /* margin-left: 40px; */
   justify-content: flex-start;
   background-color: white;
-  /* border: 1px solid orange; */
-  /* border-right: 1px solid gray; */
+
+  border-bottom:  1px  solid rgb(223, 217, 217);
 }
 
 .menucontainer .link {
@@ -34,3 +34,13 @@
   }
 }
 /*# sourceMappingURL=Menu.module.css.map */
+@media screen and (max-width: 360px) {
+  .menucontainer {
+    margin-left: 0%;
+  }
+  }
+  @media screen and (max-width: 540px) {
+    .menucontainer {
+      margin-left: 0%;
+    }
+  }

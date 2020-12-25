@@ -4,7 +4,7 @@ import classes from "../MyLinkContainer/MyLinkContainer.module.css";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import db, { auth } from "../../../Firebase_config/firebase";
 import ls from "local-storage";
-
+import {Card} from "react-bootstrap";
 // import db, { auth } from "../../Firebase_config/firebase";
 
 function MyLinkContainer(props) {
@@ -31,19 +31,19 @@ function MyLinkContainer(props) {
   useEffect(() => {
     // alert(props.url);
 
-    db.collection("users")
-      .doc(auth.currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setUsername(doc.data().name);
-        } else {
-          console.log("Error in document");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // db.collection("users")
+    //   .doc(auth.currentUser.uid)
+    //   .get()
+    //   .then((doc) => {
+    //     if (doc.exists) {
+    //       setUsername(doc.data().name);
+    //     } else {
+    //       console.log("Error in document");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     const unsubscribe = db
       .collection("users")

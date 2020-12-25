@@ -52,7 +52,15 @@ export default function AccountPopover(props) {
   const logout = () => {
     // auth.signOut();
 
-    firebaseApp.auth().signOut();
+    firebaseApp.auth().signOut().then(function () {
+      debugger;
+      localStorage.clear();
+ 
+  }, function (error) {
+    
+      console.error('Sign Out Error', error);
+  });
+    
     history.push("/");
   };
 

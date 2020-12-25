@@ -35,20 +35,17 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="login-body">
-      <div className="logo">
+    <div className="forgat-body">
+      <div className="forgatlogo">
         <img src={Logo} />
         &nbsp;
         <h1>Linktree</h1>
       </div>
-
-      <div className="text-center text">
-        <h5 className="reset-password-heading">
-          Enter your username to receive a password reset email.
-        </h5>
+      <div className="forgettext">
+        <h5> Enter your username to receive a password reset email.</h5>
       </div>
 
-      <div className="loginPart text-center" style={{ height: "150px" }}>
+      <div className="forgatloginPart text-center" style={{ height: "150px" }}>
         <div className="text-center">
           <span className="text-danger">{ErrorMessages}</span>
         </div>
@@ -64,7 +61,7 @@ const ForgotPassword = () => {
             />
             <br></br>
             {errors.email && (
-              <span className="text-danger">E-mail field is required</span>
+              <span className="text-danger1">E-mail field is required</span>
             )}
             <br></br>
             <Button
@@ -84,9 +81,9 @@ const ForgotPassword = () => {
           <p style={{ fontSize: "17px", fontWeight: 500 }}>Back to Login</p>
         </a>
       </div>
-      <p className="footer">
-        <span>Trust Centre</span> <span>Report a Violation</span>
-        <span>Careers</span>
+      <p className="forgatfooter">
+        <span className="forgatfooter12">Trust Centre</span> <span className="forgatfooter12">Report a Violation</span>
+        <span className="forgatfooter12">Careers</span>
       </p>
     </div>
   );

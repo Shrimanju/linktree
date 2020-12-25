@@ -1,4 +1,4 @@
-.sidenavbar {
+/* .sidenavbar {
   background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,20 +13,22 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  /* margin-right: 70%; */
 
   padding: 0.1vw;
 
-  /* position: -webkit-sticky;
-  position: sticky; */
+  position: -webkit-sticky;
+  position: sticky;
   position: fixed;
 
   bottom: 0;
-  height: 100vh; /* min-height: 100%; */
-  /* height: fixed; */
+  height: 100vh; 
+  
+  
+  min-height: 100%;
+  height: fixed;
   overflow: auto;
 
-  /* border-right: 1px solid gray; */
+  border-right: 1px solid gray;
 }
 
 .logo {
@@ -52,12 +54,12 @@
   min-height: 20vh;
   margin-bottom: 30%;
 
-  /* border: 6px solid green; */
-  /* margin-top: 30%; */
+  border: 6px solid green;
+  margin-top: 30%;
 }
 
 .sidenavbar .sidenavbar_buttom .avatar {
-  /* margin-top: 10%; */
+  margin-top: 10%;
   background-color: lightgreen;
 }
 
@@ -66,8 +68,15 @@
   margin-bottom: 20%;
 }
 
-@media (max-width: 80%) {
+@media screen and (max-width: 700px) {
   .sidenavbar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -83,7 +92,6 @@
     flex-direction: row;
     min-width: 30vw;
     min-height: 2vh;
-    /* border: 1px solid green; */
   }
   .sidenavbar .sidenavbar_buttom :nth-child(1) {
     -webkit-box-ordinal-group: 2;
@@ -100,5 +108,202 @@
     -ms-flex-order: 3;
     order: 3;
   }
-}
+} */
 /*# sourceMappingURL=SideNavBar.module.css.map */
+
+
+.sidebar {
+  position: fixed;
+  top:0;
+  bottom: 0;
+  height: 100%;
+
+  overflow: auto;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.sidebar .sidebar_buttom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 20vh;
+  margin-bottom: 30%;
+}
+
+.sidebar .sidebar_buttom .avatar {
+  background-color: lightgreen;
+}
+
+.sidebar .sidebar_buttom .icon1 {
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+.sidebar .sidebar_buttom .icon2 {
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+.sidebar .sidebar_buttom .avatar1 {
+/* visibility:collapse; */
+display: none;
+}
+/* @media screen and (max-width: 280px) {
+  .sidebar .sidebar_buttom {
+    margin-top: -20px;
+  }
+  .logo{
+    margin-top: 24px;
+  }
+}  */
+@media screen and (max-width: 700px) {
+  
+    
+    .sidebar {
+      width: 100%;
+    height: 70px;
+    position: relative;
+      top:0;
+      right: 0;
+    }
+      /* bottom: 0;
+      overflow: auto;
+      background-color:white;
+ 
+      display: flex;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content:space-between;
+      -webkit-box-align: left;
+      -ms-flex-align: left;
+      align-items: left;
+    } */
+    .logo {
+      display: flex;
+      margin:30px 20px;
+      padding: 0px 0px;
+      flex-direction: row;
+      position: absolute;
+      top:0;
+      left: 0;
+      height: 23px;
+      width: 23px;
+    }
+    .sidebar .sidebar_buttom {
+      position: absolute;
+      top: 0;
+      right: 0;
+    
+      display: flex;
+      margin: 0px 0px;
+      margin-top: -16px;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal; 
+      -ms-flex-direction: row;
+      flex-direction: row-reverse;
+       -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content:space-between;
+      -webkit-box-align: right;
+      -ms-flex-align: right;
+      align-items: right;
+      margin-right: 0.7%;
+    
+    }
+    
+    .sidebar .sidebar_buttom .avatar {
+      
+display: none;
+    }
+    .sidebar .sidebar_buttom .avatar1 {
+      display: block;
+      margin-top: -5%;
+ margin-left: 18px;
+    
+    }    
+    .sidebar .sidebar_buttom .icon1 {
+      display: none;
+    }
+    .sidebar .sidebar_buttom .icon2 {
+      margin-top: 10%;
+      margin-bottom: 20%;
+
+    }
+    
+}
+
+@media screen and (max-width: 411px) {
+  .sidebar .sidebar_buttom {
+    margin-top: -37px;
+  }
+  
+}
+
+@media screen and (max-width: 320px) {
+  .sidebar .sidebar_buttom {
+    margin-top: -20px;
+  }
+  .logo{
+    margin-top: 24px;
+  }
+}
+/* @media screen and (max-width: 360px) {
+ 
+  .logo{
+    margin-top: 214px;
+  }
+} */
+@media screen and (max-width: 375px) {
+  .sidebar .sidebar_buttom {
+    margin-top: -30px;
+  }
+  .logo{
+    margin-top: 22px;
+  }
+}
+@media screen and (max-width: 414px) {
+  .sidebar .sidebar_buttom {
+    margin-top: -25px;
+  }
+  .logo{
+    margin-top: 2px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .sidenavbar{
+    /* border:  11px  solid rgb(168, 46, 46); */
+    
+  }
+  .sidebar .sidebar_buttom {
+    margin-top: -35px;
+  }
+  .logo{
+    margin-top: 22px;
+  }
+
+}
