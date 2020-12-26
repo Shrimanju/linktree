@@ -42,7 +42,7 @@ const ForgotPassword = () => {
         <h1>Linktree</h1>
       </div>
       <div className="forgettext">
-        <h5> Enter your username to receive a password reset email.</h5>
+        <h5> Enter your email to receive a password reset email.</h5>
       </div>
 
       <div className="forgatloginPart text-center" style={{ height: "150px" }}>
@@ -57,7 +57,7 @@ const ForgotPassword = () => {
               inputRef={register({ required: true })}
               style={{ minWidth: "470px" }}
               id="standard-basic"
-              label="Username"
+              label="Email"
             />
             <br></br>
             {errors.email && (
@@ -82,7 +82,8 @@ const ForgotPassword = () => {
         </a>
       </div>
       <p className="forgatfooter">
-        <span className="forgatfooter12">Trust Centre</span> <span className="forgatfooter12">Report a Violation</span>
+        <span className="forgatfooter12">Trust Centre</span>{" "}
+        <span className="forgatfooter12">Report a Violation</span>
         <span className="forgatfooter12">Careers</span>
       </p>
     </div>

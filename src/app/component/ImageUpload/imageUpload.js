@@ -23,9 +23,28 @@ const ImageUpload = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log("props.getImage");
+    console.log("props.getImage");
     // setImage(props.getImage);
     firebaseApp.auth().onAuthStateChanged((user1) => {
+      // const ProfileImageUpload = db
+      //   .collection("users")
+      //   .doc(user1.uid)
+      //   .collection("imageURL")
+      //   .doc("url")
+      //   .onSnapshot((snapshot) => {
+      //     if (snapshot.exists) {
+      //       setURL(snapshot.data());
+      //       setLoading(false);
+      //     }
+      //     // else {
+      //     //   setColor({});
+      //     // }
+      //   });
+
+      // return () => {
+      //   ProfileImageUpload();
+      // };
+
       db.collection("users")
         .doc(user1.uid)
         .collection("imageURL")
@@ -42,7 +61,6 @@ const ImageUpload = (props) => {
             }
           } else {
             setLoading(false);
-
             console.log("No such document!");
           }
         })

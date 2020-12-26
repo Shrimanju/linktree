@@ -59,12 +59,8 @@ const MobileView = () => {
               {`${Base_URL}/${username}`}
             </span>
           </Link>
-        
         </span>
-        <button
-        className={classes.sharebutton}
-          onClick={popoverOpen}
-        >
+        <button className={classes.sharebutton} onClick={popoverOpen}>
           Share
         </button>
         <ShareLinkPopOver
