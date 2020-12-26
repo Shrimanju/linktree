@@ -24,23 +24,21 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import Thumbcards from "../thumbnailcard/thumbnailcard";
+import Schedulelink from "../schedulelink/schedulelink";
 
 // import Modal from 'react-modal'
 
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
-  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalIsOpen1, setmodalIsOpen1] = useState(false);
-  const [modalIsOpen2, setmodalIsOpen2] = useState(false);
-  const [modalIsOpen3, setmodalIsOpen3] = useState(false);
-  const [modalIsOpen4, setmodalIsOpen4] = useState(false);
   const [checked, setChecked] = useState();
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-18T21:11:54")
   );
-
+  const [myProfession, setMyProfession] = useState("");
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -126,9 +124,10 @@ const LinkContainer = (props) => {
       }
     }
   };
-  function closeModal() {
-    setmodalIsOpen(false);
-  }
+
+  const toggleme = () => {
+    setmodalIsOpen1(true);
+  };
 
   return (
     <div className={classes.linkcontainer}>
@@ -165,46 +164,47 @@ const LinkContainer = (props) => {
         <div className={classes.iconsbottom}>
           <div className={classes.iconsleft}>
             <IconButton
-              className={classes.iconbtnleft}
+              className={classes.iconbtnleft1}
               onClick={() => {
-                setmodalIsOpen1(!modalIsOpen1);
+                setmodalIsOpen1("thumb");
               }}
             >
+              <span className={classes.tooltiptext}>Thumbnail</span>
               <CropOriginalIcon />
             </IconButton>
 
             <IconButton
-              className={classes.iconbtnleft}
+              className={classes.iconbtnleft1}
               onClick={() => {
-                setmodalIsOpen3(!modalIsOpen3);
+                setmodalIsOpen1("schedule");
               }}
             >
+              <span className={classes.tooltiptext}>Schedule</span>
               <TodayIcon />
             </IconButton>
 
             <IconButton
-              className={classes.iconbtnleft}
+              className={classes.iconbtnleft1}
+              onClick={() => {
+                setmodalIsOpen1(!modalIsOpen1);
+              }}
+            >
+              <span className={classes.tooltiptext}>Edit</span>
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              className={classes.iconbtnleft1}
               onClick={() => {
                 props.onDelete(props.id);
               }}
             >
+              <span className={classes.tooltiptext}>Delete</span>
               <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div>
-          {/* <div className={classes.icons}>
-            <IconButton
-              className={classes.iconbtn}
-              onClick={() => {
-                props.onDelete(props.id);
-              }}
-            >
-              <DeleteOutlineOutlinedIcon />
-            </IconButton>
-          </div> */}
         </div>
-
         <div>
-          {modalIsOpen1 ? (
+          {modalIsOpen1 === "thumb" && (
             <div>
               <Card className={classes.card}>
                 <Card.Header>
@@ -222,40 +222,12 @@ const LinkContainer = (props) => {
                   </div>
                 </Card.Header>
                 <Card.Body>
-                  <div className={classes.avatar}>
-                    <Avatar
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        backgroundColor: "#000000",
-                        border: "1px solid #d8d7de",
-                        borderRadius: "100px",
-                      }}
-                    />
-                  </div>
-                  <div className={classes.thumbnail}>
-                    <Button
-                      style={{ backgroundColor: "lightgreen" }}
-                      className={classes.thumbnailbutton}
-                    >
-                      Upload Image
-                    </Button>
-
-                    <Button
-                      style={{ backgroundColor: "#FF0000" }}
-                      className={classes.thumbnailbutton}
-                    >
-                      Remove Image
-                    </Button>
-                  </div>
+                  <Thumbcards />
                 </Card.Body>
               </Card>
             </div>
-          ) : null}
-        </div>
-
-        <div>
-          {modalIsOpen3 ? (
+          )}
+          {modalIsOpen1 === "schedule" && (
             <div>
               <Card className={classes.card}>
                 <Card.Header>
@@ -264,7 +236,7 @@ const LinkContainer = (props) => {
                     <a
                       className={classes.panelheadebutton}
                       onClick={() => {
-                        setmodalIsOpen3(!modalIsOpen3);
+                        setmodalIsOpen1(!modalIsOpen1);
                       }}
                     >
                       {" "}
@@ -273,43 +245,11 @@ const LinkContainer = (props) => {
                   </div>
                 </Card.Header>
                 <Card.Body>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid>
-                      <div className={classes.startsAt}>
-                        <KeyboardDatePicker
-                          className={classes.dateinput}
-                          margin="normal"
-                          id="date-picker-dialog"
-                          label="Date picker"
-                          format="MM/dd/yyyy"
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          KeyboardButtonProps={{
-                            "aria-label": "change date",
-                          }}
-                        />
-
-                        <KeyboardTimePicker
-                          className={classes.dateinput}
-                          margin="normal"
-                          id="time-picker"
-                          label="Time picker"
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          KeyboardButtonProps={{
-                            "aria-label": "change time",
-                          }}
-                        />
-                        <Button className={classes.schedulelinkbutton}>
-                          Submit
-                        </Button>
-                      </div>
-                    </Grid>
-                  </MuiPickersUtilsProvider>
+                  <Schedulelink />
                 </Card.Body>
               </Card>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

@@ -9,19 +9,19 @@ import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import HideOrShowPassword from "../HideOrShowPassword/HideOrShowPassword";
-const schema = yup.object().shape({
-  email: yup.string().email().required("Email id should Required"),
-  name: yup.string().required(),
-  password: yup
-    .string()
-    .required("No password provided.")
-    .min(6, "Password should be 6 chars minimum.")
-    .matches(/(?=.*[0-9])/, "Password must contain a number."),
-  confpassword: yup
-    .string()
-    .required(" Confirm Password field is required")
-    .oneOf([yup.ref("password"), null], "Passwords don't match!"),
-});
+  const schema = yup.object().shape({
+    email: yup.string()
+      .email()
+      .required("Email id should Required"),
+
+    name: yup.string().required(),
+    password: yup.string()
+      .required("No password provided.")
+      .min(6, "Password should be 6 chars minimum.")
+      .matches(/(?=.*[0-9])/, "Password must contain a number."),
+      confpassword:yup.string().required(" Confirm Password field is required")
+      .oneOf([yup.ref('password'), null], "Passwords don't match!")
+  }); 
 
 const Signup = () => {
   let history = useHistory();

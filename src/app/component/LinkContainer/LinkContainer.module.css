@@ -99,8 +99,11 @@
   -ms-flex-pack: end;
   justify-content: flex-start;
 }
-.linkcontainer .link_body.iconbtnleft{
- margin-top: -2%;
+.iconbtnleft1{
+ margin-top: 1%;
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black;
   padding-left: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,11 +113,38 @@
   justify-content: flex-start;
 }
 
-.iconbtnleft:active {
-  color: rgb(63, 115, 212);
-  background-color: rgb(63, 115, 212);
+
+.iconbtnleft1 .tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: #555;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
+.iconbtnleft1.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.iconbtnleft1:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 input {
   border: none;
   outline: 0;
@@ -222,63 +252,10 @@ font-size: 20px;
   color: #7c8080;
 }
 
-.avatar{
-  margin:auto;
-  display:flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-}
-.thumbnail{
-  margin:auto;
-  display:flex;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-}
-
-.thumbnailbutton{
-  height: 48px;
-  margin: 10px 10px;
-padding: 10px 10px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-
-}
 
 
-.startsAt {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-    .dateinput {
-      /* display: inline-flex; */
-        width: 310px;
-        height: auto;
-        background: #f1efef;
-        border-radius: 10px;
-      
-      }
 
-.schedulelinkbutton{
-  display: block;
-  color: white;
-  font-size: 24px;
-  font-weight: 500;
-  text-align: center;
-  border-radius: 15px;
-  padding:10px 30px;
-  margin-top: 10px;
- 
-} 
-  
+
 
 @media (max-width: 800px) {
   .link_body :nth-child(1) {
