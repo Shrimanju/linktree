@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import CustomTheme from "../../../Assets/customTheme.png";
 // import CustomeThemeSetter from "./CustomThemeDialogBox";
 import classes from "./customTheme.module.css";
-import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
+// import Dialog from "@material-ui/core/Dialog";
+import { Dialog, Typography, TextField, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 function CustomeThemeSetter(props) {
@@ -21,7 +21,11 @@ function CustomeThemeSetter(props) {
       // key={openDialogBox}
     >
       <Typography>Background color</Typography>
+      <TextField />
       <Typography>Font color</Typography>
+      <TextField />
+      <Button>Set</Button>
+      <Button>Close</Button>
     </Dialog>
   );
 }

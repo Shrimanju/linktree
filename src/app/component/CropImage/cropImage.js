@@ -83,7 +83,7 @@ const CropImage = (props) => {
       key={props.imageFile}
       // open={handleOpen}
     >
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", overflow: "hidden" }}>
         {/* <input type="file" onChange={onChange} /> */}
         {/* <button>Use default img</button> */}
         <h3 style={{ textAlign: "center" }}>Crop Image</h3>
