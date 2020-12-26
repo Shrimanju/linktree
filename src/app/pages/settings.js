@@ -10,10 +10,27 @@ import { Email } from "@material-ui/icons";
 import { useAlert } from "react-alert";
 import firebase from "firebase";
 import HideOrShowPassword from "../../app/component/HideOrShowPassword/HideOrShowPassword";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 // HideOrShowPassword/HideOrShowPassword";
 
+const schema = yup.object().shape({
+  password: yup
+    .string()
+    .required("No password provided.")
+    .min(6, "Password should be 6 chars minimum.")
+    .matches(/(?=.*[0-9])/, "Password must contain a number."),
+  confpassword: yup
+    .string()
+    .required(" Confirm Password field is required")
+    .oneOf([yup.ref("password"), null], "Passwords don't match!"),
+});
+
 const Settings = () => {
-  const { handleSubmit, register, errors } = useForm();
+  // const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
   const [ErrorMessages, setErrorMessages] = useState();
   const [showPassword, setShowPassword] = useState({
     oldpwd: false,
@@ -135,8 +152,8 @@ const Settings = () => {
             }}
           />
           <br></br>
-          {errors.password && (
-            <span className="text-danger">Password field is required</span>
+          {errors.password?.message && (
+            <span className="text-danger4">{errors.password?.message}</span>
           )}
           <br></br>
           <TextField
@@ -158,15 +175,13 @@ const Settings = () => {
           />
           <br></br>
           <span className="text-danger">{ErrorMessages}</span>
-          {errors.confpassword && (
-            <span className="text-danger">
-              Confirm Password field is required
-            </span>
+          {errors.confpassword?.message && (
+            <span className="text-danger2">{errors.confpassword?.message}</span>
           )}
           <br></br>
           <Button
             type="submit"
-             className={classed.settingsbutton}
+            className={classed.settingsbutton}
             color="default"
             variant="contained"
           >

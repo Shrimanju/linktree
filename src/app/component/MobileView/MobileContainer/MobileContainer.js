@@ -176,6 +176,7 @@ const MobileContainer = (props) => {
                 key={link.id}
                 id={link.id}
                 title={link.data.title}
+                url={link.data.url}
               />
             );
           }

@@ -386,9 +386,9 @@ import UploadImage from "../ImageUpload/imageUpload";
 
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Color1 from "../../../Assets/WhiteTheme.png";
-import Color2 from "../../../Assets/BlackTheme.png";
-import Color3 from "../../../Assets/GreyTheme.png";
+import Color1 from "../../../Assets/WhiteTheme1.png";
+import Color2 from "../../../Assets/BlackTheme1.png";
+import Color3 from "../../../Assets/GreyTheme1.png";
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
@@ -520,7 +520,7 @@ const Appearance = () => {
   };
 
   useEffect(() => {
-    console.log("Image", image);
+    // console.log("Image", image);
   }, [image]);
 
   useEffect(() => {

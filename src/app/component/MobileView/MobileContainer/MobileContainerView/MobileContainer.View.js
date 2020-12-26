@@ -1,11 +1,11 @@
 import React from "react";
 import classes from "../MobileContainerView/MobileContainerView.module.css";
 
-function MobileContainerView({ title }) {
+function MobileContainerView({ title, url }) {
   return (
-    <div className={classes.ContainerView}>
+    <a href={url} target="_blank" className={classes.ContainerView}>
       <span>{title}</span>
-    </div>
+    </a>
   );
 }
 

@@ -129,10 +129,10 @@ const CropImage = (props) => {
               marginBottom: "5%",
             }}
           >
-            Crop
+            Save
           </button>
           <button onClick={handleClose} style={{ textAlign: "center" }}>
-            Save
+            Close
           </button>
           {/* </h1> */}
           {/* <img style={{ width: "100%" }} src={cropData} alt="cropped" /> */}

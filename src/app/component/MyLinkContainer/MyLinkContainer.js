@@ -4,7 +4,7 @@ import classes from "../MyLinkContainer/MyLinkContainer.module.css";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import db, { auth } from "../../../Firebase_config/firebase";
 import ls from "local-storage";
-import {Card} from "react-bootstrap";
+import { Card } from "react-bootstrap";
 // import db, { auth } from "../../Firebase_config/firebase";
 
 function MyLinkContainer(props) {
@@ -67,7 +67,7 @@ function MyLinkContainer(props) {
   return (
     <div className={classes.MyLinkContainer}>
       <a
-        className="btn btn-outline-success w-100 p-3"
+        className="btn btn-outline-success w-100  p-3"
         href={props.url}
         role="button"
         target="_blank"
