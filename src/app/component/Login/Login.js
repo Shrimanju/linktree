@@ -3,22 +3,16 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import { firebaseApp } from "../../../Firebase_config/firebase";
 import Logo from "../../../Assets/logo.png";
+import Google from "../../../Assets/google.png";
 import Button from "@material-ui/core/Button";
-import InstagramIcon from "@material-ui/icons/Instagram";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { yupResolver } from '@hookform/resolvers/yup';
 import AppleIcon from '@material-ui/icons/Apple';
-// import Google from './../../../Assets/iconfinder_Google_703526.png';
-import Google from '@material-ui/icons/GTranslate';
 import * as yup from 'yup';
 import firebase from 'firebase'
-// import { yupResolver } from "@hookform/resolvers/yup";
 import HideOrShowPassword from "../HideOrShowPassword/HideOrShowPassword";
-
-// import * as yup from "yup";
-
 const schema = yup.object().shape({
   email: yup.string().email().required("Email id should Required"),
 
@@ -122,10 +116,12 @@ const signinwithgoogle=()=>{
           <Button
             style={{ minWidth: "400px", fontWeight: "700", fontSize: "75%" }}
             color="default"
-            variant="contained"
-            // startIcon={<Google />}
+            variant="contained"          
             onClick={signinwithgoogle}
           >
+             <img src={Google}
+             style={{ width:"5%",height:"5%" ,marginRight:"2%"}}
+             />
             <span> Sign in with Google </span>
           </Button>
          
@@ -136,7 +132,6 @@ const signinwithgoogle=()=>{
             color="default"
             variant="contained"
             startIcon={<AppleIcon />}
-    
             onClick={signinwithapple}
           >
             <span> Sign in with Apple </span>
