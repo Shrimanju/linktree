@@ -386,9 +386,11 @@ import UploadImage from "../ImageUpload/imageUpload";
 
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+
 import Color1 from "../../../Assets/WhiteTheme1.png";
 import Color2 from "../../../Assets/BlackTheme1.png";
 import Color3 from "../../../Assets/GreyTheme1.png";
+
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
@@ -408,6 +410,7 @@ import ReactLoading from "../ImageLoader/spinner";
 // import ReactCropper from "react-cropper";
 import ReactCropImage from "../CropImage/cropImage";
 import ImageUploadWithCrop from "../ImageUpload/imageUpload";
+import { CreateCustomTheme } from "../CustomTheme/customTheme";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import  from 'bootstrap'
@@ -738,6 +741,13 @@ const Appearance = () => {
       <div className="themes">
         <div className="row pt-2 pl-2 content">
           <div className="col col-xs-12">
+            <CreateCustomTheme
+              getThemeDetails={(bgColor, fontColor) => {
+                themeClickHandler(bgColor, fontColor);
+              }}
+            />
+          </div>
+          <div className="col col-xs">
             <img
               src={Color1}
               onClick={() => {

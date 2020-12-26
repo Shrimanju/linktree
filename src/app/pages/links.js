@@ -119,9 +119,6 @@ const Link = () => {
 };
 export default Link;
 
-
-
-
 // import React, { useEffect, useState } from "react";
 // import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import LinkContainer from "../component/LinkContainer/LinkContainer";
@@ -179,7 +176,6 @@ export default Link;
 //     });
 //   };
 
-
 //   function handleOnDragEnd(result) {
 //     if (!result.destination) return;
 //     const items = Array.from(links);
@@ -199,13 +195,13 @@ export default Link;
 //             {(provided) => (
 //               <div className="characters" {...provided.droppableProps} ref={provided.innerRef}>
 //                 {links.map(({ id }, index1) => {
-                  
+
 //                   return (
 //                     <Draggable key={id} draggableId={id} index={index1}>
 //                       {(provided) => (
 //                         <div
 //                           ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-           
+
 //                           {links.map((link,index2) => {
 //                             if(index1==index2){
 //                             return (
