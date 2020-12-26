@@ -13,6 +13,7 @@ import HideOrShowPassword from "../HideOrShowPassword/HideOrShowPassword";
     email: yup.string()
       .email()
       .required("Email id should Required"),
+
     name: yup.string().required(),
     password: yup.string()
       .required("No password provided.")
