@@ -16,15 +16,14 @@ import db, { auth } from "../../../Firebase_config/firebase";
 import { Avatar } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Accordion, Button } from "react-bootstrap";
-import Grid from '@material-ui/core/Grid';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
+import Grid from "@material-ui/core/Grid";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
-
+} from "@material-ui/pickers";
 
 // import Modal from 'react-modal'
 
@@ -38,7 +37,9 @@ const LinkContainer = (props) => {
   const [checked, setChecked] = useState();
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
-const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -135,7 +136,6 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
         <DragIndicatorIcon />
       </div>
       <div className={classes.link_body}>
-    
         <div className={classes.title}>
           <input
             id="text"
@@ -173,7 +173,6 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
               <CropOriginalIcon />
             </IconButton>
 
-
             <IconButton
               className={classes.iconbtnleft}
               onClick={() => {
@@ -189,7 +188,7 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
                 props.onDelete(props.id);
               }}
             >
-             <DeleteOutlineOutlinedIcon />
+              <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div>
           {/* <div className={classes.icons}>
@@ -202,125 +201,116 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
               <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div> */}
-
-
         </div>
-       
+
         <div>
-          {
-            modalIsOpen1 ?
-              <div>
-
-                <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-                      <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen1(!modalIsOpen1); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                    <div  className={classes.avatar}>
-                  <Avatar
-                 
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      backgroundColor: "#000000",
-                      border: "1px solid #d8d7de",
-                      borderRadius: "100px",
-                    }}
-                  />
+          {modalIsOpen1 ? (
+            <div>
+              <Card className={classes.card}>
+                <Card.Header>
+                  <div className={classes.panelheader}>
+                    <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
+                    <a
+                      className={classes.panelheadebutton}
+                      onClick={() => {
+                        setmodalIsOpen1(!modalIsOpen1);
+                      }}
+                    >
+                      {" "}
+                      X
+                    </a>
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <div className={classes.avatar}>
+                    <Avatar
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        backgroundColor: "#000000",
+                        border: "1px solid #d8d7de",
+                        borderRadius: "100px",
+                      }}
+                    />
                   </div>
                   <div className={classes.thumbnail}>
-                    <Button style={{ backgroundColor: "lightgreen", }}
-                     className={classes.thumbnailbutton}
+                    <Button
+                      style={{ backgroundColor: "lightgreen" }}
+                      className={classes.thumbnailbutton}
                     >
                       Upload Image
-                      </Button>
+                    </Button>
 
-                      <Button style={{ backgroundColor: "#FF0000", }}
-                    className={classes.thumbnailbutton}>
+                    <Button
+                      style={{ backgroundColor: "#FF0000" }}
+                      className={classes.thumbnailbutton}
+                    >
                       Remove Image
-                      </Button>
-
-                      </div>
-                
-                    
-                  </Card.Body>
-                </Card>
-              </div>
-              : null
-          }
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </div>
+          ) : null}
         </div>
-        
+
         <div>
-          {
-            modalIsOpen3 ?
-              <div>
-
-                <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-                      <h5 className={classes.panelheadeheading}>Schedule Link</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen3(!modalIsOpen3); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-
-
+          {modalIsOpen3 ? (
+            <div>
+              <Card className={classes.card}>
+                <Card.Header>
+                  <div className={classes.panelheader}>
+                    <h5 className={classes.panelheadeheading}>Schedule Link</h5>
+                    <a
+                      className={classes.panelheadebutton}
+                      onClick={() => {
+                        setmodalIsOpen3(!modalIsOpen3);
+                      }}
+                    >
+                      {" "}
+                      X
+                    </a>
+                  </div>
+                </Card.Header>
+                <Card.Body>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid >
-        <div className={classes.startsAt}>
+                    <Grid>
+                      <div className={classes.startsAt}>
+                        <KeyboardDatePicker
+                          className={classes.dateinput}
+                          margin="normal"
+                          id="date-picker-dialog"
+                          label="Date picker"
+                          format="MM/dd/yyyy"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          KeyboardButtonProps={{
+                            "aria-label": "change date",
+                          }}
+                        />
 
-        <KeyboardDatePicker
-        className={classes.dateinput}
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker"
-          format="MM/dd/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        
-
-        <KeyboardTimePicker
-        className={classes.dateinput}
-          margin="normal"
-          id="time-picker"
-          label="Time picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
-        <Button className={classes.schedulelinkbutton}>Submit</Button>
-</div>
-      </Grid>
-    </MuiPickersUtilsProvider>
-
-
-                   
-                  </Card.Body>
-                </Card>
-              </div>
-              : null
-          }
+                        <KeyboardTimePicker
+                          className={classes.dateinput}
+                          margin="normal"
+                          id="time-picker"
+                          label="Time picker"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          KeyboardButtonProps={{
+                            "aria-label": "change time",
+                          }}
+                        />
+                        <Button className={classes.schedulelinkbutton}>
+                          Submit
+                        </Button>
+                      </div>
+                    </Grid>
+                  </MuiPickersUtilsProvider>
+                </Card.Body>
+              </Card>
+            </div>
+          ) : null}
         </div>
-        
       </div>
     </div>
   );
