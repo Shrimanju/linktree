@@ -32,6 +32,7 @@ import Schedulelink from '../schedulelink/schedulelink';
 const LinkContainer = (props) => {
   const [links, setlinks] = useState([]);
   const [modalIsOpen1, setmodalIsOpen1] = useState(false);
+  // const [modalIsOpen3, setmodalIsOpen3] = useState(false);
   const [checked, setChecked] = useState();
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
@@ -108,7 +109,7 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
             .collection("links")
             .doc(props.id)
             .update({
-              isactive: false,
+              // isactive: false,
             });
         }
       } else {
@@ -121,10 +122,6 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
         }
       }
     }
-  };
- 
-  const toggleme = () => {
-    setmodalIsOpen1(true)
   };
 
   return (
@@ -168,6 +165,9 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
               onClick={() => {
                 setmodalIsOpen1('thumb')
               }}
+            //   onClick={() => {
+            //  props.toggleme('thumb')
+            //   }}
             >
               <span className={classes.tooltiptext}>Thumbnail</span>
               <CropOriginalIcon />
@@ -177,6 +177,9 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
 
             <IconButton
               className={classes.iconbtnleft1}
+              // onClick={() => {
+              //   setmodalIsOpen1(!modalIsOpen1);
+              // }}
               onClick={() => {
                 setmodalIsOpen1('schedule')
               }}
@@ -251,6 +254,7 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
                         )}
 
 </div>
+      
         
       </div>
     </div>
