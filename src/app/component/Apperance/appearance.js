@@ -386,9 +386,9 @@ import UploadImage from "../ImageUpload/imageUpload";
 
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Color1 from "../../../Assets/WhiteTheme.png";
-import Color2 from "../../../Assets/BlackTheme.png";
-import Color3 from "../../../Assets/GreyTheme.png";
+import Color1 from "../../../Assets/WhiteTheme1.png";
+import Color2 from "../../../Assets/BlackTheme1.png";
+import Color3 from "../../../Assets/GreyTheme1.png";
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
@@ -520,7 +520,7 @@ const Appearance = () => {
   };
 
   useEffect(() => {
-    console.log("Image", image);
+    // console.log("Image", image);
   }, [image]);
 
   useEffect(() => {
@@ -603,7 +603,7 @@ const Appearance = () => {
       <div className="heading col-md-6">
         <h3>Profile</h3>
       </div>
-      <div className="profile-update">
+      <div className="row profile-update">
         <div className="profile col-xs-12">
           <div className="info row">
             <div className="col-xs col-lg">
@@ -615,83 +615,161 @@ const Appearance = () => {
                 }}
                 width={"100px"}
                 height={"100px"}
-
+                // PassImageDeletedValue={imageDelete}
               />
+              {/* {loading ? (
+                <ReactLoading spin={loading} />
+              ) :
+              {URL || cropImage ? (
+                <>
+                  <img
+                    className="avatar"
+                    style={{
+                      width: "120px",
+                      height: "100px",
+                      border: "1px solid #d8d7de",
+                      borderRadius: "100px",
+                      // backgroundColor: "lightgreen",
+                    }}
+                    src={cropImage || URL}
+                    // src={URL}
+                    alt={Avatar}
+                    // src={selectorImage}
+                  />
+                </>
+              ) : (
+                <>
+                   <p> {console.log("image", image)}</p>
+                  <p> {console.log("URL", URL)}</p> 
+                  <Avatar
+                    className="avatar"
+                    style={{
+                      width: "120px",
+                      height: "100px",
+                      backgroundColor: "lightgreen",
+                      border: "1px solid #d8d7de",
+                      borderRadius: "100px",
+                    }}
+                  />
+                </>
+              )} */}
+            </div>
 
-              <div className="buttons  col-xs col-lg">
-                <input
-                  id="fileUpload"
-                  style={{
-                    width: "250px",
-                    display: "none",
-                  }}
-                  type="file"
-                  onChange={clickHandler}
-                />
-                <label
-                  for="fileUpload"
-                  className="imageUploadButton"
-                >
-                  {/* PICK AN IMAGE */}
+            <div className="buttons buttonss col-xs col-lg">
+              <input
+                // style={{ width: "100px" }}
+                id="fileUpload"
+                style={{
+                  // width: "250px",
+                  display: "none",
+                }}
+                type="file"
+                // onChange={changeHandler}
+                onChange={clickHandler}
+              />
+              <label
+                for="fileUpload"
+                // onClick={() => {
+                //   clickHandler("imageUpload");
+
+                // }}
+
+                className="imageUploadButton"
+
+                // variant="contained"
+                // color="primary"
+              >
+                {/* PICK AN IMAGE */}
                 Pick an image
               </label>
-              </div>
-              <div className="buttons col-xs col-lg">
-                <button
-                  onClick={clickRemoveImageHandler}
-
-                  className="clearButton"
-                  disabled={disableButton}
-                >
-                  Remove
+            </div>
+            <div className="buttons col-xs col-lg">
+              <button
+                onClick={clickRemoveImageHandler}
+                // style={{
+                //   marginTop: "30px",
+                //   maxWidth: "400px",
+                //   maxHeight: "70px",
+                //   minWidth: "250px",
+                //   minHeight: "30px",
+                //   marginTop: "0%",
+                //   // borderRadius: "10px",
+                // }}
+                className="clearButton"
+                disabled={disableButton}
+              >
+                Remove
               </button>
-
-              </div>
-            </div>
-          </div>
-</div>
-        </div>
-
-        <div className="heading_themes">
-          <h3>Themes</h3>
-        </div>
-        <div className="themes">
-          <div className="row pt-2 pl-2 content">
-            <div className="col col-xs-12">
-              <img
-                src={Color1}
-                onClick={() => {
-                  themeClickHandler("white", "grey");
+              {/* <Button
+                onClick={clickRemoveImageHandler}
+                
+                style={{
+                  marginTop: "30px",
+                  maxWidth: "400px",
+                  maxHeight: "70px",
+                  minWidth: "250px",
+                  minHeight: "30px",
+                  marginTop: "0%",
+                  // borderRadius: "10px",
                 }}
-                className="color1"
-
-              />
-              <br></br>
-            </div>
-            <div className="col col-xs">
-              <img
-                src={Color2}
-                onClick={() => {
-                  themeClickHandler("#242322", "white");
-                }}
-                className="color1"
-              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
-              />
-            </div>
-            <div className="col col-xs">
-              <img
-                src={Color3}
-                onClick={() => {
-                  themeClickHandler("dimgray", "white");
-                }}
-                className="color1"
-              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
-              />
+                className="clearButton"
+                variant="contained"
+              >
+                Remove
+              </Button> */}
+              <p>{/* <span className="load-bar">{progress}</span> */}</p>
             </div>
           </div>
         </div>
-  
+        {/* {image ? (
+          <ReactCropImage
+            imageFile={image}
+            onOpen={true}
+            getImageURL={(imageURL) => {
+              setCropImage(imageURL);
+            }}
+          />
+        ) : null} */}
       </div>
+
+      <div className="heading_themes">
+        <h3>Themes</h3>
+      </div>
+      <div className="themes">
+        <div className="row pt-2 pl-2 content">
+          <div className="col col-xs-12">
+            <img
+              src={Color1}
+              onClick={() => {
+                themeClickHandler("white", "grey");
+              }}
+              className="color1"
+            />
+            <br></br>
+          </div>
+          <div className="col col-xs">
+            <img
+              src={Color2}
+              onClick={() => {
+                themeClickHandler("#242322", "white");
+              }}
+              className="color1"
+              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            />
+          </div>
+          <div className="col col-xs">
+            <img
+              src={Color3}
+              onClick={() => {
+                themeClickHandler("dimgray", "white");
+              }}
+              className="color1"
+              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

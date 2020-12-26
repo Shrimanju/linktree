@@ -25,6 +25,8 @@ const options = {
   position: positions.Top_CENTER,
   timeout: 5000,
   offset: "30px",
+
+  // offset: "30px",
   // you can also just use 'scale'
   transition: transitions.SCALE,
 };

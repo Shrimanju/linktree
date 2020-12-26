@@ -1,42 +1,37 @@
 .appearance {
-  margin-left:16%;
-  height: 100%;
+  margin-left: 10%;
 }
+
 .imageUploadButton {
-
-  width: 120%;
-  height: 55%;
-
+  /* width: 250px; */
+  /* margin-left: -30%;
+  width: 130%;
+  /* height: 53%; */
+  width: 210px;
+  height: 37px;
+  /* height: 37px; */
   background: blueviolet;
   color: rgb(236, 234, 247);
   text-align: center;
   border-radius: 5px;
   padding-top: 7px;
   cursor: pointer;
-  margin-left: -45%;
+  /* margin-left: -45%; */
+  /* margin-top: -50%; */
+
   font-family: sans-serif;
 }
-
-/* style={{
-  marginTop: "30px",
-  maxWidth: "400px",
-  maxHeight: "70px",
-  minWidth: "250px",
-  minHeight: "30px",
-  marginTop: "0%",
-  // borderRadius: "10px",
-}} */
 
 .clearButton,
 .clearButton:hover {
   /* margin-top: 5%; */
-  width: 120%;
-  height: 55%;
+  width: 210px;
+  height: 37px;
   color: black;
   background: gainsboro;
   border: none;
   border-radius: 5px;
-  margin-left: -25%;
+  /* margin-left: -25%; */
   padding-top: 7px;
   font-family: sans-serif;
 
@@ -49,6 +44,50 @@
   cursor: not-allowed;
 }
 
+/* .imageUploadButton {
+  width: 120%;
+  height: 55%;
+
+  background: blueviolet;
+  color: rgb(236, 234, 247);
+  text-align: center;
+  border-radius: 5px;
+  padding-top: 7px;
+  cursor: pointer;
+  margin-left: -45%;
+  font-family: sans-serif;
+} */
+
+/* style={{
+  marginTop: "30px",
+  maxWidth: "400px",
+  maxHeight: "70px",
+  minWidth: "250px",
+  minHeight: "30px",
+  marginTop: "0%",
+  // borderRadius: "10px",
+}} */
+
+/* .clearButton,
+.clearButton:hover {
+  width: 120%;
+  height: 55%;
+  color: black;
+  background: gainsboro;
+  border: none;
+  border-radius: 5px;
+  margin-left: -25%;
+  padding-top: 7px;
+  font-family: sans-serif;
+
+}
+.clearButton:active {
+  background: grey;
+}
+.clearButton:disabled {
+  cursor: not-allowed;
+} */
+
 .load-bar {
   height: 20px;
   width: 0px;
@@ -56,12 +95,11 @@
   animation: grow 5s linear forwards;
 }
 .heading {
-  width:50%;
+  width: 50%;
   margin-top: 30px;
   margin-left: 20px;
   margin-bottom: 40px;
 }
-
 
 .profile {
   margin-top: -2%;
@@ -71,6 +109,7 @@
   width: 90%;
   height: 100%;
   position: relative;
+  display: block;
   background-color: white;
   text-align: left;
   border-style: solid;
@@ -78,31 +117,27 @@
   border-width: 0;
 }
 
-.imageUploadButton {
+/* .imageUploadButton {
   width: 210px;
   height: 37px;
-
 
   background: blueviolet;
   color: black;
   text-align: center;
   border-radius: 5px;
   padding-top: 5px;
-margin-bottom: 30%;
+  margin-bottom: 30%;
   cursor: pointer;
 }
-.imageRemoveButton{
+.imageRemoveButton {
   width: 210px;
   height: 37px;
-
 
   text-align: center;
   border-radius: 5px;
   padding-top: 5px;
   cursor: pointer;
-}
-
-
+} */
 
 .avatarImg {
   background-color: lightgreen;
@@ -112,7 +147,7 @@ margin-bottom: 30%;
 
 .info {
   padding-top: 50px;
-  padding-left:1%;
+  padding-left: 1%;
 }
 
 .buttons {
@@ -128,88 +163,75 @@ margin-bottom: 30%;
 .themes {
   margin-top: -20px;
   width: 100%;
-margin-bottom: 5%;
-    position: relative;
-    background-color: white;
-    text-align: left;
-    border-style: solid;
-    border-radius: 0;
-    border-width: 0;
-    
-  
+  margin-bottom: 5%;
+  position: relative;
+  background-color: white;
+  text-align: left;
+  border-style: solid;
+  border-radius: 0;
+  border-width: 0;
 }
 
-.color1{
-width: 100%;
-height: 100%;
-cursor: pointer;
+.color1 {
+  width: 75%;
+  height: 90%;
+  cursor: pointer;
+  margin-left: 10%;
+  /* border: 2px solid black; */
 }
-@media only screen 
-and (min-device-width : 200px) 
-and (max-device-width :320px) {
- 
+@media only screen and (min-device-width: 200px) and (max-device-width: 320px) {
   .info {
     /* padding-top: 50px; */
     padding-left: 23%;
   }
-  .avatar1{
+  .avatar1 {
     padding-left: 13%;
   }
   .profile {
     margin-top: -20px;
-margin-left: -13%;
-  width: 106%;
-  height: 100%;
-   
+    margin-left: -13%;
+    width: 106%;
+    height: 100%;
   }
   .imageUploadButton {
     width: 150px;
-
-
   }
-  .imageRemoveButton{
+  .clearButton {
     width: 150px;
-  
   }
   .themes {
     margin-left: -12%;
     width: 92%;
-position: absolute;
+    position: absolute;
   }
 
-  .color1{
+  .color1 {
     width: 220px;
     height: 300px;
-  margin-left: 6%;
-  cursor: pointer;
+    margin-left: 6%;
+    cursor: pointer;
   }
-
 }
-@media only screen 
-and (min-device-width : 360px) 
-and (max-device-width : 414px) { 
- 
+@media only screen and (min-device-width: 360px) and (max-device-width: 414px) {
   .appearance {
-    margin:0px 0px;
+    margin: 0px 0px;
     padding: 0px 0px;
   }
   .info {
     /* padding-top: 50px; */
     padding-left: 20%;
   }
-  .avatar1{
+  .avatar1 {
     padding-left: 16%;
   }
   .profile {
     margin-top: -20px;
-margin-left: 4%;
-  width: 92%;
-  height: 100%;
-   
+    margin-left: 4%;
+    width: 92%;
+    height: 100%;
   }
   .imageUploadButton {
-  margin-bottom: 20%;
-
+    margin-bottom: 20%;
   }
   /* .heading {
 
@@ -220,15 +242,14 @@ margin-left: 4%;
   .themes {
     margin-left: 4%;
     width: 92%;
-position: absolute;
+    position: absolute;
   }
-  .color1{
-  width: 130px;
-  height: 200px;
-  cursor: pointer;
+  .color1 {
+    width: 130px;
+    height: 200px;
+    cursor: pointer;
   }
 }
-
 
 /* @media only screen and (max-width: 414px) {
   .appearance {
@@ -254,22 +275,21 @@ margin-left: 10%;
 
 @media only screen and (width: 540px) {
   .appearance {
-    margin:0px 0px;
+    margin: 0px 0px;
     padding: 0px 0px;
   }
   .info {
     padding-top: 50px;
     padding-left: 20%;
   }
-  .avatar1{
+  .avatar1 {
     padding-left: 21%;
   }
-  
+
   .profile {
     margin-top: -20px;
-margin-left: 10%;
-  width: 80%;
-  height: 100%;
-   
+    margin-left: 10%;
+    width: 80%;
+    height: 100%;
   }
 }

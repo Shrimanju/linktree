@@ -7,7 +7,7 @@ import AnnouncementOutlinedIcon from "@material-ui/icons/AnnouncementOutlined";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import Logo from "../../../Assets/logo.png";
 import AccountPopover from "../Account_PopOver/AccountPopover";
-import DehazeIcon from '@material-ui/icons/Dehaze';
+import DehazeIcon from "@material-ui/icons/Dehaze";
 import ImageUploadWithCrop from "../ImageUpload/imageUpload";
 
 const SideNavBar = () => {
@@ -44,19 +44,14 @@ const SideNavBar = () => {
           {/* <Avatar className={classes.avatar} /> */}
           <ImageUploadWithCrop className={classes.avatar} />
         </IconButton>
-        
 
-<DehazeIcon aria-describedby={id} onClick={popoverOpen} 
-      className={classes.avatar1}
-      >
-
-      </DehazeIcon>
-
+        <DehazeIcon
+          aria-describedby={id}
+          onClick={popoverOpen}
+          className={classes.avatar1}
+        ></DehazeIcon>
       </div>
-
     </div>
-  
-
 
     // <div className={classes.sidenavbar}>
     //   {/* <AnnouncementOutlinedIcon className={classes.avatar} /> */}
