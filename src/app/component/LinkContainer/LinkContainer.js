@@ -11,21 +11,21 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import EjectIcon from "@material-ui/icons/Eject";
 import Switch from "react-switch";
 import { IconButton } from "@material-ui/core";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 import db, { auth } from "../../../Firebase_config/firebase";
 import { Avatar } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Accordion, Button } from "react-bootstrap";
-import Grid from '@material-ui/core/Grid';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
+import Grid from "@material-ui/core/Grid";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Thumbcards from '../thumbnailcard/thumbnailcard'; 
-import Schedulelink from '../schedulelink/schedulelink';
+} from "@material-ui/pickers";
+import Thumbcards from "../thumbnailcard/thumbnailcard";
+import Schedulelink from "../schedulelink/schedulelink";
 
 // import Modal from 'react-modal'
 
@@ -35,8 +35,10 @@ const LinkContainer = (props) => {
   const [checked, setChecked] = useState();
   const [title, setTitle] = useState();
   const [url, setUrl] = useState();
-const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-    const [myProfession, setMyProfession] = useState("");
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
+  const [myProfession, setMyProfession] = useState("");
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -122,9 +124,9 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
       }
     }
   };
- 
+
   const toggleme = () => {
-    setmodalIsOpen1(true)
+    setmodalIsOpen1(true);
   };
 
   return (
@@ -133,7 +135,6 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
         <DragIndicatorIcon />
       </div>
       <div className={classes.link_body}>
-    
         <div className={classes.title}>
           <input
             id="text"
@@ -162,37 +163,34 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
         </div>
         <div className={classes.iconsbottom}>
           <div className={classes.iconsleft}>
-
             <IconButton
               className={classes.iconbtnleft1}
               onClick={() => {
-                setmodalIsOpen1('thumb')
+                setmodalIsOpen1("thumb");
               }}
             >
               <span className={classes.tooltiptext}>Thumbnail</span>
               <CropOriginalIcon />
-
             </IconButton>
-
 
             <IconButton
               className={classes.iconbtnleft1}
               onClick={() => {
-                setmodalIsOpen1('schedule')
+                setmodalIsOpen1("schedule");
               }}
             >
-               <span className={classes.tooltiptext}>Schedule</span>
+              <span className={classes.tooltiptext}>Schedule</span>
               <TodayIcon />
             </IconButton>
-            
+
             <IconButton
               className={classes.iconbtnleft1}
               onClick={() => {
                 setmodalIsOpen1(!modalIsOpen1);
               }}
             >
-               <span className={classes.tooltiptext}>Edit</span>
-              <EditIcon/>
+              <span className={classes.tooltiptext}>Edit</span>
+              <EditIcon />
             </IconButton>
             <IconButton
               className={classes.iconbtnleft1}
@@ -200,58 +198,59 @@ const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:1
                 props.onDelete(props.id);
               }}
             >
-               <span className={classes.tooltiptext}>Delete</span>
-             <DeleteOutlineOutlinedIcon />
+              <span className={classes.tooltiptext}>Delete</span>
+              <DeleteOutlineOutlinedIcon />
             </IconButton>
           </div>
         </div>
-<div>
-        {modalIsOpen1 === "thumb" && (
-                        <div>
-  <Card className={classes.card}>
-                  <Card.Header>
-                    <div className={classes.panelheader}>
-
-
-                      <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
-                      <a
-                        className={classes.panelheadebutton}
-                        onClick={() => { setmodalIsOpen1(!modalIsOpen1); }}
-                      >   X
-                        </a>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                   < Thumbcards/>
-
-                  </Card.Body>
-                </Card>
-                          </div>
-                        )}
-                        {modalIsOpen1 === "schedule" && (
-                         <div>
-
-                         <Card className={classes.card}>
-                           <Card.Header>
-                             <div className={classes.panelheader}>
-         
-                               <h5 className={classes.panelheadeheading}>Schedule Link</h5>
-                               <a
-                                 className={classes.panelheadebutton}
-                                 onClick={() => { setmodalIsOpen1(!modalIsOpen1); }}
-                               >   X
-                                 </a>
-                             </div>
-                           </Card.Header>
-                           <Card.Body>
-         <Schedulelink/>
-                           </Card.Body>
-                         </Card>
-                       </div>
-                        )}
-
-</div>
-        
+        <div>
+          {modalIsOpen1 === "thumb" && (
+            <div>
+              <Card className={classes.card}>
+                <Card.Header>
+                  <div className={classes.panelheader}>
+                    <h5 className={classes.panelheadeheading}>Add Thumbnail</h5>
+                    <a
+                      className={classes.panelheadebutton}
+                      onClick={() => {
+                        setmodalIsOpen1(!modalIsOpen1);
+                      }}
+                    >
+                      {" "}
+                      X
+                    </a>
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <Thumbcards />
+                </Card.Body>
+              </Card>
+            </div>
+          )}
+          {modalIsOpen1 === "schedule" && (
+            <div>
+              <Card className={classes.card}>
+                <Card.Header>
+                  <div className={classes.panelheader}>
+                    <h5 className={classes.panelheadeheading}>Schedule Link</h5>
+                    <a
+                      className={classes.panelheadebutton}
+                      onClick={() => {
+                        setmodalIsOpen1(!modalIsOpen1);
+                      }}
+                    >
+                      {" "}
+                      X
+                    </a>
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <Schedulelink />
+                </Card.Body>
+              </Card>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
