@@ -104,12 +104,12 @@ const Settings = () => {
     <div className={classed.settings}>
       <h3 className={classed.heading}>Change Password</h3>
       <div className={classed.changePassword}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={classed.formtextfield}>
           <TextField
             type={showPassword.oldpwd ? "text" : "password"}
             name="currentPassword"
             inputRef={register({ required: true })}
-            style={{ minWidth: "97%" }}
+            className={classed.textfield1}
             id="standard-basic"
             label="Current Password"
           />
@@ -136,7 +136,7 @@ const Settings = () => {
             type={showPassword.pwd ? "text" : "password"}
             name="password"
             inputRef={register({ required: true })}
-            style={{ minWidth: "97%" }}
+            className={classed.textfield1}
             id="standard-basic"
             label="New Password"
           />
@@ -160,7 +160,7 @@ const Settings = () => {
             type={showPassword.cpwd ? "text" : "password"}
             name="confpassword"
             inputRef={register({ required: true })}
-            style={{ minWidth: "97%" }}
+            className={classed.textfield1}
             id="standard-basic"
             label="Confirm Password"
           />

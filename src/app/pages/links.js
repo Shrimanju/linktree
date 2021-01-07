@@ -24,8 +24,13 @@ const Link = () => {
       );
   }, []);
 
+
+
   const LinkAddHandler = () => {
-    db.collection("users").doc(auth.currentUser.uid).collection("links").add({
+    db.collection("users")
+    .doc(auth.currentUser.uid)
+    .collection("links")
+    .add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   };
@@ -35,7 +40,7 @@ const Link = () => {
       .doc(auth.currentUser.uid)
       .collection("links")
       .doc(index)
-      .set({
+      .set({                                
         timestamp: timestamp,
         title: title,
         url: url,
@@ -55,68 +60,106 @@ const Link = () => {
     });
   };
 
-  function handleOnDragEnd(result) {
-    if (!result.destination) return;
-    const items = Array.from(links);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setlinks(items);
-  }
 
+  
+  const reorder = (links, startIndex, endIndex) => {
+    const result = Array.from(links);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const handleOnDragEnd = (result) => {
+  //   links.map((link)=>{
+  //  const dd=link.id
+  //     db.collection("users")
+  //     .doc(auth.currentUser.uid)
+  //     .collection("links")
+     
+  //     .update({
+  //       setlinks(links)
+  //     });
+  //     console.log(update)
+  //   })
+
+
+    
+    if (!result.destination) {
+      return;
+    }
+
+    if (
+      result.destination.droppableId === result.source.droppableId &&
+      result.destination.index === result.source.index
+    ) {
+       return;
+    }
+
+    const draggedItem = links[result.source.index];
+    links.splice(result.source.index, 1);
+    links.splice(result.destination.index, 0, draggedItem);
+    setlinks(links);
+
+//     console.log(links)
+
+
+// console.log(result);
+
+
+  };
   return (
     <div className={classes.link_body}>
-      <button className="btn btn-primary w-100 p-3" onClick={LinkAddHandler}>
+      <button className="btn btn-primary w-100 p-3" onClick={LinkAddHandler }>
+                          
         Add Link
-      </button>
+    </button>
       <header className="App-header">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="characters">
+    
+        <DragDropContext  onDragEnd={handleOnDragEnd}>
+      
+          <Droppable droppableId="droppable-1">
             {(provided) => (
               <div
-                className="characters"
+                ref={provided.innerRef}               
                 {...provided.droppableProps}
-                ref={provided.innerRef}
               >
-                {links.map(({ id }, index1) => {
+                {links.map((link, index) => {
                   return (
-                    <Draggable key={id} draggableId={id} index={index1}>
+                    <Draggable key={link.id} draggableId={"draggable-" + link.id} index={index}>
                       {(provided) => (
                         <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          {links.map((link, index2) => {
-                            if (index1 == index2) {
-                              return (
-                                <LinkContainer
-                                  key={link.id}
-                                  id={link.id}
-                                  linkData={setLinkData}
-                                  onDelete={onLinkDelete}
-                                  title={link.data.title}
-                                  url={link.data.url}
-                                  timestamp={link.data.timestamp}
-                                  isactive={link.data.isactive}
-                                />
-                              );
-                            }
-                          })}
+                          ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <LinkContainer
+                          index={link.index}
+                            key={link.id}
+                            id={link.id}
+                            linkData={setLinkData}
+                            onDelete={onLinkDelete}
+                            title={link.data.title}
+                            url={link.data.url}
+                            timestamp={link.data.timestamp}
+                            isactive={link.data.isactive}
+                          />
+
                         </div>
                       )}
-                    </Draggable>
+</Draggable>
                   );
-                })}
 
-                {provided.placeholder}
+                })}
+                 {provided.placeholder}
               </div>
             )}
+
           </Droppable>
+
         </DragDropContext>
       </header>
+
     </div>
   );
-};
+}
 export default Link;
 
 // import React, { useEffect, useState } from "react";

@@ -34,6 +34,7 @@ const Signup = () => {
     pwd: false,
     cpwd: false,
   });
+  
   const onSubmit = (data) => {
     if (data.password === data.confpassword) {
       setErrorMessage("");
@@ -43,6 +44,7 @@ const Signup = () => {
           db.collection("users").doc(auth.currentUser.uid).set({
             email: data.email,
             name: data.name,
+            bio:[],
           });
           history.push("/");
         })
@@ -58,27 +60,29 @@ const Signup = () => {
   };
 
   return (
-    <div className="login-body">
+    <div className="sign-body">
       <div className="signuplogo">
         <img src={Logo} />
         &nbsp;
         <h1>Linktree</h1>
       </div>
-      <div className="signuptext">
-        <h5 className="signuptext1">Sign up for your Linktree account</h5>
+      <div className="signuptext1">
+        <h5>Sign up for your Linktree account</h5>
       </div>
 
-      <div className="signupPart text-center" style={{ height: "450px" }}>
+      <div className="signupPart " >
         <div className="formPart">
+
           <div className="text-center">
             <span className="text-danger">{ErrorMessageFirebase}</span>
           </div>
+          
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               type="text"
               name="email"
               inputRef={register({ required: true })}
-              style={{ minWidth: "420px" }}
+              className="textfield"
               id="standard-basic"
               label="Email"
             />
@@ -92,7 +96,7 @@ const Signup = () => {
               type="text"
               name="name"
               inputRef={register({ required: true })}
-              style={{ minWidth: "420px" }}
+              className="textfield"
               id="standard-basic"
               label="Name"
             />
@@ -106,20 +110,18 @@ const Signup = () => {
               type={showPassword.pwd ? "text" : "password"}
               name="password"
               inputRef={register({ required: true })}
-              style={{ minWidth: "420px" }}
+              className="textfield"
               id="standard-basic"
               label="Password"
             />
             <HideOrShowPassword
               showPwd={(pwd1) => {
-                // var updateState = showPassword;
-                // updateState.pwd = pwd1;
-                // console.log("updateState", updateState);
+              
                 setShowPassword({
                   pwd: pwd1,
                   cpwd: showPassword.cpwd,
                 });
-                // setShowPassword(pwd);
+              
               }}
             />
             <br></br>
@@ -132,14 +134,13 @@ const Signup = () => {
               type={showPassword.cpwd ? "text" : "password"}
               name="confpassword"
               inputRef={register({ required: true })}
-              style={{ minWidth: "420px" }}
+              className="textfield"
               id="standard-basic"
               label="Confirm Password"
             />
             <HideOrShowPassword
               showPwd={(pwd1) => {
-                // var updateState = showPassword;
-                // updateState.cpwd = pwd1;
+
                 setShowPassword({
                   pwd: showPassword.pwd,
                   cpwd: pwd1,
@@ -157,7 +158,7 @@ const Signup = () => {
             <br></br>
             <Button
               type="submit"
-              style={{ minWidth: "420px" }}
+              className="loginbutton1"
               color="default"
               variant="contained"
             >
@@ -165,99 +166,12 @@ const Signup = () => {
             </Button>
           </form>
         </div>
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              type="text"
-              name="email"
-              inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
-              id="standard-basic"
-              label="Email"
-            />
-
-            <br></br>
-            {errors.email?.message && (
-              <span className="text-danger1">{errors.email?.message}</span>
-            )}
-            <br></br>
-            <TextField
-              type="text"
-              name="name"
-              inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
-              id="standard-basic"
-              label="Name"
-            />
-            <br></br>
-
-            {errors.name?.message && (
-              <span className="text-danger1">{errors.name?.message}</span>
-            )}
-            <br></br>
-            <TextField
-              type={showPassword.pwd ? "text" : "password"}
-              name="password"
-              inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
-              id="standard-basic"
-              label="Password"
-            />
-            <HideOrShowPassword
-              showPwd={(pwd1) => {
-                // var updateState = showPassword;
-                // updateState.pwd = pwd1;
-                // console.log("updateState", updateState);
-                setShowPassword({
-                  pwd: pwd1,
-                  cpwd: showPassword.cpwd,
-                });
-                // setShowPassword(pwd);
-              }}
-            />
-            <br></br>
-            {errors.password?.message && (
-              <span className="text-danger4">{errors.password?.message}</span>
-            )}
-
-            <br></br>
-            <TextField
-              type={showPassword.cpwd ? "text" : "password"}
-              name="confpassword"
-              inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
-              id="standard-basic"
-              label="Confirm Password"
-            />
-            <HideOrShowPassword
-              showPwd={(pwd1) => {
-                // var updateState = showPassword;
-                // updateState.cpwd = pwd1;
-                setShowPassword({
-                  pwd: showPassword.pwd,
-                  cpwd: pwd1,
-                });
-              }}
-            />
-            <br></br>
-            <span className="text-danger">{ErrorMessage}</span>
-            <span className="text-danger">{ErrorMessage}</span>
-            {errors.confpassword?.message && (
-              <span className="text-danger2">
-                {errors.confpassword?.message}
-              </span>
-            )}
-            <br></br>
-            <Button
-              type="submit"
-              style={{ minWidth: "400px" }}
-              color="default"
-              variant="contained"
-            >
-              Register
-            </Button>
-          </form> */}
-        {/* </div> */}
-        <div className="creatAccountPart text-center">
+        
+    
+       
+      </div>
+      <div className="logincreatAccountPart">
+      <div className="creatAccountPart text-center">
           <p>
             By using this service you are agreeing to the terms of service and
             privacy policy
@@ -266,15 +180,12 @@ const Signup = () => {
             <h6>Already have an account?</h6>
           </a>
         </div>
+        </div>
         <p className="signupfooter">
           <span className="signupfooter1"> Trust Centre</span>{" "}
           <span className="signupfooter1">Report a Violation.</span>
           <span className="signupfooter1">Careers</span>
         </p>
-        <a className="link_login" href="/">
-          <h6>Already have an account?</h6>
-        </a>
-      </div>
     </div>
   );
 };

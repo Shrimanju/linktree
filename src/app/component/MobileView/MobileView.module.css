@@ -50,6 +50,7 @@ span .mylink{
  span .link {
     font-size: 100%;
   color: #292b2c;
+  white-space: nowrap;
   text-overflow: ellipsis;
   text-decoration: underline;
 }
@@ -93,12 +94,13 @@ span .mylink{
     white-space: nowrap;
   }
 
-  .mobileheader span .link {
+  .link {
+    font-size: 100%;
+    width: 100%;
     color: #292b2c;
-    white-space: normal;
-   font-weight: 100;
-   font-size: 70%;
-   padding-right: 2%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: underline;
   }
   .container .sharebutton{
   background-color: rgb(231, 228, 231);
@@ -126,9 +128,10 @@ span .mylink{
 }
 
   @media screen and (max-width: 375px) {
-    .sharebutton{
-     margin: 0px 0px;
-      padding: 1px 5px;
+    .container .sharebutton{
+      background-color: rgb(231, 228, 231);
+      padding: 1px 3px;
+    
     }
     .container .mobilebody {
       display: none;
@@ -158,4 +161,18 @@ span .mylink{
       margin-right: 10px;
     }
   }
-
+  @media screen and (width: 280px) {
+    .container .sharebutton{
+      background-color: rgb(231, 228, 231);
+      padding: 1px 3px;
+    
+    }
+    .container .mobilebody {
+      display: none;
+   
+    }
+    .link {
+      font-weight: 100;
+      margin-right: 10px;
+    }
+  }

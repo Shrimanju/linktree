@@ -45,7 +45,7 @@ const SideNavBar = () => {
           <ImageUploadWithCrop className={classes.avatar} />
         </IconButton>
 
-        <DehazeIcon
+        <DehazeIcon 
           aria-describedby={id}
           onClick={popoverOpen}
           className={classes.avatar1}

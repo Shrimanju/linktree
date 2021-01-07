@@ -20,7 +20,8 @@ import ls from "local-storage";
 import { ImageUrlAction } from "../../../Redux/Action/ActionFile";
 import ReactLoading from "../../ImageLoader/spinner";
 import ImageUploadWithCrop from "../../ImageUpload/imageUpload";
-
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Editname from '../../Editname/editname'
 // import { selectorImage } from "../../../../utils/index";
 import {
   firebaseApp,
@@ -36,9 +37,23 @@ const MobileContainer = (props) => {
   const [URL, setURL] = useState("");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [userbio, setUserbio] = useState();
   const selectorImage = useSelector((state) => state.imageUrl);
-  // const [loading, setLoading] = useState(false);
 
+  // const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .onSnapshot((snapshot)=>{
+       if(snapshot.exists){
+        //  console.log(snapshot.data().name)
+        setUserbio(snapshot.data().bio)
+       } 
+     
+      })
+
+ 
+  }, []);
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
       // db.collection("users")
@@ -149,38 +164,30 @@ const MobileContainer = (props) => {
         className={`${classes.container} ${classed.typography}`}
       >
         <div className={classes.container_heading}>
-          {/* {loading ? (
-            <ReactLoading spin={loading} />
-          ) : selectorImage ? (
-            // {URL ? (
-            <>
-              <img
-                className={classes.link}
-                src={selectorImage || URL}
-                alt={Avatar}
-              />
-            </>
-          ) : (
-            <>
-              <Avatar className={classes.avatar} />
-            </>
-          )} */}
-          <ImageUploadWithCrop />
-
-          <span>{props.user}</span>
+        <ImageUploadWithCrop  className={classes.container_image}/>
+        <div className={classes.container_nameandbio}>
+          <h5  className={classes.container_name}>{props.user}</h5>
+          <p  className={classes.container_bio}>{userbio}</p>
+          </div>
         </div>
-        {links.map((link) => {
-          if (link.data.isactive === true) {
-            return (
-              <MobileContainerView
-                key={link.id}
-                id={link.id}
-                title={link.data.title}
-                url={link.data.url}
-              />
-            );
-          }
-        })}
+       
+                {links.map((link) => {
+                  if (link.data.isactive === true) {
+                    return (
+                     
+                            <MobileContainerView
+                              key={link.id}
+                              id={link.id}
+                              title={link.data.title}
+                              url={link.data.url}
+                     
+                            />
+                         
+                    );
+                  }
+                })}
+
+           
       </Typography>
     </MuiThemeProvider>
   );

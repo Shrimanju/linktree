@@ -22,7 +22,16 @@
   align-items: center;
   padding: 10px;
 }
-
+.header_bio{
+  display: flex;
+  justify-content: center;
+  width:100%;
+  
+  height:fit-content;
+  white-space: pre-line;
+  font-size: 90%;
+  font-weight: 600;
+}
 .mylink_container .header .avatar {
   width: 85px;
   height: 85px;

@@ -1,23 +1,25 @@
-body {
-  background-color: #f5f6f8;
+body{
+  height: 100%;
 }
 
-.login-body {
+.sign-body {
   zoom: 0.9; /* all browsers */
   -moz-transform: scale(0.9); /* Firefox*/
+  height: 100%;
 }
 
-.signuplogo{
-  margin-top: 80px;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-      margin-right: auto;
-      margin-left: auto;
-    
-      width: 500px;
-    
+.sign-body .signuplogo{
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin:0px 0px;
+    margin-top: 70px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     
   
 }
@@ -35,10 +37,15 @@ body {
 }
 
 .signuptext1{
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 0px 0px;
+  padding: 0px 8px;
+  margin-top: 40px;
   text-align: center;
-  padding: 0px 0px;
-  white-space: normal;
-  /* padding-left: 10px; */
+  align-items: center;
 }
 
 .signupPart {
@@ -47,10 +54,9 @@ body {
   margin-right: auto;
   margin-left: auto;
   background-color: white;
-  /* background-color: rgb(31, 76, 148); */
-
-  width: 480px;
-  height: 800px;
+  width: 500px;
+  padding-right: 1%;
+  padding-bottom: 2%;
 }
 
 img {
@@ -59,13 +65,14 @@ img {
   float: left;
 }
 
-.formPart {
+.formPart{
+  margin-left: 20px;
   margin-top: 50px;
   padding-top: 40px;
 }
 
 .creatAccountPart {
-  margin-top: 20px;
+  width: 500px;
   color: rgb(150, 152, 153);
   font-size: "70%";
 }
@@ -86,10 +93,12 @@ img {
 
 }
 .signupfooter1{
+  display: flex;
 padding-right:32px;
   font-size: 80%;
   color: gray;
   margin-top: 30px;
+  padding-bottom: 5%;
   
 }
 
@@ -167,54 +176,99 @@ button:hover {
   background-color: white;
   color: rgb(11, 12, 12);
 }
-@media (max-width: 360px) {
-  .signuptext {
-      margin-left: 70px;
-  }
-.creatAccountPart{
-  margin-left: 60px;
+.textfield{
+  width:440px;
 }
-  
+.loginbutton1{
+  width: 450px;
+  font-weight: 700;
+  font-size: 70%;
+  padding-left: 15%;
+  padding-top: 10px;
+}
+@media only screen and (min-device-width: 200px) and (max-device-width: 320px) {
+  .sign-body .signuplogo{
+    margin-top: 70px; 
+}
+.textfield{
+  width: 230px;
+}
+  .signupPart{
+    width: 280px;
+    padding-right: 4%;
+      }
+      .loginbutton1 {
+        padding-top: 20px;
+        width: 350px;
+      }
+      .instaButton1 {
+        padding-top: 20px;
+        width: 350px;
+      }
+      .instaButton11 {
+        width: 300px;
+      }
+      .email{
+        width:345px;
+      }
+      .loginbutton1{
+        width: 240px;
+      }
+      .readme{
+        width: 300px;
+      }
+      .signupfooter{
+        display: flex;
+        width: 345px;
+
+      
+      }
+    }
+    
+     
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 414px) {
+  .signupPart{
+width: 390px;
   }
 
-  @media (max-width: 420px) {
-    .signuptext {
-        margin-left: 50px;
-    }
-    }
-   
-    @media (max-width: 320px) {
-      .signuptext {
-          margin-left: 80px;
-      }
-      .creatAccountPart{
-        margin-left: 77px;
-      }
-      }
-      @media (max-width: 414px) {
-    
-        .creatAccountPart{
-          margin-left: 7px;
-        }
-        }
-        @media (max-width: 375px) {
-    
-          .creatAccountPart{
-            margin-left: 27px;
-          }
-          }
-      @media (max-width: 768px) {
-        .signuptext {
-            margin-left: 50px;
-        }
-        }
-        @media (max-width: 1024px) {
-          .signuptext {
-              margin-left: 45px;
-          }
-          }
-          @media (max-width: 280px) {
-            .signuptext {
-                margin-left: 65px;
-            }
-            }
+  .textfield{
+    width:345px;
+  }
+  .loginbutton1{
+    width: 350px;
+  }
+  .signupfooter{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+ margin: 0px 0px;
+    width: 390px;
+    padding-bottom: 0%;
+  
+  }
+}
+
+@media only screen and (min-device-width: 540px) and (max-device-width: 768px) {
+  .signupPart{
+width: 550px;
+  }
+
+  .textfield{
+    width:475px;
+  }
+  .loginbutton1{
+    width: 480px;
+  }
+  .signupfooter{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+ margin: 0px 0px;
+    width: 390px;
+    padding-bottom: 0%;
+  
+  }
+}

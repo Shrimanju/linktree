@@ -31,3 +31,89 @@
     color: rgb(235, 235, 235);
   
   }
+
+  .appearance1 {
+    flex:1;
+    align-items: center;
+    justify-content: center;
+  }
+  .imageUploadButton1 {
+    
+    width: 210px;
+    height: 37px;
+    margin-left: 40%;
+    background: blueviolet;
+    color: rgb(236, 234, 247);
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 7px;
+    cursor: pointer;
+    font-family: sans-serif;
+  }
+  
+  .clearButton1,
+  .clearButton1:hover {
+    width: 210px;
+    height: 37px;
+    color: black;
+    background: gainsboro;
+    border: none;
+    border-radius: 5px;
+    /* margin-left: -25%; */
+    padding-top: 7px;
+    font-family: sans-serif;
+  
+    /* min-width: 10%; */
+  }
+  .clearButton1:active {
+    background: grey;
+  }
+  .clearButton1:disabled {
+    cursor: not-allowed;
+  }
+  
+  .load-bar {
+    height: 20px;
+    width: 0px;
+    background: lime;
+    animation: grow 5s linear forwards;
+  }
+  .heading {
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .profile {
+    margin-top: -2%;
+    margin-left: 8%;
+    padding-top: -10%;
+    padding-bottom: 7%;
+    width: 90%;
+    height: 100%;
+    position: relative;
+    display: block;
+    background-color: white;
+    text-align: left;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 0;
+  }
+  
+  .avatarImg {
+    background-color: lightgreen;
+    width: 120px;
+    height: 100px;
+  }
+  
+  .info {
+    padding-top: 50px;
+    padding-left: 1%;
+  }
+  
+  .buttons {
+    padding-top: 30px;
+  }
+  
+  

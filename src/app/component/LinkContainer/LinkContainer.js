@@ -158,6 +158,7 @@ const LinkContainer = (props) => {
             onChange={urlhandler}
           />
         </div>
+       
         <div className={classes.iconsbottom}>
           <div className={classes.iconsleft}>
             <IconButton
@@ -223,7 +224,7 @@ const LinkContainer = (props) => {
                     </div>
                   </Card.Header>
                   <Card.Body>
-                   < Thumbcards/>
+                   <Thumbcards/>
 
                   </Card.Body>
                 </Card>

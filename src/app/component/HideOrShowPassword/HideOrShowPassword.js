@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import a from "@material-ui/core";
 import ShowPassword from "../../../Assets/showPassword2.png";
 import HidePassword from "../../../Assets/hidePassword2.png";
 import classes from "./hideOrShowPassword.module.css";
@@ -9,9 +8,7 @@ import TextField from "@material-ui/core/TextField";
 const HideOrShowPassword = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState();
-  // const { handleSubmit, register, errors } = useForm({
-  //   resolver: yupResolver(schema),
-  // });
+
 
   const clickhandler = () => {
     console.log("Show password", !showPassword);

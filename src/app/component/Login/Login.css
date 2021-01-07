@@ -1,6 +1,4 @@
-body {
-  background-color: #f5f6f8;
-}
+
 
 .login-body {
   zoom: 0.9; /* all browsers */
@@ -12,46 +10,32 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
-  
-    width: 500px;
-  
-  
-}
+  margin:0px 0px;
+    margin-top: 70px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
 
-.logo1 {
-  margin-top: 80px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  
-}
-.email ::placeholder {
-  /* font-family: sans-serif; */
-  color: green !important;
 }
 .text1 {
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    padding:auto;
-  
-    width:500px;
+  margin: 0px 0px;
+  padding: 0px 8px;
+  margin-top: 40px;
+  text-align: center;
+  align-items: center;
 }
 
-.text1 {
-  margin-top: 40px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  /* font-family: "myFont", Arial, Helvetica, sans-serif; */
+.email ::placeholder {
+  color: green !important;
 }
+
+
 
 .loginPart1 {
   display: block;
@@ -59,10 +43,9 @@ body {
   margin-right: auto;
   margin-left: auto;
   background-color: white;
-  /* background-color: rgb(31, 76, 148); */
-
   width: 500px;
-  height: 800px;
+  padding-right: 1%;
+  padding-bottom: 2%;
 }
 
 .reset-password-heading {
@@ -72,25 +55,59 @@ body {
 
 .instaButton {
   padding-top: 40px;
-  width: 11%;
+  padding: 0px 0px;
+  width: 450px;
   padding-left: 10%;
 }
 .instaButton1 {
+  padding-left: 10%;
   padding-top: 20px;
 }
-/* div.instaButton Button {
-  padding-left: 0px;
+.instaButton11 {
+  width: 400px;
+  font-weight: 700;
+  font-size: 70%;
+  padding-left: 10%;
+  padding-top: 20px;
 }
-div.instaButton Button span {
-  padding-left: 50px;
-} */
-
 img {
   width: 50px;
   height: 50px;
   float: left;
 }
-.link_login1,
+.link_login1 {
+  margin-left: 15px;
+}
+.email{
+  width:440px;
+}
+.hideshow{
+  padding: 40px 60px;
+}
+.readme{
+  width: 450px;
+}
+.loginbutton{
+  width: 450px;
+  font-weight: 700;
+  font-size: 70%;
+  padding-left: 15%;
+  padding-top: 10px;
+}
+.forgatpassword11{
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 0px 0px;
+  padding: 0px 0px;
+  margin-top: 10px;
+
+  text-align: center;
+  align-items: center;
+  color:black;
+}
+/* .link_login1,
 .link_login1:hover {
   display: flex;
   flex-direction: row;
@@ -99,22 +116,23 @@ img {
   margin-right: auto;
   margin-left: auto;
   width: 500px;
+  
 }
+
 .link_login1,
 .link_login1:hover {
   color: rgb(56, 54, 54);
   text-decoration: none;
   border: none;
   box-shadow: none;
-}
+  margin-left: 15px;
+} */
 
 div.horizontalLine h5 {
   padding-top: 30px;
   width: 100%;
   text-align: center;
   border-bottom: 3px solid#dfe4e7;
-  /* border-bottom: 1px solid rebeccapurple; */
-
   line-height: 0.1em;
   margin: 10px 0 20px;
 }
@@ -125,9 +143,7 @@ div.horizontalLine h5 span {
   color: rgb(185, 185, 185);
 }
 
-.link_login1 {
-  margin-left: 20px;
-}
+
 .footer1{
   display: flex;
   flex-direction: row;
@@ -139,17 +155,18 @@ div.horizontalLine h5 span {
 
 }
 .footer12{
-padding-right:32px;
-  font-size: 80%;
-  color: gray;
-  margin-top: 30px;
-  
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin: 0px 0px;
+width: 390px;
+
 }
 .logincreatAccountPart {
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 .logincreatAccountPart1 {
   text-decoration: none;
@@ -158,17 +175,15 @@ padding-right:32px;
   font-size: "70%";
   margin:0px 0px;
   padding:0px 0px;
-
 }
 .logincreatAccountPart1{
 padding-right:32px;
   font-size: 80%;
   color: gray;
-  margin-top: 30px;
-  
+  margin-top: 20px;
 }
-/*# sourceMappingURL=Login.css.map */
-@media (max-width: 360px) {
+
+/* @media (max-width: 360px) {
   .text1 {
       margin-left: 10px;
   }
@@ -181,12 +196,7 @@ padding-right:32px;
 }
   }
 
-  /* @media (max-width: 420px) {
-    .signuptext {
-        margin-left: 50px;
-    }
-    } */
-   
+
     @media (max-width: 280px) {
       .loginPart1 {
         margin-left:18px;
@@ -206,12 +216,7 @@ padding-right:32px;
     }
         }
       
-        /* @media (max-width: 375px) {
-    
-          .creatAccountPart{
-            margin-left: 27px;
-          }
-          } */
+        
           @media (max-width:768px) {
             .creatAccountPart1{
               margin-left: 5px;
@@ -226,4 +231,94 @@ padding-right:32px;
             .creatAccountPart1{
               margin-left: 15px;
             }
+            } */
+            @media only screen and (min-device-width: 200px) and (max-device-width: 320px) {
+              .info {
+                padding-left: 23%;
+              }
+              .avatar1 {
+                padding-left: 13%;
+              }
+              .profile {
+                margin-top: -20px;
+                margin-left: -13%;
+                width: 106%;
+                height: 100%;
+              }
+              .imageUploadButton {
+                width: 150px;
+              }
+              .clearButton {
+                width: 150px;
+              }
+              .themes {
+                margin-left: -12%;
+                width: 92%;
+                position: absolute;
+              }
+            
+              .color1 {
+                width: 220px;
+                height: 300px;
+                margin-left: 6%;
+                cursor: pointer;
+              }
             }
+            @media only screen and (min-device-width: 360px) and (max-device-width: 414px) {
+              .loginPart1 {
+         width: 390px;
+              }
+              .instaButton {
+                padding-top: 20px;
+                width: 350px;
+              }
+              .instaButton1 {
+                padding-top: 20px;
+                width: 350px;
+              }
+              .instaButton11 {
+                width: 300px;
+              }
+              .email{
+                width:345px;
+              }
+              .loginbutton{
+                width: 350px;
+              }
+              .readme{
+                width: 300px;
+              }
+              .footer1{
+            
+               margin: 0px 0px;
+                width: 400px;
+              
+              }
+              .footer12{
+                padding-right:2px;
+                width: 390px;
+                }
+              
+            }
+            
+            @media only screen and (width: 540px) {
+              .appearance {
+                margin: 0px 0px;
+                padding: 0px 0px;
+              }
+              .info {
+                padding-top: 50px;
+                padding-left: 20%;
+              }
+              .avatar1 {
+                padding-left: 21%;
+              }
+            
+              .profile {
+                margin-top: -20px;
+                margin-left: 10%;
+                width: 80%;
+                height: 100%;
+              }
+            }
+            

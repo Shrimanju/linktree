@@ -412,8 +412,15 @@ import ReactCropImage from "../CropImage/cropImage";
 import ImageUploadWithCrop from "../ImageUpload/imageUpload";
 import { CreateCustomTheme } from "../CustomTheme/customTheme";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
-
-// import  from 'bootstrap'
+import Editname from '../Editname/editname'
+import Editbio from '../Editbio/editbio'
+import Editnameandbio from '../Editnameandbio/editnameandbio'
+import { makeStyles } from '@material-ui/core/styles';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
+import { Container, Card, Accordion } from "react-bootstrap";
+import Grid from "@material-ui/core/Grid";
 const Appearance = () => {
   const [image, setImage] = useState("");
   const [URL, setURL] = useState("");
@@ -427,7 +434,15 @@ const Appearance = () => {
   const [cropImage, setCropImage] = useState("");
   // const forceUpdate = React.useState()[1].bind(null, {});
   const [imageDelete, setImageDeleted] = useState(false);
+  const [userbio, setUserbio] = useState();
 
+
+
+  const useStyles = makeStyles((theme) => ({
+    typography: {
+      padding: theme.spacing(2),
+    },
+  }));
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
       db.collection("users")
@@ -442,52 +457,6 @@ const Appearance = () => {
         });
     });
   }, []);
-
-  // useEffect(() => {
-  //   if (username) {
-  //     db.collection("users")
-  //       .doc(auth.currentUser.uid)
-  //       .collection("imageURL")
-  //       .doc("url")
-  //       .get()
-  //       .then(function (doc) {
-  //         if (doc.exists) {
-  //           // setColor(doc.data());
-  //           console.log("URL", doc.data());
-
-  //           setURL(doc.data().URL);
-  //         } else {
-  //           console.log("No such document!");
-  //         }
-  //       })
-  //       .catch(function (error) {
-  //         console.log("Error in getting URL:", error);
-  //       });
-  //   }
-  // }, [username]);
-
-  // useEffect(() => {
-  //   // if (username && !URL && !selectorImage) {
-  //   //   storage
-  //   //     .ref("abc@mail.com")
-  //   //     .child("ProfileImage")
-  //   //     .child("ProfileImage.jpg")
-  //   //     .getDownloadURL()
-  //   //     .then((url) => {
-  //   //       // setURL("");
-  //   //       setURL(url);
-  //   //       console.log("CropURL", URL);
-  //   //       setLoading(false);
-  //   //       console.log("URL", url);
-  //   //     });
-  //   // }
-  //   // .ref(username)
-  //   // else {
-  //   //   setLoading(true);
-  //   // }
-  // }, [username, selectorImage]);
-
-  // useEffect(() => {}, [username, URL]);
 
   const clickHandler = (e) => {
     e.preventDefault();
@@ -506,20 +475,7 @@ const Appearance = () => {
       reader.readAsDataURL(files[0]);
     }
 
-    ///------------------------------------------------------------///
 
-    // const getImageimage = e.target.files[0];
-    // console.log("getImageimage", getImageimage);
-    // if (getImageimage) {
-    // storage
-    //   .ref(`${username}/ProfileImage/ProfileImage.jpg`)
-    //   .put(getImageimage)
-    //   .then(() => {
-    //     // setLoading(true);
-    //     setDisableButton(false);
-    //   });
-    // setImage(getImageimage);
-    // }
   };
 
   useEffect(() => {
@@ -535,17 +491,7 @@ const Appearance = () => {
         .set({
           URL: cropImage,
         });
-
-      // storage
-      //   .ref(`abc@mail.com/ProfileImage/ProfileImage.jpg`)
-      //   .put(cropImage)
-      //   .then(() => {
-      //     // setLoading(true);
-      //     setDisableButton(false);
-      //   });
     }
-
-    // .ref(`${username}/ProfileImage/ProfileImage.jpg`)
   }, [cropImage]);
 
   const clickRemoveImageHandler = () => {
@@ -558,37 +504,12 @@ const Appearance = () => {
       .delete()
       .then(() => {
         dispatch(ImageUrlAction(""));
-        // setImageDeleted(true);
-        //     setLoading(false);
+
       })
       .catch(() => {
         console.log("ERROR Deleting image");
       });
-
-    // storage
-    //   .ref(username)
-    //   .child("ProfileImage")
-    //   .child("ProfileImage.jpg")
-    //   .delete()
-    //   .then(() => {
-    //     dispatch(ImageUrlAction(""));
-    //     setLoading(false);
-
-    //     // forceUpdate();
-    //     setURL("");
-    //     console.log("Image deleted in firebase");
-    //   })
-    //   .catch(() => {
-    //     console.log("ERROR Deleting image");
-    //   });
   };
-
-  // useEffect(() => {
-  //   if (selectorImage) {
-  //     setLoading(false);
-  //   }
-
-  // }, [selectorImage]);
 
   const themeClickHandler = (backgroundColor, fontColor) => {
     db.collection("users")
@@ -601,139 +522,157 @@ const Appearance = () => {
       });
   };
 
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
+  const open1 = Boolean(anchorEl1);
+  const id1 = open1 ? 'simple-popover' : undefined;
+
   return (
     <div className="appearance">
+
       <div className="heading col-md-6">
         <h3>Profile</h3>
       </div>
-      <div className="row profile-update">
-        <div className="profile col-xs-12">
-          <div className="info row">
-            <div className="col-xs col-lg">
-              <ImageUploadWithCrop
-                getImage={image}
-                disableLoading={disableButton}
-                disableRemoveButton={(enable) => {
-                  setDisableButton(enable);
-                }}
-                width={"100px"}
-                height={"100px"}
-                // PassImageDeletedValue={imageDelete}
-              />
-              {/* {loading ? (
-                <ReactLoading spin={loading} />
-              ) :
-              {URL || cropImage ? (
-                <>
-                  <img
-                    className="avatar"
-                    style={{
-                      width: "120px",
-                      height: "100px",
-                      border: "1px solid #d8d7de",
-                      borderRadius: "100px",
-                      // backgroundColor: "lightgreen",
-                    }}
-                    src={cropImage || URL}
-                    // src={URL}
-                    alt={Avatar}
-                    // src={selectorImage}
-                  />
-                </>
-              ) : (
-                <>
-                   <p> {console.log("image", image)}</p>
-                  <p> {console.log("URL", URL)}</p> 
-                  <Avatar
-                    className="avatar"
-                    style={{
-                      width: "120px",
-                      height: "100px",
-                      backgroundColor: "lightgreen",
-                      border: "1px solid #d8d7de",
-                      borderRadius: "100px",
-                    }}
-                  />
-                </>
-              )} */}
+
+
+      <div className="profile">
+        <div className="editprofilebutton">
+    
+                         <EditIcon  aria-describedby={id}  onClick={handleClick1} className="editbutton">
+</EditIcon>
+  <Popover
+              id={id1}
+              open={open1}
+              anchorEl={anchorEl1}
+              onClose={handleClose1}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              PaperProps={{
+                    style: { width: '49%',height:'24%' },
+                  }}
+            >
+              <Typography className={classes.typography}>
+<Editnameandbio/>
+              </Typography>
+            </Popover>
             </div>
+        <div className='editimagewithicon'>
+          <div className="profileimagefield">
+            <ImageUploadWithCrop
+            //  onClick={handleClick}
+              getImage={image}
+             
+              disableLoading={disableButton}
+              disableRemoveButton={(enable) => {
+                setDisableButton(enable);
+              }}
+              width={"100px"}
+              height={"100px"}
+            />
+          </div>
+ 
 
-            <div className="buttons buttonss col-xs col-lg">
-              <input
-                // style={{ width: "100px" }}
-                id="fileUpload"
-                style={{
-                  // width: "250px",
-                  display: "none",
-                }}
-                type="file"
-                // onChange={changeHandler}
-                onChange={clickHandler}
-              />
-              <label
-                for="fileUpload"
-                // onClick={() => {
-                //   clickHandler("imageUpload");
-
-                // }}
-
-                className="imageUploadButton"
-
-                // variant="contained"
-                // color="primary"
-              >
-                {/* PICK AN IMAGE */}
-                Pick an image
+          <div className="editimageicon">
+            {/* <EditIcon aria-describedby={id}  onClick={handleClick} className="editbutton">
+            </EditIcon> */}
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+          
+              anchorOrigin={{
+                vertical: 'center',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              PaperProps={{
+                style: { width: '20%' }
+              }}
+            >
+              <Typography className={classes.typography}>
+              <div className="imageuploadandremove">
+                <div className="buttons buttonss col-xs col-lg">
+                  <input
+                    id="fileUpload"
+                    style={{
+                      display: "none",
+                    }}
+                    type="file"
+                    onChange={clickHandler}
+                  />
+                  <label
+                    for="fileUpload"
+                    className="imageUploadButton"
+                  >
+                    Pick an image
               </label>
-            </div>
-            <div className="buttons col-xs col-lg">
-              <button
-                onClick={clickRemoveImageHandler}
-                // style={{
-                //   marginTop: "30px",
-                //   maxWidth: "400px",
-                //   maxHeight: "70px",
-                //   minWidth: "250px",
-                //   minHeight: "30px",
-                //   marginTop: "0%",
-                //   // borderRadius: "10px",
-                // }}
-                className="clearButton"
-                disabled={disableButton}
-              >
-                Remove
+                </div>
+
+                <div className="buttons col-xs col-lg">
+                  <button
+                    onClick={clickRemoveImageHandler}
+                    className="clearButton"
+                    disabled={disableButton}
+                  >
+                    Remove
               </button>
-              {/* <Button
-                onClick={clickRemoveImageHandler}
-                
-                style={{
-                  marginTop: "30px",
-                  maxWidth: "400px",
-                  maxHeight: "70px",
-                  minWidth: "250px",
-                  minHeight: "30px",
-                  marginTop: "0%",
-                  // borderRadius: "10px",
-                }}
-                className="clearButton"
-                variant="contained"
-              >
-                Remove
-              </Button> */}
-              <p>{/* <span className="load-bar">{progress}</span> */}</p>
-            </div>
+                </div>
+                </div>
+              </Typography>
+            </Popover>
           </div>
         </div>
-        {/* {image ? (
-          <ReactCropImage
-            imageFile={image}
-            onOpen={true}
-            getImageURL={(imageURL) => {
-              setCropImage(imageURL);
-            }}
-          />
-        ) : null} */}
+        <div className='editnameandbio'>
+          <div className="editnamefield">
+            <Editname />
+          </div>
+
+
+          <div className="editbiofield">
+            <Editbio />
+          </div>
+        </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
 
       <div className="heading_themes">
         <h3>Themes</h3>
@@ -764,7 +703,7 @@ const Appearance = () => {
                 themeClickHandler("#242322", "white");
               }}
               className="color1"
-              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            // style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
           </div>
           <div className="col col-xs">
@@ -774,7 +713,7 @@ const Appearance = () => {
                 themeClickHandler("dimgray", "white");
               }}
               className="color1"
-              // style={{ width: "200px", height: "300px", cursor: "pointer" }}
+            // style={{ width: "200px", height: "300px", cursor: "pointer" }}
             />
           </div>
         </div>

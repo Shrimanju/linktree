@@ -15,12 +15,25 @@ function Mylink() {
   const [URL, setURL] = useState("");
   const [links, setlinks] = useState([]);
   var selectorImage = useSelector((state) => state.imageUrl);
+  const [userbio, setUserbio] = useState();
   // console.log("Image", selectorImage);
 
   // setTimeout(() => {
   //   selectorImage = useSelector((state) => state.imageUrl);
   // }, 3000);
+  useEffect(() => {
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .onSnapshot((snapshot)=>{
+       if(snapshot.exists){
+        //  console.log(snapshot.data().name)
+        setUserbio(snapshot.data().bio)
+       } 
+     
+      })
 
+ 
+  }, []);
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user1) => {
       console.log("user", user1.uid);
@@ -80,23 +93,11 @@ function Mylink() {
   return (
     <div className={classes.mylink_container}>
       <div className={classes.header}>
-        {/* {selectorImage || URL ? (
-          <>
-            <img
-              className={classes.link}
-              src={selectorImage || URL}
-              alt={Avatar}
-            />
-            <img className={classes.link} src={URL} />
-          </>
-        ) : (
-          <>
-            <Avatar className={classes.avatar} />
-          </>
-        )} */}
+       
         <ImageUploadWithCrop width={"100px"} height={"100px"} />
 
-        <span>{username}</span>
+        <h5>{username}</h5>
+        <p className={classes.header_bio}>{userbio}</p>
       </div>
       <div className={classes.body}>
         {links.map((link) => {

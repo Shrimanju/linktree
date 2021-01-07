@@ -1,0 +1,43 @@
+.profile11 {
+    margin-top: -2%;
+    margin-left: 8%;
+    padding-top: -10%;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 0;
+  }
+  .editnameandicon11{
+    display: flex;
+
+}
+.editname11{
+   width: 80%;
+   border: none;
+ 
+}
+
+.editnameandbio1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  padding-left: 10%;
+  }
+  .editnamefield1{
+    margin-top: 5%;
+    padding: 0% 0%;
+  }
+  .editnamesubmitbutton{
+      background-color: rgb(53, 20, 85);
+      width:25px;
+      height: 25px;
+      border-radius: 100%;
+      margin-top:5%;
+     padding:0px 1px;
+border:1px solid rgb(226, 214, 214);
+      border-style: ridge;
+       border: none;
+}

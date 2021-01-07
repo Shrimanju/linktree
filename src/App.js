@@ -22,6 +22,7 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
+        
         setuser(user);
       } else {
         setuser(null);

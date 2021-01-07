@@ -12,7 +12,7 @@ import db, { auth } from "../../../Firebase_config/firebase";
 import ReactCropImage from "../CropImage/cropImage";
 import { ImageUrlAction } from "../../Redux/Action/ActionFile";
 
-const ImageUpload = (props) => {
+const Thumbimageupload= (props) => {
   const [URL, setURL] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -24,27 +24,8 @@ const ImageUpload = (props) => {
 
   useEffect(() => {
     console.log("props.getImage");
-    // setImage(props.getImage);
     firebaseApp.auth().onAuthStateChanged((user1) => {
-      // const ProfileImageUpload = db
-      //   .collection("users")
-      //   .doc(user1.uid)
-      //   .collection("imageURL")
-      //   .doc("url")
-      //   .onSnapshot((snapshot) => {
-      //     if (snapshot.exists) {
-      //       setURL(snapshot.data());
-      //       setLoading(false);
-      //     }
-      //     // else {
-      //     //   setColor({});
-      //     // }
-      //   });
-
-      // return () => {
-      //   ProfileImageUpload();
-      // };
-
+    
       db.collection("users")
         .doc(user1.uid)
         .collection("imageURL")
@@ -119,12 +100,12 @@ const ImageUpload = (props) => {
             {/* <p> {console.log("image", image)}</p>
                   <p> {console.log("URL", URL)}</p> */}
             <Avatar
-              // className="avatar"
+              className="avatar"
               style={{
                 width: props.width,
                 height: props.height,
                 border: "1px solid #d8d7de",
-                borderRadius: "10px",
+                borderRadius: "100px",
                 backgroundColor: "lightgreen",
               }}
             />
@@ -144,4 +125,4 @@ const ImageUpload = (props) => {
   );
 };
 
-export default ImageUpload;
+export default Thumbimageupload;

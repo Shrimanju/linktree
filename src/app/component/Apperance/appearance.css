@@ -1,42 +1,36 @@
 .appearance {
   margin-left: 10%;
 }
+.imageuploadandremove{
+  display:flex;
+}
 
 .imageUploadButton {
-  /* width: 250px; */
-  /* margin-left: -30%;
-  width: 130%;
-  /* height: 53%; */
-  width: 210px;
+  width: 100px;
   height: 37px;
-  /* height: 37px; */
-  background: blueviolet;
-  color: rgb(236, 234, 247);
+  color: black;
+  background: gainsboro;
+  font-size: 14px;
   text-align: center;
   border-radius: 5px;
   padding-top: 7px;
   cursor: pointer;
-  /* margin-left: -45%; */
-  /* margin-top: -50%; */
-
   font-family: sans-serif;
 }
 
 .clearButton,
 .clearButton:hover {
-  /* margin-top: 5%; */
-  width: 210px;
+  width: 100px;
   height: 37px;
+  font-size: 14px;
   color: black;
   background: gainsboro;
   border: none;
   border-radius: 5px;
-  /* margin-left: -25%; */
   padding-top: 7px;
   font-family: sans-serif;
-
-  /* min-width: 10%; */
 }
+
 .clearButton:active {
   background: grey;
 }
@@ -44,49 +38,6 @@
   cursor: not-allowed;
 }
 
-/* .imageUploadButton {
-  width: 120%;
-  height: 55%;
-
-  background: blueviolet;
-  color: rgb(236, 234, 247);
-  text-align: center;
-  border-radius: 5px;
-  padding-top: 7px;
-  cursor: pointer;
-  margin-left: -45%;
-  font-family: sans-serif;
-} */
-
-/* style={{
-  marginTop: "30px",
-  maxWidth: "400px",
-  maxHeight: "70px",
-  minWidth: "250px",
-  minHeight: "30px",
-  marginTop: "0%",
-  // borderRadius: "10px",
-}} */
-
-/* .clearButton,
-.clearButton:hover {
-  width: 120%;
-  height: 55%;
-  color: black;
-  background: gainsboro;
-  border: none;
-  border-radius: 5px;
-  margin-left: -25%;
-  padding-top: 7px;
-  font-family: sans-serif;
-
-}
-.clearButton:active {
-  background: grey;
-}
-.clearButton:disabled {
-  cursor: not-allowed;
-} */
 
 .load-bar {
   height: 20px;
@@ -102,49 +53,77 @@
 }
 
 .profile {
+  box-shadow: 0px 0px 2px 2px #b6b5b5;
   margin-top: -2%;
   margin-left: 8%;
   padding-top: -10%;
-  padding-bottom: 7%;
   width: 90%;
-  height: 100%;
-  position: relative;
-  display: block;
+  display: flex;
+  justify-content: space-around;
   background-color: white;
-  text-align: left;
   border-style: solid;
   border-radius: 0;
   border-width: 0;
 }
 
-/* .imageUploadButton {
-  width: 210px;
-  height: 37px;
-
-  background: blueviolet;
-  color: black;
-  text-align: center;
-  border-radius: 5px;
-  padding-top: 5px;
-  margin-bottom: 30%;
-  cursor: pointer;
+.editnameandbio{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+padding-left: 10%;
 }
-.imageRemoveButton {
-  width: 210px;
-  height: 37px;
+.editnamefield{
+  margin-top: 10%;
+  padding: 0% 0%;
+}
+.editimagewithicon{
 
-  text-align: center;
-  border-radius: 5px;
-  padding-top: 5px;
-  cursor: pointer;
-} */
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+position: absolute;
+padding-left: 10%;
+padding-top: 8%;
+left: 0;
+}
+.editbiofield{
+
+  padding-bottom: 10%;
+  
+}
+.editbutton{
+  width:15px;
+height: 15px;
+border-radius: 50px;
+border-style: ridge;
+
+}
+.profileimagefield{
+ position: relative;
+}
+.editimageicon{
+  position: absolute;
+bottom:0;
+  right: 0;
+padding-right: 0%;
+}
+.editprofilebutton{
+  display: flex;
+position: absolute;
+top:0;
+right: 0;
+}
+
+
 
 .avatarImg {
   background-color: lightgreen;
   width: 120px;
   height: 100px;
 }
-
+.avatar11{
+  background-color: lightgreen;
+}
 .info {
   padding-top: 50px;
   padding-left: 1%;
@@ -182,9 +161,9 @@
 @media only screen and (min-device-width: 200px) and (max-device-width: 320px) {
   .info {
     /* padding-top: 50px; */
-    padding-left: 23%;
+    padding-left: 117%;
   }
-  .avatar1 {
+  .avatar11 {
     padding-left: 13%;
   }
   .profile {
@@ -221,7 +200,7 @@
     /* padding-top: 50px; */
     padding-left: 20%;
   }
-  .avatar1 {
+  .avatar11 {
     padding-left: 16%;
   }
   .profile {
@@ -251,27 +230,6 @@
   }
 }
 
-/* @media only screen and (max-width: 414px) {
-  .appearance {
-    margin:0px 0px;
-    padding: 0px 0px;
-  }
-  .info {
-    padding-top: 50px;
-    padding-left: 12%;
-  }
-  .avatar1{
-    padding-left: 17%;
-  }
-  
-  .profile {
-    margin-top: -20px;
-margin-left: 10%;
-  width: 85%;
-  height: 100%;
-   
-  }
-} */
 
 @media only screen and (width: 540px) {
   .appearance {

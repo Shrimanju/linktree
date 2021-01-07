@@ -1,0 +1,29 @@
+.bioborder{
+    width:310px;
+
+}
+.biobordertext{
+
+    width:100%;
+white-space: normal;
+display:block;
+   height:fit-content;
+   white-space: pre-line;
+   position: absolute;
+   font-size: 90%;
+   font-weight:600;
+   border:none;
+}
+.editbiotext{
+    width: 100%;
+    line-height: 0%;
+    background-color: rgb(173, 173, 173);
+    border-radius: 5%;
+    font-size: 220%;
+    
+}
+.editbiobutton1{
+    background-color: blue;
+
+    
+}

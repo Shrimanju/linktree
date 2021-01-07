@@ -36,7 +36,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgat-body">
-      <div className="forgatlogo">
+      <div className="logo1">
         <img src={Logo} />
         &nbsp;
         <h1>Linktree</h1>
@@ -45,17 +45,18 @@ const ForgotPassword = () => {
         <h5> Enter your email to receive a password reset email.</h5>
       </div>
 
-      <div className="forgatloginPart text-center" style={{ height: "150px" }}>
+      <div className="forgatloginPart" >
         <div className="text-center">
           <span className="text-danger">{ErrorMessages}</span>
         </div>
         <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="link_login1">
             <TextField
               type="email"
               name="email"
               inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
+              className="textfield"
               id="standard-basic"
               label="Email"
             />
@@ -66,7 +67,7 @@ const ForgotPassword = () => {
             <br></br>
             <Button
               type="submit"
-              style={{ minWidth: "400px" }}
+              className="loginbutton"
               color="default"
               variant="contained"
             >
@@ -76,9 +77,9 @@ const ForgotPassword = () => {
           </form>
         </div>
       </div>
-      <div className="creatAccountPart text-center">
-        <a className="link_login" href="/">
-          <p style={{ fontSize: "17px", fontWeight: 500 }}>Back to Login</p>
+      <div className="logincreatAccountPart">
+        <a className="logincreatAccountPart1" href="/">
+          <p>Back to Login</p>
         </a>
       </div>
       <p className="forgatfooter">

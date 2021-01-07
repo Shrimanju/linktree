@@ -30,16 +30,19 @@ const Login = () => {
   const [ErrorMessages, setErrorMessages] = useState();
   const [remember,setRemember] = useState();
   const [showPassword, setShowPassword] = useState(false);
-
+  const [ErrorMessageFirebase, setErrorMessageFirebase] = useState();
   const onSubmit = (data) => {
+  
+
       firebaseApp.auth().setPersistence(remember?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION)
     .then(function() {
   
       return firebaseApp.auth().signInWithEmailAndPassword(data.email,data.password)
     })
-    .catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+    
+    .catch((err) => {
+      setErrorMessageFirebase("email or password incorrect!.");
+      console.log(err);
     });
     }
    
@@ -108,13 +111,13 @@ const signinwithgoogle=()=>{
       </div>
 
       <div className="text1">
-        <h5>Log in to continue to your Linktree admin</h5>
+        <h4>Log in to continue to your Linktree admin</h4>
       </div>
-
-      <div className="loginPart1 text-center" style={{ height: "500px" }}>
+      
+      <div className="loginPart1">
         <div className="instaButton">
           <Button
-            style={{ minWidth: "400px", fontWeight: "700", fontSize: "75%" }}
+            className="instaButton11"
             color="default"
             variant="contained"          
             onClick={signinwithgoogle}
@@ -128,7 +131,7 @@ const signinwithgoogle=()=>{
         </div>
         <div className="instaButton1">
           <Button
-            style={{ minWidth: "400px", fontWeight: "700", fontSize: "75%" }}
+           className="instaButton11"
             color="default"
             variant="contained"
             startIcon={<AppleIcon />}
@@ -144,16 +147,17 @@ const signinwithgoogle=()=>{
           </h5>
         </div>
         <div className="text-center">
+        <span className="text-danger">{ErrorMessageFirebase}</span>
           <p className="text-danger">{ErrorMessages}</p>
         </div>
-        <div className="">
+        <div className="link_login1">
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               type="email"
               name="email"
               inputRef={register({ required: true })}
               className="email"
-              style={{ minWidth: "470px" }}
+              // style={{ minWidth: "470px" }}
               id="standard-basic"
               label="Email"
             />
@@ -166,7 +170,7 @@ const signinwithgoogle=()=>{
               type={showPassword ? "text" : "password"}
               name="password"
               inputRef={register({ required: true })}
-              style={{ minWidth: "470px" }}
+              className="email"
               id="standard-basic"
               label="Password"
             />
@@ -181,7 +185,7 @@ const signinwithgoogle=()=>{
             )}
             <br></br>
             <FormControlLabel
-              style={{ minWidth: "470px" }}
+                className="readme"
               control={<Checkbox value="members" color="primary" />}
               label="Remember me"
             onChange={onChangecheckbox}            
@@ -191,14 +195,14 @@ const signinwithgoogle=()=>{
             <br></br>
             <Button
               type="submit"
-              style={{ minWidth: "400px" }}
+              className="loginbutton"
               color="default"
               variant="contained"
             >
               Log in
             </Button>
             <br></br>&nbsp;
-            <a className="link_login" href="/fotgotPassword">
+            <a className="forgatpassword11" href="/fotgotPassword">
               <p>Forgot your password? Click to reset</p>
             </a>
           </form>

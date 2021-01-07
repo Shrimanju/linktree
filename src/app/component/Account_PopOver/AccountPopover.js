@@ -30,22 +30,22 @@ export default function AccountPopover(props) {
   const [databaseError, setDatabaseError] = useState();
 
   const history = useHistory();
-
   useEffect(() => {
     db.collection("users")
       .doc(auth.currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setUsername(doc.data().name);
-        } else {
-          setUserError("No such information present");
-        }
+      .onSnapshot((snapshot)=>{
+       if(snapshot.exists){
+        //  console.log(snapshot.data().name)
+        setUsername(snapshot.data().name)
+       } 
+       else {
+            setUserError("No such information present");
+          }
       })
-      .catch((error) => {
-        setDatabaseError(error);
-      });
+ 
   }, []);
+
+
 
   const classes = useStyles();
 
