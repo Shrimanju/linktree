@@ -31,13 +31,17 @@
     padding: 0% 0%;
   }
   .editnamesubmitbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
       background-color: rgb(53, 20, 85);
-      width:25px;
-      height: 25px;
+      width:20px;
+      height: 20px;
       border-radius: 100%;
       margin-top:5%;
-     padding:0px 1px;
-border:1px solid rgb(226, 214, 214);
-      border-style: ridge;
+     padding:0px 0px;
        border: none;
+  }
+  .editnamesubmitbutton:disabled {
+  display:none;
 }

@@ -15,6 +15,7 @@
     "bootstrap": "^5.0.0-beta1",
     "clipboard": "^2.0.6",
     "date-fns": "^2.16.1",
+    "emoji-js": "^3.5.0",
     "emoji-picker-react": "^3.2.4",
     "firebase": "^8.0.0",
     "local-storage": "^2.0.0",

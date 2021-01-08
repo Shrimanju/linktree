@@ -44,7 +44,7 @@ const Signup = () => {
           db.collection("users").doc(auth.currentUser.uid).set({
             email: data.email,
             name: data.name,
-            bio:[],
+            bio:"",
           });
           history.push("/");
         })

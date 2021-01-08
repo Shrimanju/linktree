@@ -1,15 +1,6 @@
 
 import React, { useState, useEffect } from "react";
 import "./editnameandbio.css"
-import UploadImage from "../ImageUpload/imageUpload";
-
-import { Avatar } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-
-import Color1 from "../../../Assets/WhiteTheme1.png";
-import Color2 from "../../../Assets/BlackTheme1.png";
-import Color3 from "../../../Assets/GreyTheme1.png";
-
 import db, { auth } from "../../../Firebase_config/firebase";
 import purple from "@material-ui/core/colors/purple";
 import pink from "@material-ui/core/colors/pink";
@@ -43,11 +34,31 @@ import { Container, Card, Accordion } from "react-bootstrap";
 import Grid from "@material-ui/core/Grid";
 import { useForm } from "react-hook-form";
 import CheckIcon from '@material-ui/icons/Check';
+// import EmojiPicker from "emoji-picker-react";
+// import JSEMOJI from "emoji-js";
+// let jsemoji = new JSEMOJI();
+
+// // // set the style to emojione (default - apple)
+// // jsemoji.img_set = "emojione";
+// // // // set the storage location for all emojis
+// // jsemoji.img_sets.emojione.path ="https://cdn.jsdelivr.net/emojione/assets/3.0/png/32/";
+  
+
+// // // some more settings...
+// // jsemoji.supports_css = false;
+// // jsemoji.allow_native = true;
+// // jsemoji.replace_mode = "unified";
 const Editnameandbio = () => {
     let history = useHistory();
     const { handleSubmit, register, errors } = useForm({
     });
+    
     const useStyles = makeStyles((theme) => ({
+        inputLabel: {
+            fontSize:14,
+            fontWeight:500,
+            color:'black'
+          },
         typography: {
             padding: theme.spacing(2),
         },
@@ -58,7 +69,11 @@ const Editnameandbio = () => {
             "&&:after": {
                 borderBottom: "none"
             }
+        },
+        floatingLabelFocusStyle: {
+            color: "red"
         }
+
     }));
     const onSubmit = (data) => {
         db.collection("users")
@@ -95,7 +110,8 @@ const Editnameandbio = () => {
     // const forceUpdate = React.useState()[1].bind(null, {});
     const [imageDelete, setImageDeleted] = useState(false);
     const [userbio, setUserbio] = useState();
-
+    const [disabled,setDisabled] = useState(true);
+    const [inputVal, setInputVal] = useState('')
 
     useEffect(() => {
         firebaseApp.auth().onAuthStateChanged((user1) => {
@@ -188,12 +204,69 @@ const Editnameandbio = () => {
     const open1 = Boolean(anchorEl1);
     const id1 = open1 ? 'simple-popover' : undefined;
 
+
+//     const [anchorEl2, setAnchorEl2] = React.useState(null);
+//     const[emojies,setEmojies]=useState("");
+//     const[text,setText]=useState(null);
+  
+//     const handleClick2 = (event) => {
+//       setAnchorEl2(event.currentTarget);
+//     };
+  
+//     const handleClose2 = () => {
+//       setAnchorEl2(null);
+//     };
+//     const onSubmit3 = (data) => {
+//       db.collection("users")
+//       .doc(auth.currentUser.uid)
+//       .update({
+//         bio: data.bio,
+//       });
+     
+//     }
+//       useEffect(() => {
+//   db.collection("users")
+//   .doc(auth.currentUser.uid)
+//   .onSnapshot((snapshot)=>{
+//    if(snapshot.exists){
+//     //  console.log(snapshot.data().name)
+//     setUserbio(snapshot.data().bio)
+//    } 
+  
+//   })
+  
+  
+//   }, []);
+//   useEffect(()=>{
+//   console.log(anchorEl)
+//   },[anchorEl]
+//   );
+//     const open2 = Boolean(anchorEl2);
+//     const id2= open2 ? 'simple-popover' : undefined;
+//     const [chosenEmoji, setChosenEmoji] = useState(null);
+//   const handleClick3= (event, emojiObject) => {
+//     console.log(event)
+//     // console.log(emojiObject)
+//     setEmojies(emojiObject) 
+//           console.log(emojiObject.emoji)                    
+//     // let emoji = jsemoji.replace_colons(`:${e.name}:`)
+//     // console.log("emogi",emoji)
+//     // let emoji = jsemoji.replace_colons(`:${e.name}:`);
+//     // this.setState({
+//     //   text: this.state.text + emoji
+//     // });
+//     // console.log(emoji);
+//   };
+
     return (
         <div >
             <div className="profile11">
                 <div className='editimagewithicon'>
-                    <div className="profileimagefield">
+                    <div className="profileimagefield" onClick={handleClick}>
+                    
+                        
                         <ImageUploadWithCrop
+                       
                             getImage={image}
                             disableLoading={disableButton}
                             disableRemoveButton={(enable) => {
@@ -201,13 +274,16 @@ const Editnameandbio = () => {
                             }}
                             width={"100px"}
                             height={"100px"}
-                        />
+                        >
+{/* <EditIcon onClick={handleClick} className="editbutton"></EditIcon> */}
+                        </ImageUploadWithCrop>
+                       
                     </div>
 
 
                     <div className="editimageicon">
-                        <EditIcon aria-describedby={id} onClick={handleClick} className="editbutton">
-                        </EditIcon>
+                        {/* <EditIcon aria-describedby={id} onClick={handleClick} className="editbutton">
+                        </EditIcon> */}
                         <Popover
                             id={id}
                             open={open}
@@ -265,20 +341,29 @@ const Editnameandbio = () => {
 
                             <form onSubmit={handleSubmit(onSubmit)} className="editnameandicon11">
                                 <TextField
+                                 InputLabelProps={{
+                                    classes: {
+                                      root: classes.inputLabel,
+                                
+                                    }
+                                  }}
                                     type="text"
                                     name="name"
-                                    // value={username}
+                                    value={inputVal} 
+                                    onChange={e => setInputVal(e.target.value)}
                                     inputRef={register({ required: true })}
                                     InputProps={{ classes }}
                                     className="editname11"
                                     label="Update display name"
+                                    // onChange={ e => setDisabled(e.target.name)}
+                                    // floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
 
                                 // defaultValue="Update display name"
                                 />
                                 <button
                                     type="submit"
                                     className="editnamesubmitbutton"
-
+                                    disabled={!inputVal}           
                                 >
                                     <CheckIcon />
                                 </button>
@@ -291,10 +376,7 @@ const Editnameandbio = () => {
 
 
                     <div className="editbiofield">
-                        <Editbio />
-
-
-
+                        <Editbio/>
                     </div>
                 </div>
             </div>

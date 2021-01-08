@@ -124,7 +124,7 @@ const ImageUpload = (props) => {
                 width: props.width,
                 height: props.height,
                 border: "1px solid #d8d7de",
-                borderRadius: "10px",
+                borderRadius: "100%",
                 backgroundColor: "lightgreen",
               }}
             />
