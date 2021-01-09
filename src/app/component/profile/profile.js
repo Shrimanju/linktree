@@ -17,14 +17,12 @@ import Typography from '@material-ui/core/Typography';
 import { useForm } from "react-hook-form";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-// import EmojiPicker from "emoji-picker-react";
-import EmojiPicker from "emoji-picker-react";
-import JSEMOJI from "emoji-js";
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
 import { useHistory } from "react-router-dom";
 import InputEmoji from "react-input-emoji";
 import EditIcon from '@material-ui/icons/Edit';
-import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
-let jsemoji = new JSEMOJI();
+
 const Profile = () => {
     const [image, setImage] = useState("");
     const [username, setUsername] = useState();
@@ -43,6 +41,8 @@ const Profile = () => {
   const { handleSubmit, register, errors } = useForm({});
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const[changetext,setChangetext]= useState("enter name");
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+  const [message, SetMessage] = useState("");
 
 
 
@@ -55,7 +55,7 @@ const Profile = () => {
                 .get()
                 .then((doc) => {
                     if (doc.exists) {
-                        setUsername(doc.data().email);
+                        setUsername(doc.data().name);
                     } else {
                         console.log("Error in document");
                     }
@@ -83,6 +83,8 @@ const Profile = () => {
     useEffect(() => {
         // console.log("Image", image);
     }, [image]);
+
+
 
     useEffect(() => {
         if (cropImage) {
@@ -215,52 +217,20 @@ const handleClick10 = (event) => {
         }
       })
   }, []);
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={emoji => SetMessage(message + emoji.native)}
+      />
+    );
+  }
 
-
-//   useEffect(() => {
-//     console.log(anchorEl)
-//   }, [anchorEl4]
-//   );
-
-  // useEffect(()=>{
-  //   if(text){
-  //     let value=text+emojies
-  //     setBio(value)
-
-
-  //   }
-  //   else{
-  // setBio(text)
-  //  setEmojies("")
-  //   }
-
-  // setBio(emojies.emoji+text)
-  // console.log(text+emojies.emoji)
-  // },[text,emojies]
-  // );
-
- 
-
-
-
-  const handleClick6 = (event, emojiObject) => {
-    console.log(event)
-    // console.log(emojiObject)
-    setEmojies(emojiObject.emoji)
-    // console.log(C)   
-    setBio(text + emojiObject.emoji)
-    // let emoji = jsemoji.replace_colons(`:${e.name}:`)
-    // console.log("emogi",emoji)
-    // let emoji = jsemoji.replace_colons(`:${e.name}:`);
-    // setText({
-    //   text: text 
-    // });
-    // console.log(text.text);
-  };
-  const   onPress = () => {
-    setChangetext({
-      changetext: {username}
-    })
+  function triggerPicker(event) {
+    event.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
   }
 
     return (
@@ -405,7 +375,7 @@ const handleClick10 = (event) => {
         <TextField
           type="text"
           name="name"
-          value={!username?"enter name":username} 
+          value={username} 
             onChange={e => setInputVal(e.target.value)}
           inputRef={register({ required: true })}
           InputProps={{ className: classes.underline }}
@@ -446,6 +416,9 @@ const handleClick10 = (event) => {
           vertical: 'top',
           horizontal: 'left',
         }}
+        PaperProps={{
+          style: { width: '29%' },
+        }}
 
       >
       <Typography className={classes.typography}>
@@ -459,25 +432,21 @@ const handleClick10 = (event) => {
               rows={5}
               type="text"
               name="bio"
-              value={bio || text}
-              onChange={e => setText(e.target.value)}
-              // value= {text?text+emojies.emoji:null}
+              value={message}
+              onChange={event => SetMessage(event.target.value)}
               InputProps={{ classes }}
               inputRef={register()}
               id="standard-basic"
               data-emoji="true"
-
               className="editbiotext"
             />
-            <SentimentSatisfiedIcon onClick={handleClick5} />
-            <Popover
-              id={id}
-              open={open5}
-              anchorEl={anchorEl}
-              onClose={handleClose5}
-            >
-              <Typography className={classes.typography}> <EmojiPicker onEmojiClick={handleClick6} /></Typography>
-            </Popover>
+            <span role="img" aria-label="" onClick={triggerPicker} className="editbioemojiimage">
+  😁
+</span>
+             {emojiPicker}
+
+
+
 <br></br>
             <div className="editbiobutton11">
               <button
