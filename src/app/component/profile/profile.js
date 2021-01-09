@@ -171,7 +171,7 @@ const Profile = () => {
           .doc(auth.currentUser.uid)
           .onSnapshot((snapshot) => {
             if (snapshot.exists) {
-              //  console.log(snapshot.data().name)
+               console.log(snapshot.data().name)
               setUsername(snapshot.data().name)
             }})
     }, []);
